@@ -33,5 +33,14 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
+    Route::get('/topic', function(){
+    	$boop = array(
+    		'topic' => App\topics::all(),
+    		'tags' => App\tags::all()
+    		);
+    	return view('topics', $boop);
+    });
+
     Route::get('/home', 'HomeController@index');
+
 });
