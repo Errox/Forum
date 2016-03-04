@@ -48,6 +48,7 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/home') }}">Home</a></li>
+                    <li><a href="{{ url('/topic') }}">View all topics</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

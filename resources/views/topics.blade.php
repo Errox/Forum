@@ -10,11 +10,11 @@
                 <div class="panel-body">
                   <ul>
                   	@foreach($topic as $topics)
-                  		<p>{{ $topics->id}}</p>
-                  		<p>{{ $topics->user_id}}</p>                  	
-                  		<p>{{ $topics->topic_title}}</p>
-                  		<p>{{ $topics->topic_description}}</p>
-                  		<p>{{ $topics->topic_tag}}</p>
+                  		<p>topic id:		{{ $topics->id}}</p>
+                  		<p>user id: {{ $topics->user_id}}</p>                  	
+                  		<p>topic title: 	{{ $topics->topic_title}}</p>
+                  		<p>topic description: 	{{ $topics->topic_description}}</p>
+                  		<p>topic tags :	{{ $topics->topic_tag}}</p>
                   		<p>--------------------------------------------</p>
                   	@endforeach
                   </ul>
