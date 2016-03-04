@@ -33,13 +33,10 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
-    Route::get('/topic', function(){
-    	$boop = array(
-    		'topic' => App\topics::all(),
-    		'tags' => App\tags::all()
-    		);
-    	return view('topics', $boop);
-    });
+    //Topic route
+    Route::get('/topic', 'TopicController@index');
+    Route::get('/create_topic', 'TopicController@create');
+    Route::post('/topic', 'TopicController@store');
 
     Route::get('/home', 'HomeController@index');
 
