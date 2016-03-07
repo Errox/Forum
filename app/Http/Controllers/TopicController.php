@@ -49,6 +49,6 @@ class TopicController extends Controller
     		['user_id' => $userid, 'topic_title' => $input['title'], 'topic_description' => $input['description'] ]
     	]);
 
-    	return redirect('topic');
+    	return redirect('/home');
     }
 }
