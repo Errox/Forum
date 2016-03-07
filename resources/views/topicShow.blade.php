@@ -10,7 +10,7 @@
                 <div class="panel-body">
                   <ul>
                   	@foreach($topic as $topics)
-                  		<p> <a >topic id: {{ $topics->id}}</p>
+                  		<p>topic id: {{ $topics->id}}</p>
                   		<p>user id: {{ $topics->user_id}}</p>                  	
                   		<p>topic title: {{ $topics->topic_title}}</p>
                   		<p>topic description: {{ $topics->topic_description}}</p>

@@ -52,6 +52,10 @@ class TopicController extends Controller
     	return redirect('/home');
     }
 
+    public function show($id){
+    	
+    	return ;
+    }
 
     public function subscribe(){
         

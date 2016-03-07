@@ -34,9 +34,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     //Topic route
-    Route::get('/topic', 'TopicController@index');
-    Route::get('/create_topic', 'TopicController@create');
-    Route::post('/topic', 'TopicController@store');
+    Route::resource('/topic', 'TopicController');
 
     Route::get('/home', 'HomeController@index');
 

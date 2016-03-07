@@ -16,10 +16,11 @@
 
                     @else    
 
-                    @foreach ($result as $searched)
-                   <p> {{$searched->topic_title}}</p>
+                        @foreach ($result as $searched)
 
-                    @endforeach
+                            <p> {{$searched->topic_title}}</p>
+
+                        @endforeach
                     @endif
                 @endif
             </div>
