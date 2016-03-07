@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use Illuminate\Http\Request;
+
+use App\Http\Requests;
+
+use DB;
+
+use View;
 
 class HomeController extends Controller
 {
@@ -24,6 +29,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $result = DB::table('topics')
+            ->select('topic_title')
+            ->get();
+        //$result = \App\Topics::all();
+        return View::make('home')->with('result', $result);
     }
 }

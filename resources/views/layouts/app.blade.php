@@ -57,6 +57,14 @@
                         <li><a href="{{ url('/login') }}">Login</a></li>
                         <li><a href="{{ url('/register') }}">Register</a></li>
                     @else
+                    <ul>{!! Form::open(array('url' => 'search', 'required')) !!}
+    <div class="form-group" style="width:500px;">
+        {!! Form::text('Search', null, ['class' => 'form-control', 'placeholder' => 'Zoeken']) !!}
+        {!! Form::submit('Zoeken', ['class' => 'btn btn-primary form-control']) !!}
+    </div>
+
+{!! Form::close() !!}
+</ul>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::user()->name }} <span class="caret"></span>
