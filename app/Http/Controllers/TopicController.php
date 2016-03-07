@@ -53,8 +53,13 @@ class TopicController extends Controller
     }
 
     public function show($id){
-    	
-    	return ;
+    	$result = DB::table('topics')
+    		->leftJoin('users', 'topics.user_id', '=', 'users.id')
+    		->select('topics.id','users.name','topics.topic_title','topics.topic_description','topics.topic_tag')
+    		->where('topic.id', '=', $id)
+    		->get();
+
+    	return \View::make('topicShow')->with('result', $result);
     }
 
     public function subscribe(){
