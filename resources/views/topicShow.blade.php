@@ -14,6 +14,7 @@
                       <h1> {{ $topics->topic_title}}</h1>
                       <p>{{ $topics->topic_description}}</p>
                       <p>Created by {{ $topics->name}}</p>                   
+
                     @endforeach
                   </ul>
                 </div>

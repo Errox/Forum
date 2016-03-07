@@ -23,11 +23,11 @@ class SearchController extends Controller
 
 
     	$result = DB::table('topics')
-    		->select('topic_title')
+    		->select('topic_title', 'topic_description', 'id')
     		->where('topic_title', 'like', '%'.$SearchQuery.'%')
     		->get();
     	//$result = \App\Topics::all();
-    	return View::make('home')->with('result', $result);
+    	return View::make('/home')->with('result', $result);
 
     		
     }
