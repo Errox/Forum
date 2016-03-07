@@ -15,7 +15,6 @@
                       <p>user id: {{ $topics->name}}</p>                   
                       <p>topic title: {{ $topics->topic_title}}</p>
                       <p>topic description: {{ $topics->topic_description}}</p>
-                      <p>topic tags: {{ $topics->topic_tag}}</p>
                     @endforeach
                   </ul>
                 </div>
