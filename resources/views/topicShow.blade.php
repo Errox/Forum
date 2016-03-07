@@ -11,11 +11,9 @@
                   <ul>
 
                     @foreach($result as $topics)
-                      <p>id: {{ $topics->id}} </a></p>
-                      <p>user id: {{ $topics->name}}</p>                   
-                      <p>topic title: {{ $topics->topic_title}}</p>
-                      <p>topic description: {{ $topics->topic_description}}</p>
-                      <p>topic tags: {{ $topics->topic_tag}}</p>
+                      <h1> {{ $topics->topic_title}}</h1>
+                      <p>{{ $topics->topic_description}}</p>
+                      <p>User name: {{ $topics->name}}</p>                   
                     @endforeach
                   </ul>
                 </div>
