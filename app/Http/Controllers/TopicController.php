@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Request;
 
-use Carbon\Carbon;
+use DB;
 
 use App\Http\Requests;
 
@@ -29,17 +29,26 @@ class TopicController extends Controller
     	return view('topics', $topic);
     }
 
-    public function create(){
+    public function create()
+    {
     	return view('create_topic');
     }
 
-    public function store(){
+    public function store()
+    {
     	$input = Request::all();
-    	$input['published_at'] = Carbon::now();
 
-    	\App\topics::create($input);
+    	$user = \Auth::user();
+    	$userid = $user->id;
+
+    	var_dump($userid);
+
+    	echo $input['title'];
+
+    	DB::table('topics')->insert([
+    		['user_id' => $userid, 'topic_title' => $input['title'], 'topic_description' => $input['description'] ]
+    	]);
 
     	return redirect('topic');
-
     }
 }
