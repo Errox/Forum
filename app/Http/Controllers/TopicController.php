@@ -63,6 +63,7 @@ class TopicController extends Controller
     public function show($id){
     	$result = DB::table('topics')
     		->leftJoin('users', 'topics.user_id', '=', 'users.id')
+    		->select('topics.id','users.name','topics.topic_title','topics.topic_description')
     		->where('topics.id', '=', $id)
     		->get();
 
