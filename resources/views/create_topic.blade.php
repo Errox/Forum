@@ -16,7 +16,16 @@
                             {!! Form::label('description', 'Description:') !!}
                             {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
                         <br />
+                            <select name="tag" class="form-control">
+                                @foreach($tags as $tag)
+                                    <option value="<?=$tag->id?>"><?=$tag->tag_name?></option>
+
+                                @endforeach
+                            </select>
                             {!! Form::submit('Create post', ['class' => 'btn btn-primary form-control']) !!}
+
+
+                         
                         </div>
                     {!! Form::close() !!}
                 </div>

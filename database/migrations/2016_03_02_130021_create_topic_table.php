@@ -17,7 +17,6 @@ class CreateTopicTable extends Migration
             $table->integer('user_id');
             $table->string('topic_title', 150);
             $table->string('topic_description', 500);
-            $table->integer('topic_tag');
         });
     }
 

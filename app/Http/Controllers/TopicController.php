@@ -31,7 +31,12 @@ class TopicController extends Controller
 
     public function create()
     {
-    	return view('create_topic');
+        $tags = DB::table('tags')->select('tag_name', 'id')
+                                   ->get();
+
+
+
+    	return view('create_topic')->with('tags', $tags);
     }
 
     public function store()
@@ -41,13 +46,16 @@ class TopicController extends Controller
     	$user = \Auth::user();
     	$userid = $user->id;
 
-    	var_dump($userid);
 
-    	echo $input['title'];
+        DB::table('topics')->insert([
+            ['user_id' => $userid, 'topic_title' => $input['title'], 'topic_description' => $input['description']]
+        ]);
 
-    	DB::table('topics')->insert([
-    		['user_id' => $userid, 'topic_title' => $input['title'], 'topic_description' => $input['description'] ]
-    	]);
+    $last = DB::table('topics')->orderBy('id', 'desc')->first();
+        DB::table('tags_topic')->insert([
+            ['topic_id' => $last->id, 'tag_id' => $input['tag']]]);
+
+
 
     	return redirect('/home');
     }
@@ -63,7 +71,15 @@ class TopicController extends Controller
     }
 
     public function subscribe(){
-        
+        $user = \Auth::user();
+        $userid = $user->id;
+
+        DB::table('subscription')->insert([
+            ['user_id' => $userid, 'topic_id' => $topic_id]
+        ]);
+
+
+        return redirect('/home/'.$topic_id);
     }
 
 }
