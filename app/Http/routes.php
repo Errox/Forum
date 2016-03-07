@@ -33,7 +33,13 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
+    //Topic route
+    Route::get('/topic', 'TopicController@index');
+    Route::get('/create_topic', 'TopicController@create');
+    Route::post('/topic', 'TopicController@store');
+
     Route::get('/home', 'HomeController@index');
+
     Route::post('/search', 'SearchController@index');
 
 });

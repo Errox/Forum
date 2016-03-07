@@ -4,3 +4,6 @@
 Homestead.yaml
 Homestead.json
 .env
+.lock
+composer.lock
+composer.json
