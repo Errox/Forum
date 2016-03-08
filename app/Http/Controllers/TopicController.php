@@ -22,18 +22,11 @@ class TopicController extends Controller
      */
     public function index()
     {
-         // $topics = DB::table('topics')
-        //     ->leftJoin('users', 'topics.user_id', '=', 'users.id')
-        //     ->select('topics.topic_title','topics.topic_description','users.name','topics.created_at')
-        //     ->get();
-        //     var_dump(get_defined_vars());
-        //     echo $topics[1]->name;
-        // fix om user name bij de topic view page te krijgen. error topic doesnt work.
-
-        $topic = array(
-    		'topic' => \App\topics::all()
-    		//'tags' => App\tags::all()
-    		);
+         $topic = DB::table('topics')
+            ->leftJoin('users', 'topics.user_id', '=', 'users.id')
+            ->select('topics.topic_title','topics.topic_description','users.name','topics.created_at')
+            ->get();
+            var_dump(get_defined_vars());
     	return view('topics', $topic);
     }
 
