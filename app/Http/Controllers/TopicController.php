@@ -73,19 +73,16 @@ class TopicController extends Controller
             ->where('comments.topic_id', '=', $id)
             ->get();
 
+            $user = \Auth::user();
+            $userid = $user->id;
+
+            $result[2] = DB::table('subscription')
+            ->select('user_id', 'topic_id')
+            ->where('topic_id', '=', $id, 'AND', 'user_id', '=', $userid)
+            ->get();
+
     	return \View::make('topicShow')->with('result', $result);
     }
 
-    public function subscribe(){
-        $user = \Auth::user();
-        $userid = $user->id;
-
-        DB::table('subscription')->insert([
-            ['user_id' => $userid, 'topic_id' => $topic_id]
-        ]);
-
-
-        return redirect('/home/'.$topic_id);
-    }
 
 }

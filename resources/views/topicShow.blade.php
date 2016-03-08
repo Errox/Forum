@@ -12,7 +12,17 @@
                       <h1> {{ $topics->topic_title}}</h1>
                       <p>{{ $topics->topic_description}}</p>
                       <p>Created by {{ $topics->name}}</p>
-                      <a href="{{url('subscribe')}}/<?=$topics->id?>">Subscribe</a>                
+
+                      @if (empty($result[2]))
+                      {{ Form::open(array('route' => array('subscribe.store'), 'method' => 'store')) }}
+                      {{Form::hidden('id', $topics->id)}}
+                     {{Form::submit('Subscribe')}}
+                      {{ Form::close() }}
+                    @else
+                      {{ Form::open(array('route' => array('subscribe.destroy', $topics->id), 'method' => 'delete')) }}
+                      <button class="btn btn-primary" type="submit" >Unsubscribe</button>
+                      {{ Form::close() }}
+                      @endif                  
                     @endforeach
                   </ul>
               </div>

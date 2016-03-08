@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
+use Request;
 
 use DB;
+
+use App\Http\Requests;
 
 use View;
 
@@ -17,14 +17,23 @@ class SubscriptionController extends Controller
         $this->middleware('auth');
     }
 
-    public function show($id)
+    public function store()
     {
-    	    	$user = \Auth::user();
+    	$input = Request::all();
+		$topic_id = $input['id'];    	
+    	$user = \Auth::user();
     	$userid = $user->id;
 
 		DB::table('subscription')->insert([
-            ['user_id' => $userid, 'topic_id' => $id]]);
-    	return redirect('/topic');
+            ['user_id' => $userid, 'topic_id' => $topic_id]]);
+    	return redirect('/topic/'.$topic_id);
     		
     }
+
+    public function destroy($id){
+    $user = \Auth::user();
+   	$userid = $user->id;
+
+    }
+
 }
