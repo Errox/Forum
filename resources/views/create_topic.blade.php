@@ -10,6 +10,9 @@
                 <div class="panel-body">
                     {!! Form::open(array('url' => 'topic')) !!}
                         <div class="form-group">
+                        @if ((session()->has('error')))
+                            <p style="color:red;">Er moet een checkbox aangevinkt zijn!</p>
+                            @endif
                             {!! Form::label('name', 'Name:') !!}
                             {!! Form::text('title', null, ['class' => 'form-control']) !!}
                              <br />

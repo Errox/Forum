@@ -42,8 +42,14 @@ class TopicController extends Controller
     public function store()
     {
     	$input = Request::all();
-
+        if (isset($input['tags'])){
         $checked = $input['tags'];
+        }
+        if (empty($checked)){
+        return redirect('/topic/create')->with('error', ['foutmelding']);
+        }
+        else{
+        
         $user = \Auth::user();
         $userid = $user->id;
 
@@ -57,6 +63,8 @@ class TopicController extends Controller
             ['topic_id' => $last->id, 'tag_id' => $check[0]]]);
         }
     	return redirect('/topic');
+
+    }
     }
 
     public function show($id){
