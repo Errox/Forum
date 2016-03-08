@@ -22,12 +22,11 @@ class TopicController extends Controller
      */
     public function index()
     {
-         $topic = DB::table('topics')
+         $result = DB::table('topics')
             ->leftJoin('users', 'topics.user_id', '=', 'users.id')
-            ->select('topics.topic_title','topics.topic_description','users.name','topics.created_at')
+            ->select('topics.topic_title','topics.id','topics.topic_description','users.name','topics.created_at')
             ->get();
-            var_dump(get_defined_vars());
-    	return view('topics', $topic);
+        return \View::make('topics')->with('result', $result);
     }
 
     public function create()

@@ -47,6 +47,7 @@
                 {!! Form::open(array('url' => 'comment')) !!}
                   <div class="form-group">
                     {!! Form::label('description', 'Comment') !!}
+                    {!! Form::hidden('id', $topics->id) !!}
                     {!! Form::textarea('comment_description', null, ['class' => 'form-control']) !!}
                       <br />
                     {!! Form::submit('Create comment', ['class' => 'btn btn-primary form-control']) !!}

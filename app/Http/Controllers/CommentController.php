@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
+
+use DB;
 
 use App\Http\Requests;
 
@@ -24,7 +26,7 @@ class CommentController extends Controller
         DB::table('tags_topic')->insert([
             ['topic_id' => $last->id, 'tag_id' => $input['tag']]]);
 
-    	return redirect('/home');
+    	return $input;
 
     }
 
