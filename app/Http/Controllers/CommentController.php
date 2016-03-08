@@ -16,17 +16,14 @@ class CommentController extends Controller
     	//all user id's
     	$user = \Auth::user();
     	$userid = $user->id;
+        $topic_id = $input['id'];
 
 
         DB::table('comments')->insert([
-            ['user_id' => $userid, 'topic_id' => $input['title'], 'topic_description' => $input['description']]
+            ['user_id' => $userid, 'topic_id' => $topic_id, 'comment_description' => $input['comment_description']]
         ]);
 
-        $last = DB::table('topics')->orderBy('id', 'desc')->first();
-        DB::table('tags_topic')->insert([
-            ['topic_id' => $last->id, 'tag_id' => $input['tag']]]);
-
-    	return $input;
+    	return redirect('topic/'.$topic_id);
 
     }
 
