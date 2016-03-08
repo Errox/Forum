@@ -43,4 +43,5 @@ Route::group(['middleware' => 'web'], function () {
     //Searchbar post route
     Route::post('/search', 'SearchController@index');
 
+    Route::resource('/subscribe', 'SubscriptionController');
 });
