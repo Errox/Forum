@@ -13,8 +13,8 @@
                     @foreach($result as $topics)
                       <h1> {{ $topics->topic_title}}</h1>
                       <p>{{ $topics->topic_description}}</p>
-                      <p>Created by {{ $topics->name}}</p>                   
-
+                      <p>Created by {{ $topics->name}}</p>
+                      <button class="btn">Subscribe</button>                   
                     @endforeach
                   </ul>
                 </div>
