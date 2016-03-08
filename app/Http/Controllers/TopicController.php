@@ -53,8 +53,7 @@ class TopicController extends Controller
         $last = DB::table('topics')->orderBy('id', 'desc')->first();
         DB::table('tags_topic')->insert([
             ['topic_id' => $last->id, 'tag_id' => $input['tag']]]);
-
-    	return redirect('/home');
+    	return 'succesvol ofzo';
     }
 
     public function show($id){
