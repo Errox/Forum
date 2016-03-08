@@ -29,17 +29,17 @@
           </div>
           <div class="panel panel-default">
             <div class="panel-body">
-            @if (!empty($result[1]))
-              @foreach($result[1] as $comments)
-                <div class="panel">
-                  <h3>{{$comments->name}} replied: </h3>
-                  <h4>{{$comments->comment_description}} </h4>
-                  <p>Time: {{$comments->created_at}}</p>
-                </div>
-              @endforeach
-            @else
-              <p>There are no comments on this topic. Be the first one to help out!</p>
-            @endif
+              @if (!empty($result[1]))
+                @foreach($result[1] as $comments)
+                  <div class="panel">
+                    <h3>{{$comments->name}} replied: </h3>
+                    <h4>{{$comments->comment_description}} </h4>
+                    <p>Time: {{$comments->created_at}}</p>
+                  </div>
+                @endforeach
+              @else
+                <p>There are no comments on this topic. Be the first one to help out!</p>
+              @endif
             </div>
           </div>
             <div class="panel panel-default">
