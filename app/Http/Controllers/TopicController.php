@@ -42,18 +42,17 @@ class TopicController extends Controller
     public function store()
     {
     	$input = Request::all();
-
-    	$user = \Auth::user();
-    	$userid = $user->id;
+        $last = DB::table('topics')->orderBy('id', 'desc')->first();
+        $user = \Auth::user();
+        $userid = $user->id;
 
         DB::table('topics')->insert([
             ['user_id' => $userid, 'topic_title' => $input['title'], 'topic_description' => $input['description']]
         ]);
 
-        $last = DB::table('topics')->orderBy('id', 'desc')->first();
         DB::table('tags_topic')->insert([
             ['topic_id' => $last->id, 'tag_id' => $input['tag']]]);
-    	return 'succesvol ofzo';
+    	return redirect('/topic');
     }
 
     public function show($id){
