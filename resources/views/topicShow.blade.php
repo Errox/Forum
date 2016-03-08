@@ -11,8 +11,8 @@
                       <p>{{ $topics->created_at}} </p>
                       <h1> {{ $topics->topic_title}}</h1>
                       <p>{{ $topics->topic_description}}</p>
-                        <br/>
                       <p>Created by {{ $topics->name}}</p>
+                      <button class="btn">Subscribe</button>                   
                     @endforeach
                   </ul>
               </div>
