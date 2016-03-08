@@ -16,12 +16,11 @@
                             {!! Form::label('description', 'Description:') !!}
                             {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
                              <br />
-                            <select name="tag" class="form-control">
-                                @foreach($tags as $tag)
-                                    <option value="<?=$tag->id?>"><?=$tag->tag_name?></option>
 
-                                @endforeach
-                             </select>
+                             @foreach($tags as $tag)
+                             <input type="checkbox" name="tags[]" value="<?= $tag->id?>"> <?=$tag->tag_name?> <br>
+                             @endforeach
+                             <br>
                              {!! Form::submit('Create post', ['class' => 'btn btn-primary form-control']) !!}
 
 

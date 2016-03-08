@@ -34,6 +34,12 @@ class SubscriptionController extends Controller
     $user = \Auth::user();
    	$userid = $user->id;
 
+   	$test = DB::table('subscription')->where('topic_id', '=', $id)
+   									 ->where('user_id', '=', $userid)
+   									 ->delete();
+   	return redirect('/topic/'.$id);
+
+
     }
 
 }

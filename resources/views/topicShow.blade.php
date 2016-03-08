@@ -16,7 +16,7 @@
                       @if (empty($result[2]))
                       {{ Form::open(array('route' => array('subscribe.store'), 'method' => 'store')) }}
                       {{Form::hidden('id', $topics->id)}}
-                     {{Form::submit('Subscribe')}}
+                     {{Form::submit('Subscribe', ['class' => 'btn btn-primary'])}}
                       {{ Form::close() }}
                     @else
                       {{ Form::open(array('route' => array('subscribe.destroy', $topics->id), 'method' => 'delete')) }}

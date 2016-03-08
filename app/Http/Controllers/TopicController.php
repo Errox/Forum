@@ -45,14 +45,18 @@ class TopicController extends Controller
 
     	$user = \Auth::user();
     	$userid = $user->id;
+        $checked = $input['tags'];
+
 
         DB::table('topics')->insert([
-            ['user_id' => $userid, 'topic_title' => $input['title'], 'topic_description' => $input['description']]
+           ['user_id' => $userid, 'topic_title' => $input['title'], 'topic_description' => $input['description']]
         ]);
 
         $last = DB::table('topics')->orderBy('id', 'desc')->first();
-        DB::table('tags_topic')->insert([
-            ['topic_id' => $last->id, 'tag_id' => $input['tag']]]);
+        foreach ($checked as $check){
+       DB::table('tags_topic')->insert([
+            ['topic_id' => $last->id, 'tag_id' => $check[0]]]);
+   }
     	return 'succesvol ofzo';
     }
 
