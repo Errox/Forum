@@ -14,14 +14,14 @@
                       <p>Created by {{ $topics->name}}</p>
 
                       @if (empty($result[2]))
-                      {{ Form::open(array('route' => array('subscribe.store'), 'method' => 'store')) }}
-                      {{Form::hidden('id', $topics->id)}}
-                     {{Form::submit('Subscribe', ['class' => 'btn btn-primary'])}}
-                      {{ Form::close() }}
-                    @else
-                      {{ Form::open(array('route' => array('subscribe.destroy', $topics->id), 'method' => 'delete')) }}
-                      <button class="btn btn-primary" type="submit" >Unsubscribe</button>
-                      {{ Form::close() }}
+                        {{ Form::open(array('route' => array('subscribe.store'), 'method' => 'store')) }}
+                        {{Form::hidden('id', $topics->id)}}
+                        {{Form::submit('Subscribe', ['class' => 'btn btn-primary'])}}
+                        {{ Form::close() }}
+                      @else
+                        {{ Form::open(array('route' => array('subscribe.destroy', $topics->id), 'method' => 'delete')) }}
+                          <button class="btn btn-primary" type="submit" >Unsubscribe</button>
+                        {{ Form::close() }}
                       @endif                  
                     @endforeach
                   </ul>
