@@ -9,16 +9,15 @@
 
                 <div class="panel-body">
                   <ul>
-                  	@foreach($topic as $topics)
-                  		<p>topic id: {{ $topics->id}}</p>
-                  		<p>user id: {{ $topics->user_id}}</p>                  	
-                  		<p> <a href="/topic/<?=$topics->id?>" >topic title: {{ $topics->topic_title}}</a></p>
-                  		<p>topic description: {{ $topics->topic_description}}</p>
-                  		<p>topic tags: {{ $topics->topic_tag}}</p>
-                  		<p>--------------------------------------------</p>
+                    @foreach($topic as $topics)
+                      <div class="panel-body panel">
+                        <h1><a href="/topic/<?=$topics->id?>">{{ $topics->topic_title}}</a></h1>
+                        <p>topic description: {{ $topics->topic_description}}</p>
+                        <p>user id: {{ $topics->user_id}}</p>                   
+                    		<!-- <p>topic tags: {{ $topics->topic_tag}}</p> -->
+                      </div>
                   	@endforeach
                   </ul>
-                </div>
             </div>
         </div>
     </div>

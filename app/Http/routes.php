@@ -35,9 +35,12 @@ Route::group(['middleware' => 'web'], function () {
 
     //Topic route
     Route::resource('/topic', 'TopicController');
-
+    //Comment route
+    Route::resource('/comment', 'CommentController',
+    	['only' => ['store', 'destroy']]);
+    //Directing to homepage
     Route::get('/home', 'HomeController@index');
-
+    //Searchbar post route
     Route::post('/search', 'SearchController@index');
 
 });

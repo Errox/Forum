@@ -12,17 +12,17 @@
                         <div class="form-group">
                             {!! Form::label('name', 'Name:') !!}
                             {!! Form::text('title', null, ['class' => 'form-control']) !!}
-                        <br />
+                             <br />
                             {!! Form::label('description', 'Description:') !!}
                             {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
-                        <br />
+                             <br />
                             <select name="tag" class="form-control">
                                 @foreach($tags as $tag)
                                     <option value="<?=$tag->id?>"><?=$tag->tag_name?></option>
 
                                 @endforeach
-                            </select>
-                            {!! Form::submit('Create post', ['class' => 'btn btn-primary form-control']) !!}
+                             </select>
+                             {!! Form::submit('Create post', ['class' => 'btn btn-primary form-control']) !!}
 
 
                          
