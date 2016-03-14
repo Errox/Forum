@@ -7,6 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                   <ul>
+                  
                     @foreach($result[0] as $topics)
                       <p>{{ $topics->created_at}} </p>
                       <h1> {{ $topics->topic_title}}</h1>

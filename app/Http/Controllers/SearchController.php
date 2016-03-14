@@ -21,10 +21,12 @@ class SearchController extends Controller
     {
     	$SearchQuery = $_POST['Search'];
 
+        $NoSpace = trim($SearchQuery, ' ');
 
-    	$result = DB::table('topics')
+        $result[0] = strlen($NoSpace);
+    	$result[1] = DB::table('topics')
     		->select('topic_title', 'topic_description', 'id')
-    		->where('topic_title', 'like', '%'.$SearchQuery.'%')
+    		->where('topic_title', 'like', '%'.$NoSpace.'%')
     		->get();
     	//$result = \App\Topics::all();
     	return View::make('/home')->with('result', $result);
