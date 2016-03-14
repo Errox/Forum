@@ -8,7 +8,7 @@
                 <div class="panel-heading">Welcome</div>
                   <div class="panel-body">
                     <ul>
-                      <table class="table table-striped table-hover">
+                      <table class="table table-hover">
                         <thead>
                           <th>Naam</th>
                           <th>Beschrijving</th>

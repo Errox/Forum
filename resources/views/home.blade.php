@@ -13,11 +13,22 @@
                             @if (empty($result) OR $result[0] == 0)
                                 <p>Sorry, we hebben geen resultaten gevonden</p>
                             @else    
+                        <table class="table table-hover">
+                            <thead>
+                              <th>Naam</th>
+                              <th>Beschrijving</th>
+                            </thead>
+                            <tbody>
                                 @foreach ($result[1] as $searched)
-                                    <p> <a href="/topic/<?=$searched->id?>" > {{$searched->topic_title}}</a></p> 
-                                    <p> --------------------------</p> 
+                                    <tr>
+                                        <td><a href="/topic/<?=$searched->id?>">{{ $searched->topic_title}}</a></td>
+                                        <td>{{ $searched->topic_description}}</td>
+                                    </tr>
                                 @endforeach
                             @endif
+                            </tbody>
+                        </table>
+                    </div>
                         @endif
                     </div>
                 </div>
