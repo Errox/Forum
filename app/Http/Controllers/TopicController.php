@@ -70,6 +70,9 @@ class TopicController extends Controller
 
     public function show($id){
         //Specific topic/username
+            $user = \Auth::user();
+            $userid = $user->id;
+
     	$result[0] = DB::table('topics')
     		->leftJoin('users', 'topics.user_id', '=', 'users.id')
     		->select('topics.id','users.name','topics.topic_title','topics.topic_description', 'topics.created_at')
@@ -83,12 +86,12 @@ class TopicController extends Controller
             ->where('comments.topic_id', '=', $id)
             ->get();
 
-            $user = \Auth::user();
-            $userid = $user->id;
+
 
             $result[2] = DB::table('subscription')
             ->select('user_id', 'topic_id')
-            ->where('topic_id', '=', $id, 'AND', 'user_id', '=', $userid)
+            ->where('topic_id', '=', $id) 
+            ->where('user_id', '=', $userid)
             ->get();
 
     	return \View::make('topicShow')->with('result', $result);
