@@ -6,28 +6,28 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">Welcome</div>
-                <div class="panel-body">
-                  <ul>
-
-                  <table>
-                  <thead>
-                  <th>Naam</th>
-                  <th>Beschrijving</th>
-                  <th>Datum</th>
-                  </thead>
-                  <tbody>
-                    @foreach($result as $topics)
-                    <tr>
-                        <td><a href="/topic/<?=$topics->id?>">{{ $topics->topic_title}}</a></td>
-                        <td>{{ $topics->topic_description}}</td>
-                        <td>{{$topics->created_at}}</td>
-                        <td>Created by {{ $topics->name}} </td>
-                    </tr>
-                  	@endforeach
-                    </tbody>
-                    </table>
-                    </div>
-                  </ul>
+                  <div class="panel-body">
+                    <ul>
+                      <table class="table table-striped table-hover">
+                        <thead>
+                          <th>Naam</th>
+                          <th>Beschrijving</th>
+                          <th>Datum</th>
+                          <th>Created by</th>
+                        </thead>
+                        <tbody>
+                          @foreach($result as $topics)
+                          <tr>
+                              <td><a href="/topic/<?=$topics->id?>">{{ $topics->topic_title}}</a></td>
+                              <td><a href="/topic/<?=$topics->id?>">{{ $topics->topic_description}}</a></td>
+                              <td>{{$topics->created_at}}</td>
+                              <td>{{ $topics->name}} </td>
+                          </tr>
+                      	 @endforeach
+                        </tbody>
+                      </table>
+                    </ul>
+                  </div>
             </div>
         </div>
     </div>

@@ -19,9 +19,12 @@
                             {!! Form::label('description', 'Description:') !!}
                             {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
                              <br />
-                            @foreach($tags as $tag)
-                                <input type="checkbox" name="tags[]" value="<?= $tag->id?>"> <?=$tag->tag_name?> <br>
-                            @endforeach
+                             {!! Form::label('tags', 'Tags:') !!}
+                            <div class="topic_tags" style="overflow-y:scroll;height:100px;">
+                                @foreach($tags as $tag)
+                                    <input type="checkbox" name="tags[]" value="<?= $tag->id?>"> <?=$tag->tag_name?> <br>
+                                @endforeach
+                            </div>
                               <br />
                             {!! Form::submit('Create post', ['class' => 'btn btn-primary form-control']) !!}
                         </div>
