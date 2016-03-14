@@ -84,8 +84,6 @@ class TopicController extends Controller
             ->where('comments.topic_id', '=', $id)
             ->get();
 
-
-
         $result[2] = DB::table('subscription')
             ->select('user_id', 'topic_id')
             ->where('topic_id', '=', $id) 
