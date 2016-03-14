@@ -12,22 +12,18 @@
                         <div class="form-group">
                         @if ((session()->has('error')))
                             <p style="color:red;">Er moet een checkbox aangevinkt zijn!</p>
-                            @endif
+                        @endif
                             {!! Form::label('name', 'Name:') !!}
                             {!! Form::text('title', null, ['class' => 'form-control']) !!}
                              <br />
                             {!! Form::label('description', 'Description:') !!}
                             {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
                              <br />
-
-                             @foreach($tags as $tag)
-                             <input type="checkbox" name="tags[]" value="<?= $tag->id?>"> <?=$tag->tag_name?> <br>
-                             @endforeach
-                             <br>
-                             {!! Form::submit('Create post', ['class' => 'btn btn-primary form-control']) !!}
-
-
-                         
+                            @foreach($tags as $tag)
+                                <input type="checkbox" name="tags[]" value="<?= $tag->id?>"> <?=$tag->tag_name?> <br>
+                            @endforeach
+                              <br />
+                            {!! Form::submit('Create post', ['class' => 'btn btn-primary form-control']) !!}
                         </div>
                     {!! Form::close() !!}
                 </div>

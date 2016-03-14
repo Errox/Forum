@@ -32,10 +32,9 @@ class TopicController extends Controller
 
     public function create()
     {
-        $tags = DB::table('tags')->select('tag_name', 'id')
+        $tags = DB::table('tags')
+            ->select('tag_name', 'id')
             ->get();
-
-
 
     	return view('create_topic')->with('tags', $tags);
     }
@@ -43,29 +42,28 @@ class TopicController extends Controller
     public function store()
     {
     	$input = Request::all();
-        if (isset($input['tags'])){
-        $checked = $input['tags'];
-        }
-        if (empty($checked)){
-        return redirect('/topic/create')->with('error', ['foutmelding']);
-        }
-        else{
-        
-        $user = \Auth::user();
-        $userid = $user->id;
+            if (isset($input['tags'])){
+                $checked = $input['tags'];
+            }
+            if (empty($checked)){
+                return redirect('/topic/create')->with('error', ['foutmelding']);
+            }
+            else{
+                
+                $user = \Auth::user();
+                $userid = $user->id;
 
-        DB::table('topics')->insert([
-           ['user_id' => $userid, 'topic_title' => $input['title'], 'topic_description' => $input['description']]
-        ]);
+                DB::table('topics')->insert([
+                   ['user_id' => $userid, 'topic_title' => $input['title'], 'topic_description' => $input['description']]
+                ]);
 
-        $last = DB::table('topics')->orderBy('id', 'desc')->first();
-        foreach ($checked as $check){
-        DB::table('tags_topic')->insert([
-            ['topic_id' => $last->id, 'tag_id' => $check[0]]]);
-        }
-    	return redirect('/topic');
-
-    }
+                $last = DB::table('topics')->orderBy('id', 'desc')->first();
+                    foreach ($checked as $check){
+                        DB::table('tags_topic')->insert([
+                        ['topic_id' => $last->id, 'tag_id' => $check[0]]]);
+                    }
+            	return redirect('/topic');
+            }
     }
 
     public function show($id){
@@ -88,7 +86,7 @@ class TopicController extends Controller
 
 
 
-            $result[2] = DB::table('subscription')
+        $result[2] = DB::table('subscription')
             ->select('user_id', 'topic_id')
             ->where('topic_id', '=', $id) 
             ->where('user_id', '=', $userid)
