@@ -12,7 +12,7 @@ class CreateTopicTable extends Migration
      */
     public function up()
     {
-        Schema::create('topic', function (Blueprint $table) {
+        Schema::create('topics', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
             $table->string('topic_title', 150);

@@ -8,6 +8,8 @@ use DB;
 
 use App\Http\Requests;
 
+use App\topic;
+
 class TopicController extends Controller
 {
     public function __construct()
@@ -22,11 +24,7 @@ class TopicController extends Controller
      */
     public function index()
     {
-         $result = DB::table('topics')
-            ->leftJoin('users', 'topics.user_id', '=', 'users.id')
-            ->select('topics.topic_title','topics.id','topics.topic_description','users.name','topics.created_at')
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $result = Topic::all();
         return \View::make('topics')->with('result', $result);
     }
 
