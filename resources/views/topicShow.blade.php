@@ -7,15 +7,14 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                   <ul>
-                  
                     @foreach($result[0] as $topics)
-                      <p>{{ $topics->created_at}} </p>
-                      <h1> {{ $topics->topic_title}}</h1>
-                      <p>{{ $topics->topic_description}}</p>
-                      <p>Created by {{ $topics->name}}</p>
+                      <p>{{$topics->created_at}} </p>
+                      <h1>{{$topics->topic_title}}</h1>
+                      <p>{{$topics->topic_description}}</p>
+                      <p>Created by {{$topics->user->name}}</p>
 
                       @if (empty($result[2]))
-                        {{ Form::open(array('route' => array('subscribe.store'), 'method' => 'store')) }}
+                        {{Form::open(array('route' => array('subscribe.store'), 'method' => 'store')) }}
                         {{Form::hidden('id', $topics->id)}}
                         {{Form::submit('Subscribe', ['class' => 'btn btn-primary'])}}
                         {{ Form::close() }}
@@ -33,7 +32,7 @@
               @if (!empty($result[1]))
                 @foreach($result[1] as $comments)
                   <div class="panel">
-                    <h3>{{$comments->name}} replied: </h3>
+                    <h3>{{$comments->user->name}} replied: </h3>
                     <h4>{{$comments->comment_description}} </h4>
                     <p>Time: {{$comments->created_at}}</p>
                   </div>

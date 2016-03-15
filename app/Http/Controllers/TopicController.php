@@ -10,6 +10,8 @@ use App\topic;
 
 use App\tag;
 
+use App\Comment;
+
 use DB;
 
 class TopicController extends Controller
@@ -58,14 +60,10 @@ class TopicController extends Controller
             $user = \Auth::user();
             $userid = $user->id;
 
-    	$result[0] = Topic::find($id);
+    	$result[0] = Topic::where('id', '=', $id)->get();
 
-        $result[1] = DB::table('topics')
-            ->leftJoin('comments', 'topics.id', '=', 'comments.topic_id')
-            ->leftJoin('users', 'comments.user_id', '=', 'users.id')
-            ->select('users.name', 'comments.topic_id', 'comments.comment_description', 'comments.created_at')
-            ->where('comments.topic_id', '=', $id)
-            ->get();
+
+        $result[1] = Comment::where('topic_id', '=', $id)->get();
 
         $result[2] = DB::table('subscriptions')
             ->select('user_id', 'topic_id')
