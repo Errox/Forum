@@ -20,8 +20,8 @@
                           <tr>
                               <td><a href="/topic/<?=$topics->id?>">{{ $topics->topic_title}}</a></td>
                               <td><a href="/topic/<?=$topics->id?>">{{ $topics->topic_description}}</a></td>
-                              <td>{{$topics->created_at}}</td>
-                              <td>{{ $topics->name}} </td>
+                              <td>{{ $topics->created_at}}</td>
+                              <td>{{ $topics->User->name}} </td>
                           </tr>
                       	 @endforeach
                         </tbody>

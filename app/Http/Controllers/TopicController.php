@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Request;
 
-use DB;
-
 use App\Http\Requests;
+
+use App\topic;
+
+use App\tag;
 
 class TopicController extends Controller
 {
@@ -22,20 +24,13 @@ class TopicController extends Controller
      */
     public function index()
     {
-         $result = DB::table('topics')
-            ->leftJoin('users', 'topics.user_id', '=', 'users.id')
-            ->select('topics.topic_title','topics.id','topics.topic_description','users.name','topics.created_at')
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $result = Topic::all();
         return \View::make('topics')->with('result', $result);
     }
 
     public function create()
     {
-        $tags = DB::table('tags')
-            ->select('tag_name', 'id')
-            ->get();
-
+        $tags = Tag::all();
     	return view('create_topic')->with('tags', $tags);
     }
 
