@@ -73,10 +73,11 @@ class TopicController extends Controller
             ->where('user_id', '=', $userid)
             ->get();/*/
 
-        $result[2] = Subscription::where('user_id', $userid)
-                                  ->where('topic_id', $id)
+        $result[2] = Subscription::where('user_id', '=', $userid)
+                                  ->where('topic_id', '=', $id)
                                   ->get(); 
 
+         var_dump($result[2]);                         
     	return view('topicShow')->with('result', $result);
     }
 
