@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Request;
 
-use DB;
-
 use App\Http\Requests;
 
 use App\topic;
+
+use App\tag;
 
 class TopicController extends Controller
 {
@@ -30,10 +30,7 @@ class TopicController extends Controller
 
     public function create()
     {
-        $tags = DB::table('tags')
-            ->select('tag_name', 'id')
-            ->get();
-
+        $tags = Tag::all();
     	return view('create_topic')->with('tags', $tags);
     }
 
