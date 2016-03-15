@@ -38,29 +38,19 @@ class TopicController extends Controller
 
     public function store()
     {
-    	$input = Request::all();
-            if (isset($input['tags'])){
-                $checked = $input['tags'];
-            }
-            if (empty($checked)){
-                return redirect('/topic/create')->with('error', ['foutmelding']);
-            }
-            else{
-                
-                $user = \Auth::user();
-                $userid = $user->id;
+        $user = \Auth::user();
+        $userid = $user->id;
 
-                DB::table('topics')->insert([
-                   ['user_id' => $userid, 'topic_title' => $input['title'], 'topic_description' => $input['description']]
-                ]);
+        $input = Request::all();
 
-                $last = DB::table('topics')->orderBy('id', 'desc')->first();
-                    foreach ($checked as $check){
-                        DB::table('tags_topic')->insert([
-                        ['topic_id' => $last->id, 'tag_id' => $check[0]]]);
-                    }
-            	return redirect('/topic');
-            }
+        $topic = new Topic;
+
+        $topic->user_id = $userid;
+        $topic->topic_title = $input['title'];
+        $topic->topic_description = $input['description'];
+        $topic->save();
+
+        return "hierbij ga je nu naar de andere pagina";
     }
 
     public function show($id){
