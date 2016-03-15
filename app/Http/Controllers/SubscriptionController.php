@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Request;
 
-use DB;
-
 use App\Http\Requests;
 
 use App\Subscription;
@@ -28,15 +26,15 @@ class SubscriptionController extends Controller
 
 		$subscription = new Subscription;   
 		$subscription->topic_id = $topic_id;
-		$subscription->user_id = $userid;
+		$subscription->user_id = $userid;	
 		$subscription->save();
-		var_dump($subscription->topic_id);	
+
 
 
 		/*/ DB::table('subscription')->insert([
-        ['user_id' => $userid, 'topic_id' => $topic_id]]);
+        ['user_id' => $userid, 'topic_id' => $topic_id]]);/*/
     	
-      return redirect('/topic/'.$topic_id);/*/
+      return redirect('/topic/'.$topic_id);
     		
     }
 
@@ -44,10 +42,14 @@ class SubscriptionController extends Controller
       $user = \Auth::user();
      	$userid = $user->id;
 
-     	$test = DB::table('subscription')
+     	Subscription::where('user_id', $userid)
+     							  ->where('topic_id', $id)
+     							  ->delete();
+
+     	/*/$test = DB::table('subscription')
         ->where('topic_id', '=', $id)
      		->where('user_id', '=', $userid)
-     		->delete();
+     		->delete();    }/*/
      	return redirect('/topic/'.$id);
-    }
+}
 }
