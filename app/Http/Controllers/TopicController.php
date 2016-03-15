@@ -90,7 +90,7 @@ class TopicController extends Controller
             ->where('user_id', '=', $userid)
             ->get();
 
-    	return \View::make('topicShow')->with('result', $result);
+    	return view('topicShow')->with('result', $result);
     }
 
 

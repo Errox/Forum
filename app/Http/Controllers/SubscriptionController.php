@@ -20,7 +20,7 @@ class SubscriptionController extends Controller
     public function store()
     {
     	$input = Request::all();
-		  $topic_id = $input['id'];    	
+		$topic_id = $input['id'];    	
     	$user = \Auth::user();
     	$userid = $user->id;
 
