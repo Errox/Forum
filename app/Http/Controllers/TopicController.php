@@ -49,6 +49,8 @@ class TopicController extends Controller
         $topic->topic_title = $input['title'];
         $topic->topic_description = $input['description'];
         $topic->save();
+
+        return "hierbij ga je nu naar de andere pagina";
     }
 
     public function show($id){
