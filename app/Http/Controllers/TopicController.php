@@ -14,6 +14,8 @@ use App\Comment;
 
 use DB;
 
+use App\Subscription;
+
 class TopicController extends Controller
 {
     public function __construct()
@@ -65,11 +67,15 @@ class TopicController extends Controller
 
         $result[1] = Comment::where('topic_id', '=', $id)->get();
 
-        $result[2] = DB::table('subscriptions')
+       /*/ $result[2] = DB::table('subscriptions')
             ->select('user_id', 'topic_id')
             ->where('topic_id', '=', $id) 
             ->where('user_id', '=', $userid)
-            ->get();
+            ->get();/*/
+
+        $result[2] = Subscription::where('user_id', $userid)
+                                  ->where('topic_id', $id)
+                                  ->get(); 
 
     	return view('topicShow')->with('result', $result);
     }
