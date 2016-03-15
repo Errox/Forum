@@ -44,7 +44,4 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/search', 'SearchController@index');
     //Subscribe resource
     Route::resource('/subscribe', 'SubscriptionController');
-
-    //Test for giving json code trough html page
-
 });

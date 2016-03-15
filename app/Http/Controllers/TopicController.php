@@ -12,8 +12,6 @@ use App\tag;
 
 use App\Comment;
 
-use DB;
-
 use App\Subscription;
 
 class TopicController extends Controller
