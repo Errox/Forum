@@ -21,6 +21,7 @@ class SubscriptionController extends Controller
 
     public function store()
     {
+
     	$input = Request::all();
 		$topic_id = $input['id']; 
 		$user = \Auth::user();
@@ -30,7 +31,7 @@ class SubscriptionController extends Controller
 		$subscription->topic_id = $topic_id;
 		$subscription->user_id = $userid;
 		$subscription->save();
-		var_dump($subscription->topic_id);	
+		var_dump(get_defined_vars());	
 
 
 		/*/ DB::table('subscription')->insert([
@@ -40,14 +41,14 @@ class SubscriptionController extends Controller
     		
     }
 
-    public function destroy($id){
-      $user = \Auth::user();
-     	$userid = $user->id;
+    // public function destroy($id){
+    //   $user = \Auth::user();
+    //  	$userid = $user->id;
 
-     	$test = DB::table('subscription')
-        ->where('topic_id', '=', $id)
-     		->where('user_id', '=', $userid)
-     		->delete();
-     	return redirect('/topic/'.$id);
-    }
+    //  	$test = DB::table('subscription')
+    //     ->where('topic_id', '=', $id)
+    //  		->where('user_id', '=', $userid)
+    //  		->delete();
+    //  	return redirect('/topic/'.$id);
+    // }
 }

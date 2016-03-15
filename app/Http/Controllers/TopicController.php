@@ -41,32 +41,14 @@ class TopicController extends Controller
         $user = \Auth::user();
         $userid = $user->id;
 
+        $input = Request::all();
 
         $topic = new Topic;
 
         $topic->user_id = $userid;
-        $topic->topic_title = Input::get('title');
-        $topic->topic_description = Input::get('email');
-        if($topic->save()) {
-            $response = Response::json(array('success' => true), 200);
-        }  
-        echo $response;
-
-            if (isset($input['tags'])){
-                $checked = $input['tags'];
-            }
-            if (empty($checked)){
-                return redirect('/topic/create')->with('error', ['foutmelding']);
-            }
-            else{
-                    
-                $last = DB::table('topics')->orderBy('id', 'desc')->first();
-                    foreach ($checked as $check){
-                        DB::table('tags_topic')->insert([
-                        ['topic_id' => $last->id, 'tag_id' => $check[0]]]);
-                    }
-            	return redirect('/topic');
-            }
+        $topic->topic_title = $input['title'];
+        $topic->topic_description = $input['description'];
+        $topic->save();
     }
 
     public function show($id){
