@@ -38,7 +38,20 @@ class TopicController extends Controller
 
     public function store()
     {
-    	$input = Request::all();
+        $user = \Auth::user();
+        $userid = $user->id;
+
+
+        $topic = new Topic;
+
+        $topic->user_id = $userid;
+        $topic->topic_title = Input::get('title');
+        $topic->topic_description = Input::get('email');
+        if($topic->save()) {
+            $response = Response::json(array('success' => true), 200);
+        }  
+        echo $response;
+
             if (isset($input['tags'])){
                 $checked = $input['tags'];
             }
@@ -46,14 +59,7 @@ class TopicController extends Controller
                 return redirect('/topic/create')->with('error', ['foutmelding']);
             }
             else{
-                
-                $user = \Auth::user();
-                $userid = $user->id;
-
-                DB::table('topics')->insert([
-                   ['user_id' => $userid, 'topic_title' => $input['title'], 'topic_description' => $input['description']]
-                ]);
-
+                    
                 $last = DB::table('topics')->orderBy('id', 'desc')->first();
                     foreach ($checked as $check){
                         DB::table('tags_topic')->insert([
