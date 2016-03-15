@@ -12,17 +12,16 @@
                       <h1>{{$topics->topic_title}}</h1>
                       <p>{{$topics->topic_description}}</p>
                       <p>Created by {{$topics->user->name}}</p>
-
-                      @if (empty($result[2]))
-                        {{Form::open(array('route' => array('subscribe.store'), 'method' => 'store')) }}
-                        {{Form::hidden('id', $topics->id)}}
-                        {{Form::submit('Subscribe', ['class' => 'btn btn-primary'])}}
-                        {{ Form::close() }}
-                      @else
-                        {{ Form::open(array('route' => array('subscribe.destroy', $topics->id), 'method' => 'delete')) }}
-                          <button class="btn btn-primary" type="submit" >Unsubscribe</button>
-                        {{ Form::close() }}
-                      @endif                  
+                        @if (!$result[2]->count())
+                          {{Form::open(array('route' => array('subscribe.store'), 'method' => 'store')) }}
+                          {{Form::hidden('id', $topics->id)}}
+                          {{Form::submit('Subscribe', ['class' => 'btn btn-primary'])}}
+                          {{Form::close()}}
+                        @else
+                          {{Form::open(array('route' => array('subscribe.destroy', $topics->id), 'method' => 'delete')) }}
+                            <button class="btn btn-primary" type="submit" >Unsubscribe</button>
+                          {{Form::close()}}
+                        @endif
                     @endforeach
                   </ul>
               </div>
