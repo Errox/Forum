@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Request;
 
-use DB;
-
 use App\Http\Requests;
+
+use App\Comment;
 
 class CommentController extends Controller
 {
@@ -16,14 +16,15 @@ class CommentController extends Controller
     	//all user id's
     	$user = \Auth::user();
     	$userid = $user->id;
-        $topic_id = $input['id'];
 
+        $comment = new Comment;
 
-        DB::table('comments')->insert([
-            ['user_id' => $userid, 'topic_id' => $topic_id, 'comment_description' => $input['comment_description']]
-        ]);
+        $comment->user_id = $userid;
+        $comment->topic_id = $input['id'];
+        $comment->comment_description = $input['comment_description'];
+        $comment->save();
 
-    	return redirect('topic/'.$topic_id);
+    	return redirect('topic/'.$input['id']);
 
     }
 

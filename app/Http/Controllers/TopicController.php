@@ -58,11 +58,7 @@ class TopicController extends Controller
             $user = \Auth::user();
             $userid = $user->id;
 
-    	$result[0] = DB::table('topics')
-    		->leftJoin('users', 'topics.user_id', '=', 'users.id')
-    		->select('topics.id','users.name','topics.topic_title','topics.topic_description', 'topics.created_at')
-    		->where('topics.id', '=', $id)
-    		->get();
+    	$result[0] = Topic::find($id);
 
         $result[1] = DB::table('topics')
             ->leftJoin('comments', 'topics.id', '=', 'comments.topic_id')
