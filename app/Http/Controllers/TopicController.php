@@ -10,6 +10,8 @@ use App\topic;
 
 use App\tag;
 
+use DB;
+
 class TopicController extends Controller
 {
     public function __construct()

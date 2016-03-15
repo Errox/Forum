@@ -8,6 +8,8 @@ use DB;
 
 use App\Http\Requests;
 
+use App\Subscription;
+
 use View;
 
 class SubscriptionController extends Controller
@@ -20,14 +22,21 @@ class SubscriptionController extends Controller
     public function store()
     {
     	$input = Request::all();
-		$topic_id = $input['id'];    	
-    	$user = \Auth::user();
+		$topic_id = $input['id']; 
+		$user = \Auth::user();
     	$userid = $user->id;
 
-		  DB::table('subscription')->insert([
+		$subscription = new Subscription;   
+		$subscription->topic_id = $topic_id;
+		$subscription->user_id = $userid;
+		$subscription->save();
+		var_dump($subscription->topic_id);	
+
+
+		/*/ DB::table('subscription')->insert([
         ['user_id' => $userid, 'topic_id' => $topic_id]]);
     	
-      return redirect('/topic/'.$topic_id);
+      return redirect('/topic/'.$topic_id);/*/
     		
     }
 

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subscription extends Model
 {
-    protected function index(){
-    	
+    public function index(){
+    return $this->belongsTo('App\User', 'App\Topic'); 	
     }
 }
