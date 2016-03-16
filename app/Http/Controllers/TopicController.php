@@ -50,15 +50,37 @@ class TopicController extends Controller
         $topic->user_id = $userid;
         $topic->topic_title = $input['title'];
         $topic->topic_description = $input['description'];
+        
+        if (isset($input['tags'])){
+            $checked = $input['tags'];
+        }
+        if (empty($checked)){
+            return redirect('/topic/create')->with('error', ['foutmelding']);
+        }else{
         $topic->save();
+        $topicid = $topic->id;
 
-        return "hierbij ga je nu naar de andere pagina";
+        
+        //$topic->sync(array('topic_id' => $topicid,'tag_id' => $input['tags']));
+
+        //var_dump(get_defined_vars());
+        
+        // $last = DB::table('topics')->orderBy('id', 'desc')->first();
+        //             foreach ($checked as $check){
+        //                 DB::table('tags_topic')->insert([
+        //                 ['topic_id' => $last->id, 'tag_id' => $check[0]]]);
+        //             }
+        // $tags = new Tag;
+
+
+
+
+        return redirect('topic');
     }
-
+}
     public function show($id){
-        //Specific topic/username
-            $user = \Auth::user();
-            $userid = $user->id;
+        $user = \Auth::user();
+        $userid = $user->id;
 
     	$result[0] = Topic::where('id', '=', $id)->get();
 
