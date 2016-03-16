@@ -66,7 +66,7 @@
                         {!! Form::close() !!}
                     </li>
 
-                        <li><a href="{{ url('/topic/create')}}">Create new topic</a></li>
+                        <li><a href="{{ url('/topic/create')}}">Maak leervraag</a></li>
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

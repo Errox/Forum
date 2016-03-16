@@ -5,15 +5,15 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Topics</div>
+                <div class="panel-heading">Leervragen</div>
                   <div class="panel-body">
                     <ul>
                       <table class="table table-hover table-striped">
                         <thead>
-                          <th>Naam</th>
+                          <th>Onderwerp</th>
                           <th>Beschrijving</th>
                           <th>Datum</th>
-                          <th>Created by</th>
+                          <th>Gemaakt door</th>
                         </thead>
                         <tbody>
                           @foreach($result as $topics)

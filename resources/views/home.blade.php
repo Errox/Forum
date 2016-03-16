@@ -15,7 +15,7 @@
                             @else    
                         <table class="table table-hover">
                             <thead>
-                              <th>Naam</th>
+                              <th>Onderwerp</th>
                               <th>Beschrijving</th>
                             </thead>
                             <tbody>
