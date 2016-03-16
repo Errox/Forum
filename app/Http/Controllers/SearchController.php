@@ -20,7 +20,6 @@ class SearchController extends Controller
     public function index()
     {
     	$SearchQuery = $_POST['Search'];
-
         $NoSpace = trim($SearchQuery, ' ');
        $result[0] = strlen($NoSpace);
        $result[1] = Topic::where('topic_title', 'like', '%'.$NoSpace.'%')->get();

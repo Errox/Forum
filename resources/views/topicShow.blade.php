@@ -13,7 +13,7 @@
                       <p>{{$topics->topic_description}}</p>
                       <p>Created by {{$topics->user->name}}</p>
 
-                      @if (empty($result[2]))
+                      @if (isset($result[2]))
                         {{Form::open(array('route' => array('subscribe.store'), 'method' => 'store')) }}
                         {{Form::hidden('id', $topics->id)}}
                         {{Form::submit('Subscribe', ['class' => 'btn btn-primary'])}}

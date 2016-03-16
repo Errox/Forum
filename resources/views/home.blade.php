@@ -9,8 +9,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Zoekresultaten</div>
                     <div class="panel-body">
-                        @if (isset($result))
-                            @if (empty($result) OR $result[0] == 0)
+                        @if ($result)
+                            @if (!$result[1]->count() OR $result[0] == 0)
                                 <p>Sorry, we hebben geen resultaten gevonden</p>
                             @else    
                         <table class="table table-hover">
