@@ -37,14 +37,15 @@ class SubscriptionController extends Controller
     		
     }
 
-     public function destroy($id){
-       $user = \Auth::user();
-      	$userid = $user->id;
+     public function destroy($id)
+     {
+        $user = \Auth::user();
+        $userid = $user->id;
 
 
      	Subscription::where('user_id', $userid)
-     							  ->where('topic_id', $id)
-     							  ->delete();
+     	  ->where('topic_id', $id)
+     	  ->delete();
 
     //  	$test = DB::table('subscription')
     //     ->where('topic_id', '=', $id)

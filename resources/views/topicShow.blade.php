@@ -13,23 +13,23 @@
                       <p>{{$topics->topic_description}}</p>
                       <p>Created by {{$topics->user->name}}</p>
 
-                      @if (isset($result[2]))
-                        {{Form::open(array('route' => array('subscribe.store'), 'method' => 'store')) }}
-                        {{Form::hidden('id', $topics->id)}}
-                        {{Form::submit('Subscribe', ['class' => 'btn btn-primary'])}}
-                        {{ Form::close() }}
-                      @else
-                        {{ Form::open(array('route' => array('subscribe.destroy', $topics->id), 'method' => 'delete')) }}
-                          <button class="btn btn-primary" type="submit" >Unsubscribe</button>
-                        {{ Form::close() }}
-                      @endif                  
+                        @if (!$result[2]->count())
+                          {{Form::open(array('route' => array('subscribe.store'), 'method' => 'store')) }}
+                          {{Form::hidden('id', $topics->id)}}
+                          {{Form::submit('Subscribe', ['class' => 'btn btn-primary'])}}
+                          {{Form::close()}}
+                        @else
+                          {{Form::open(array('route' => array('subscribe.destroy', $topics->id), 'method' => 'delete')) }}
+                            <button class="btn btn-primary" type="submit" >Unsubscribe</button>
+                          {{Form::close()}}
+                        @endif
                     @endforeach
                   </ul>
               </div>
           </div>
           <div class="panel panel-default">
             <div class="panel-body">
-              @if (!empty($result[1]))
+              @if ($result[1]->count())
                 @foreach($result[1] as $comments)
                   <div class="panel">
                     <h3>{{$comments->user->name}} replied: </h3>
