@@ -12,7 +12,6 @@
                       <h1>{{$topics->topic_title}}</h1>
                       <p>{{$topics->topic_description}}</p>
                       <p>Gemaakt door {{$topics->user->name}}</p>
-
                         @if (!$result[2]->count())
                           {{Form::open(array('route' => array('subscribe.store'), 'method' => 'store')) }}
                           {{Form::hidden('id', $topics->id)}}
@@ -32,7 +31,7 @@
               @if ($result[1]->count())
                 @foreach($result[1] as $comments)
                   <div class="panel">
-                    <h3>{{$comments->user->name}} replied: </h3>
+                    <h3>{{$comments->user->name}} antwoorde: </h3>
                     <h4>{{$comments->comment_description}} </h4>
                     <p>Tijd: {{$comments->created_at}}</p>
                   </div>

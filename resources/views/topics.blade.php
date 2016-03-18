@@ -13,15 +13,14 @@
                           <th>Onderwerp</th>
                           <th>Beschrijving</th>
                           <th>Datum</th>
-                          <th>Gemaakt door</th>
+                          <th></th>
                         </thead>
                         <tbody>
                           @foreach($result as $topics)
                           <tr>
                               <td><a href="/topic/<?=$topics->id?>">{{ $topics->topic_title}}</a></td>
-                              <td><a href="/topic/<?=$topics->id?>">{{ $topics->topic_description}}</a></td>
+                              <td>{{ $topics->topic_description}}</td>
                               <td>{{ $topics->created_at}}</td>
-                              <td>{{ $topics->User->name}} </td>
                           </tr>
                       	 @endforeach
                         </tbody>
