@@ -36,8 +36,13 @@ class TopicController extends Controller
 
     public function create()
     {
+        if (Auth::check()){
         $tags = Tag::all();
     	return view('create_topic')->with('tags', $tags);
+    }
+    else{
+        return redirect('/topic');
+    }
     }
 
     public function store()
