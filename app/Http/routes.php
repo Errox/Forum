@@ -15,6 +15,13 @@ Route::get('/', function () {
     return redirect('/topic');
 });
 
+Route::resource('/topic-nl', 'TopicNLController');
+    //Topic route
+
+
+Route::resource('/topic', 'TopicController',
+		['only' => ['index']]);
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -26,15 +33,13 @@ Route::get('/', function () {
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-    //
-});
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
+	Route::resource('/topic', 'TopicController');
 
-    //Topic route
-    Route::resource('/topic', 'TopicController');
+
+
     //Comment route
     Route::resource('/comment', 'CommentController',
     	['only' => ['store', 'destroy']]);

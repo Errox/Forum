@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+
 use Request;
 
 use App\Http\Requests;
@@ -18,7 +20,7 @@ class TopicController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -79,16 +81,21 @@ class TopicController extends Controller
     }
 }
     public function show($id){
+        if (Auth::check()){
         $user = \Auth::user();
         $userid = $user->id;
 
+        $result[2] = Subscription::where('user_id', '=', $userid)
+                                  ->where('topic_id', '=', $id)
+                                  ->get();         
+
+    }
     	$result[0] = Topic::where('id', '=', $id)->get();
 
         $result[1] = Comment::where('topic_id', '=', $id)->get();
+  
 
-        $result[2] = Subscription::where('user_id', '=', $userid)
-                                  ->where('topic_id', '=', $id)
-                                  ->get(); 
+
 
     	return view('topicShow')->with('result', $result);
     }
