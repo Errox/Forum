@@ -10,17 +10,19 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
+	//Topic via Home
 Route::get('/', function () {
     return redirect('/topic');
 });
-
-Route::resource('/topic-nl', 'TopicNLController');
     //Topic route
-
-
 Route::resource('/topic', 'TopicController',
 		['only' => ['index']]);
+
+    //Searchbar post route
+Route::post('/search', 'SearchController@index',
+		['only' => ['index']]);
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -37,16 +39,14 @@ Route::resource('/topic', 'TopicController',
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 	Route::resource('/topic', 'TopicController');
-
+	Route::post('/search', 'SearchController@index',
+		['only' => ['index']]);
 
 
     //Comment route
     Route::resource('/comment', 'CommentController',
     	['only' => ['store', 'destroy']]);
     //Directing to homepage
-    Route::get('/home', 'HomeController@index');
-    //Searchbar post route
-    Route::post('/search', 'SearchController@index');
     //Subscribe resource
     Route::resource('/subscribe', 'SubscriptionController');
 });

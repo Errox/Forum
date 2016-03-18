@@ -10,11 +10,14 @@ use App\topic;
 
 use View;
 
+use Auth;
+
 class SearchController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+       // $this->middleware('auth');
+    
     }
 
     public function index()
