@@ -12,17 +12,18 @@
                       <h1>{{$topics->topic_title}}</h1>
                       <p>{{$topics->topic_description}}</p>
                       <p>Gemaakt door {{$topics->user->name}}</p>
-
+                      @if(Auth::check())
                         @if (!$result[2]->count())
                           {{Form::open(array('route' => array('subscribe.store'), 'method' => 'store')) }}
                           {{Form::hidden('id', $topics->id)}}
                           {{Form::submit('Aansluiten', ['class' => 'btn btn-primary'])}}
-                          {{Form::close()}}
+                          {{Form::close()}} 
                         @else
                           {{Form::open(array('route' => array('subscribe.destroy', $topics->id), 'method' => 'delete')) }}
                             <button class="btn btn-primary" type="submit" >Afmelden</button>
                           {{Form::close()}}
-                        @endif
+                          @endif
+                        @endif 
                     @endforeach
                   </ul>
               </div>
@@ -42,6 +43,7 @@
               @endif
             </div>
           </div>
+         @if (Auth::check()) 
             <div class="panel panel-default">
               <div class="panel-body">
                 {!! Form::open(array('url' => 'comment')) !!}
@@ -54,7 +56,10 @@
                   </div>
                 {!! form::close(); !!}
               </div>
+              @else
+              <h4 style="text-align : center;"><a href="/login">Log in om te reageren</a></h4>
             </div>
+            @endif
         </div>
     </div>
 </div>
