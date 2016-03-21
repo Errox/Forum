@@ -13,4 +13,14 @@ class Topic extends Model
 	public function tag(){
 		return $this->hasMany('App\Tag', 'App\Topic', 'topic_id', 'tag_id');
 	}
+
+	public function subscriptions(){
+		return $this->hasMany('App\Subscription');
+	}
+
+	public function subscriptionsCount(){
+		return $this->subscriptions()
+		 ->selectRaw('topic_id, count(*) as aggregate')
+		 ->groupBy('topic_id');
+	}
 }

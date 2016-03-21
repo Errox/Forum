@@ -30,19 +30,28 @@ class TopicController extends Controller
      */
     public function index()
     {
-        $result = Topic::all();
-        return \View::make('topics')->with('result', $result);
+        $result[0] = Topic::orderBy('created_at', 'desc')->get();
+
+        $result[1] = Topic::all();
+
+        $result[2] = Topic::with('subscriptionsCount')->get();
+
+        return view('topics')->with('result', $result);
     }
 
     public function create()
     {
         if (Auth::check()){
-        $tags = Tag::all();
-    	return view('create_topic')->with('tags', $tags);
-    }
-    else{
-        return redirect('/topic');
-    }
+            
+            $tags = Tag::all();
+        	
+            return view('create_topic')->with('tags', $tags);
+        }
+        else{
+
+            return redirect('/topic');
+        
+        }
     }
 
     public function store()
@@ -64,10 +73,10 @@ class TopicController extends Controller
         if (empty($checked)){
             return redirect('/topic/create')->with('error', ['foutmelding']);
         }else{
-        $topic->save();
-        $topicid = $topic->id;
+            $topic->save();
+            $topicid = $topic->id;
 
-        
+        //Tags moeten nog opgeslagen worden via de tendant table
         //$topic->sync(array('topic_id' => $topicid,'tag_id' => $input['tags']));
 
         //var_dump(get_defined_vars());
@@ -86,22 +95,18 @@ class TopicController extends Controller
     }
 }
     public function show($id){
-        if (Auth::check()){
-        $user = \Auth::user();
-        $userid = $user->id;
-
-        $result[2] = Subscription::where('user_id', '=', $userid)
-                                  ->where('topic_id', '=', $id)
-                                  ->get();         
-
-    }
-    	$result[0] = Topic::where('id', '=', $id)->get();
+        $result[0] = Topic::where('id', '=', $id)->get();
 
         $result[1] = Comment::where('topic_id', '=', $id)->get();
-  
 
+        if (Auth::check()){
+            $user = \Auth::user();
+            $userid = $user->id;
 
-
+            $result[2] = Subscription::where('user_id', '=', $userid)
+                                      ->where('topic_id', '=', $id)
+                                      ->get();         
+        }
     	return view('topicShow')->with('result', $result);
     }
 
