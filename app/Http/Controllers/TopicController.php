@@ -30,8 +30,18 @@ class TopicController extends Controller
      */
     public function index()
     {
-        $result = Topic::all();
-        return \View::make('topics')->with('result', $result);
+        if(Auth::check()){
+            $user = \Auth::user();
+            $result[4] = $user->id;
+        }
+
+        $result[0] = Topic::orderBy('created_at', 'desc')->get();
+
+        $result[1] = Topic::all();
+
+        $result[3] = Subscription::all();
+
+        return view('topics')->with('result', $result);
     }
 
     public function create()
