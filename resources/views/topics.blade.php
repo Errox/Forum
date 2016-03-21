@@ -22,7 +22,13 @@
                               <td>{{ $topics->topic_description}}</td>
                               <td>{{ $topics->created_at}}</td>
                                 <?php $subs = $topics->subscriptionsCount->first() ?>
-                              <td class="text-center">{{ $subs['aggregate'] }} </td>
+                              <td class="text-center">
+                                @if($subs == null)
+                                  {{'0'}}
+                                @else
+                                  {{$subs['aggregate']}}
+                                @endif
+                              </td>
                                 @if (isset($result[4]))  
                                   @foreach($result[3] as $subscriptions)
                                     @if($subscriptions->topic_id == $topics->id and $subscriptions->user_id == $result[4])
@@ -61,7 +67,13 @@
                               <td>{{ $topics->topic_description}}</td>
                               <td>{{ $topics->created_at}}</td>
                               <?php $subs = $topics->subscriptionsCount->first() ?>
-                              <td class="text-center">{{ $subs['aggregate'] }} </td>
+                              <td class="text-center">
+                                @if($subs == null)
+                                  {{'0'}}
+                                @else
+                                  {{$subs['aggregate']}}
+                                @endif
+                              </td>
                                 @if (isset($result[4]))  
                                   @foreach($result[3] as $subscriptions)
                                     @if($subscriptions->topic_id == $topics->id and $subscriptions->user_id == $result[4])
