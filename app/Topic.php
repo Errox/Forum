@@ -2,6 +2,8 @@
 
 namespace App;
 
+
+
 use Illuminate\Database\Eloquent\Model;
 
 class Topic extends Model
@@ -23,4 +25,5 @@ class Topic extends Model
 		 ->selectRaw('topic_id, count(*) as aggregate')
 		 ->groupBy('topic_id');
 	}
+
 }
