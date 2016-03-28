@@ -67,8 +67,8 @@
 
                     @else
 
-                    
-
+                        <!-- Tags cant be acces'd by students -->
+                        <li><a href="{{ url('/tag')}}" style="color:red">Tags</a></li>
                         <li><a href="{{ url('/topic/create')}}">Maak leervraag</a></li>
 
                         <li class="dropdown">

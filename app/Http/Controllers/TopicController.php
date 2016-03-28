@@ -92,12 +92,9 @@ class TopicController extends Controller
         //             }
         // $tags = new Tag;
 
-
-
-
         return redirect('topic');
+        }
     }
-}
     public function show($id){
         $result[0] = Topic::where('id', '=', $id)->get();
 
