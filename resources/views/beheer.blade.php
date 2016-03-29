@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@extends('layouts.menu')
 @section('content')
 <div class="container">
     <div class="row">
@@ -7,11 +7,6 @@
             <div class="panel panel-default">
                 <div class="panel-body">
         <div class="container">
-        <div class="collapse navbar-collapse" id="app-navbar-collapse">
-         <ul class="nav navbar-nav">
-            <span><a href="{{ url('/tag')}}">Tags</a></span>
-          </ul>
-        </div>
             </div>
               </div>
           </div>

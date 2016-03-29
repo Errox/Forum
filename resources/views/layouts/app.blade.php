@@ -78,7 +78,7 @@
                 @if($role != 0)
                         <li><a href="{{ url('/beheer') }}">Beheer</a></li>
                         @endif
-
+                        
                         <li><a href="{{ url('/topic/create')}}">Maak leervraag</a></li>
 
                         <li class="dropdown">

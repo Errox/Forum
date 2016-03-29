@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@extends('layouts.menu')
 <div class="container col-md-12">
   <div class="row">
     <div class="col-md-6">
