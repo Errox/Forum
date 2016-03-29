@@ -66,9 +66,18 @@
                         <li><a href="{{ url('/register') }}">Register</a></li>
 
                     @else
-
-                    
-
+                    <?php         
+                         $user = \Auth::user();
+                        $info =  DB::table('users')
+                        ->where('id', '=', $user->id)
+                        ->get(); 
+                        foreach ($info as $result){
+                            $role = $result->role;
+                        } 
+                    ?>
+                @if($role != 0)
+                        <li><a href="{{ url('/beheer') }}">Beheer</a></li>
+                        @endif
                         <li><a href="{{ url('/topic/create')}}">Maak leervraag</a></li>
 
                         <li class="dropdown">

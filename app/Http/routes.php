@@ -41,6 +41,10 @@ Route::group(['middleware' => 'web'], function () {
 	Route::resource('/topic', 'TopicController');
 	Route::post('/search', 'SearchController@index',
 		['only' => ['index']]);
+	
+Route::group(['middleware' => 'role'], function(){
+	Route::resource('/beheer', 'RoleController');
+});
 
 
     //Comment route

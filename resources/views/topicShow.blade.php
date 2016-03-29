@@ -11,7 +11,7 @@
                       <p>{{$topics->created_at}} </p>
                       <h1>{{$topics->topic_title}}</h1>
                       <p>{{$topics->topic_description}}</p>
-                      <p>Gemaakt door {{$topics->user->name}}</p>
+                      <p>Gemaakt door {{$topics->username}}</p>
                       @if(Auth::check())
                         @if (!$result[2]->count())
                           {{Form::open(array('route' => array('subscribe.store'), 'method' => 'store')) }}

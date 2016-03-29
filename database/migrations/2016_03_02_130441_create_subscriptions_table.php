@@ -16,6 +16,7 @@ class CreateSubscriptionsTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('topic_id');
+            $table->timestamps();            
         });
     }
 
