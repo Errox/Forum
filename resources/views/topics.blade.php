@@ -60,7 +60,7 @@
                         <th>Aanmeldingen</th>
                       </thead>
                       <tbody>
-                        @foreach($result[1] as $topics)
+                        @foreach($result[2] as $topics)
                           <?php $subscribed = false; ?>
                             <tr>
                               <td><a href="/topic/<?=$topics->id?>">{{ str_limit($topics->topic_title, 20)}}</a></td>
