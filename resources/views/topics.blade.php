@@ -18,7 +18,7 @@
                         @foreach($result[0] as $topics)
                           <?php $subscribed = false; ?>
                             <tr>
-                              <td><a href="/topic/<?=$topics->id?>">{{ str_limit($topics->topic_title, 20)}}</a></td>
+                              <td><a href="topic/<?=$topics->id?>">{{ str_limit($topics->topic_title, 20)}}</a></td>
                               <td>{{ str_limit($topics->topic_description, 20)}}</td>
                               <td>{{ $topics->created_at->diffForHumans()}}</td>
                                 <?php $subs = $topics->subscriptionsCount->first() ?>
@@ -63,7 +63,7 @@
                         @foreach($result[2] as $topics)
                           <?php $subscribed = false; ?>
                             <tr>
-                              <td><a href="/topic/<?=$topics->id?>">{{ str_limit($topics->topic_title, 20)}}</a></td>
+                              <td><a href="topic/<?=$topics->id?>">{{ str_limit($topics->topic_title, 20)}}</a></td>
                               <td>{{ str_limit($topics->topic_description, 20) }}</td>
                               <td>{{ $topics->created_at->diffForHumans()}}</td>
                               <?php $subs = $topics->subscriptionsCount->first() ?>

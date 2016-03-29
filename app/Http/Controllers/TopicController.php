@@ -8,9 +8,9 @@ use Request;
 
 use App\Http\Requests;
 
-use App\topic;
+use App\Topic;
 
-use App\tag;
+use App\Tag;
 
 use App\Comment;
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 
-use App\tag;
+use App\Tag;
 
 use Request;
 
