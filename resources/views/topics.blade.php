@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container col-md-12">
     <div class="row">
         <div class="col-md-6">
             <div class="panel panel-default">
@@ -18,9 +18,9 @@
                         @foreach($result[0] as $topics)
                           <?php $subscribed = false; ?>
                             <tr>
-                              <td><a href="/topic/<?=$topics->id?>">{{ $topics->topic_title}}</a></td>
-                              <td>{{ $topics->topic_description}}</td>
-                              <td>{{ $topics->created_at}}</td>
+                              <td><a href="/topic/<?=$topics->id?>">{{ str_limit($topics->topic_title, 20)}}</a></td>
+                              <td>{{ str_limit($topics->topic_description, 20)}}</td>
+                              <td>{{ $topics->created_at->diffForHumans()}}</td>
                                 <?php $subs = $topics->subscriptionsCount->first() ?>
                               <td class="text-center">
                                 @if($subs == null)
@@ -63,9 +63,9 @@
                         @foreach($result[1] as $topics)
                           <?php $subscribed = false; ?>
                             <tr>
-                              <td><a href="/topic/<?=$topics->id?>">{{ $topics->topic_title}}</a></td>
-                              <td>{{ $topics->topic_description}}</td>
-                              <td>{{ $topics->created_at}}</td>
+                              <td><a href="/topic/<?=$topics->id?>">{{ str_limit($topics->topic_title, 20)}}</a></td>
+                              <td>{{ str_limit($topics->topic_description, 20) }}</td>
+                              <td>{{ $topics->created_at->diffForHumans()}}</td>
                               <?php $subs = $topics->subscriptionsCount->first() ?>
                               <td class="text-center">
                                 @if($subs == null)

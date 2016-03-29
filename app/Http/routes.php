@@ -11,16 +11,17 @@
 |
 */
 	//Topic via Home
+    //Directing to homepage
 Route::get('/', function () {
     return redirect('/topic');
 });
     //Topic route
 Route::resource('/topic', 'TopicController',
-		['only' => ['index']]);
+        ['only' => ['index']]);
 
     //Searchbar post route
 Route::post('/search', 'SearchController@index',
-		['only' => ['index']]);
+        ['only' => ['index']]);
 
 
 
@@ -38,19 +39,31 @@ Route::post('/search', 'SearchController@index',
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
+
 	Route::resource('/topic', 'TopicController');
 	Route::post('/search', 'SearchController@index',
 		['only' => ['index']]);
 	
 Route::group(['middleware' => 'role'], function(){
 	Route::resource('/beheer', 'RoleController');
+	    //Tag route
+    Route::resource('/tag', 'TagController');
 });
+
+
+    //Topic route.
+    Route::resource('/topic', 'TopicController');
+    
+    //Search route
+    Route::post('/search', 'SearchController@index',
+        ['only' => ['index']]);
+
 
 
     //Comment route
     Route::resource('/comment', 'CommentController',
-    	['only' => ['store', 'destroy']]);
-    //Directing to homepage
+        ['only' => ['store', 'destroy']]);
+  
     //Subscribe resource
     Route::resource('/subscribe', 'SubscriptionController');
 });

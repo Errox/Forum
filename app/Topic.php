@@ -2,8 +2,6 @@
 
 namespace App;
 
-
-
 use Illuminate\Database\Eloquent\Model;
 
 class Topic extends Model
@@ -23,6 +21,7 @@ class Topic extends Model
 	public function subscriptionsCount(){
 		return $this->subscriptions()
 		 ->selectRaw('topic_id, count(*) as aggregate')
+		 ->orderBy('aggregate', 'desc')
 		 ->groupBy('topic_id');
 	}
 
