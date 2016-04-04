@@ -39,8 +39,10 @@ class TopicController extends Controller
         $result[2] = Topic::with('subscriptions')->get()->sortBy(function($topic){
             return $topic->subscriptions->count();
         },$options = SORT_REGULAR, $descending = true );
+        $result[5] = Topic::with('getTags')->get();
         $result[3] = Subscription::all();
 
+        dd($result[5]);
         return view('topics')->with('result', $result);
     }
 
@@ -78,21 +80,10 @@ class TopicController extends Controller
         if (empty($checked)){
             return redirect('/topic/create')->with('error', ['foutmelding']);
         }else{
-            $topic->save();
-            $topicid = $topic->id;
+          $topic->save();
 
         //Tags moeten nog opgeslagen worden via de tendant table
-        //$topic->sync(array('topic_id' => $topicid,'tag_id' => $input['tags']));
-
-        //var_dump(get_defined_vars());
-        
-        // $last = DB::table('topics')->orderBy('id', 'desc')->first();
-        //             foreach ($checked as $check){
-        //                 DB::table('tags_topic')->insert([
-        //                 ['topic_id' => $last->id, 'tag_id' => $check[0]]]);
-        //             }
-        // $tags = new Tag;
-
+        $topic->tag()->sync($input['tags']);
         return redirect('topic');
         }
     }
