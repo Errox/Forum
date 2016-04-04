@@ -11,6 +11,9 @@
                       <p>{{$topics->created_at}} </p>
                       <h1>{{$topics->topic_title}}</h1>
                       <p>{{$topics->topic_description}}</p>
+                      @foreach($topics->tag as $tag)
+                      <span class="label label-primary">{{$tag->tag_name}}</span>
+                      @endforeach
                       <p>Gemaakt door {{$topics->username}}</p>
                       @if(Auth::check())
                         @if (!$result[2]->count())

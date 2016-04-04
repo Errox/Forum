@@ -14,10 +14,6 @@ class Topic extends Model
 		return $this->belongsToMany('App\tag','tag_topics', 'topic_id', 'tag_id');
 	}
 
-	public function getTags(){
-		return $this->hasMany('App\tag_topic');
-	}
-
 	public function subscriptions(){
 		return $this->hasMany('App\subscription');
 	}

@@ -40,8 +40,7 @@ class TopicController extends Controller
             return $topic->subscriptions->count();
         },$options = SORT_REGULAR, $descending = true );
         $result[3] = Subscription::all();
-        $result[5] = Topic::with('getTags')->get();
-
+       // dd($result[5]);
         return view('topics')->with('result', $result);
     }
 
@@ -87,7 +86,9 @@ class TopicController extends Controller
         }
     }
     public function show($id){
-        $result[0] = Topic::where('id', '=', $id)->get();
+        $result[0] = Topic::where('id', '=', $id)
+        ->with('tag')
+        ->get();
 
         $result[1] = Comment::where('topic_id', '=', $id)->get();
 
