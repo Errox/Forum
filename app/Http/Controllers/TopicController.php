@@ -16,6 +16,8 @@ use App\Comment;
 
 use App\Subscription;
 
+use App\User;
+
 class TopicController extends Controller
 {
     public function __construct()
@@ -30,10 +32,6 @@ class TopicController extends Controller
      */
     public function index()
     {
-        if(Auth::check()){
-            $user = \Auth::user();
-            $result[4] = $user->id;
-        }
 
         $result[0] = Topic::orderBy('created_at', 'desc')->get();
         $result[2] = Topic::with('subscriptions')->get()->sortBy(function($topic){
@@ -42,6 +40,11 @@ class TopicController extends Controller
         $result[3] = Subscription::all();
         $result[5] = Topic::with('getTags')->get();
 
+        if(Auth::check()){
+            $user = \Auth::user();
+            $result[4] = $user->id;
+        }
+        
         return view('topics')->with('result', $result);
     }
 
@@ -87,9 +90,9 @@ class TopicController extends Controller
         }
     }
     public function show($id){
-        $result[0] = Topic::where('id', '=', $id)->get();
-
+        $result[0] = Topic::with('user')->where('id', '=', $id)->get();
         $result[1] = Comment::where('topic_id', '=', $id)->get();
+        $result[2] = Topic::with('user')->get();
 
         if (Auth::check()){
             $user = \Auth::user();
@@ -101,6 +104,4 @@ class TopicController extends Controller
         }
     	return view('topicShow')->with('result', $result);
     }
-
-
 }
