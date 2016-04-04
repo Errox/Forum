@@ -10,14 +10,16 @@
           <div class="panel-body">
             <table class="table table-hover table-striped">
               <thead>
-                <th>Tag ID</th>
                 <th>Tag Naam</th>
               </thead>
               <tbody>
                 @foreach($result as $tags)
                   <tr>
-                    <td>{{ $tags->id}}</td>
                     <td>{{ $tags->tag_name}}</td>
+                    <td> {{Form::open(array('route' => array('tag.destroy', $tags->id), 'method' => 'delete')) }}
+                            <button class="btn btn-primary" type="submit" >Verwijderen</button>
+                          {{Form::close()}}
+                    </td>
                   </tr>
                 @endforeach
               </tbody>

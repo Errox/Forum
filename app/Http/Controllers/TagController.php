@@ -35,5 +35,11 @@ class TagController extends Controller
        	return redirect('tag');
     }
 
+    public function destroy($id){
+        Tag::where('id', $id)
+          ->delete();
+          return redirect('tag');
+    }
+
 
 }
