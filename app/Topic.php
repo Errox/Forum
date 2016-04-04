@@ -18,11 +18,4 @@ class Topic extends Model
 		return $this->hasMany('App\Subscription');
 	}
 
-	public function subscriptionsCount(){
-		return $this->subscriptions()
-		 ->selectRaw('topic_id, count(*) as aggregate')
-		 ->groupBy('topic_id')
-		 ->orderBy('aggregate', 'desc');
-	}
-
 }

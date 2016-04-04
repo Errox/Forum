@@ -12,10 +12,9 @@
             </div>
             <div class="panel panel-default">
               <div class="panel-body">
-              <h2>Dit is het admin/beheer menu</h2>
+                <h2>Dit is het admin/beheer menu</h2>
               </div>
             </div>
-
         </div>
     </div>
 </div>

@@ -36,8 +36,9 @@ class TopicController extends Controller
         }
 
         $result[0] = Topic::orderBy('created_at', 'desc')->get();
-        $result[1] = Topic::all();
-        $result[2] = Topic::with('subscriptionsCount')->get();
+        $result[2] = Topic::with('subscriptions')->get()->sortBy(function($topic){
+            return $topic->subscriptions->count();
+        },$options = SORT_REGULAR, $descending = true );
         $result[3] = Subscription::all();
 
         return view('topics')->with('result', $result);

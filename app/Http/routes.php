@@ -48,8 +48,9 @@ Route::group(['middleware' => 'role'], function(){
 	Route::resource('/beheer', 'RoleController');
 	    //Tag route
     Route::resource('/tag', 'TagController');
-});
 
+    Route::resource('/user', 'UserController');
+});
 
     //Topic route.
     Route::resource('/topic', 'TopicController');
@@ -57,8 +58,6 @@ Route::group(['middleware' => 'role'], function(){
     //Search route
     Route::post('/search', 'SearchController@index',
         ['only' => ['index']]);
-
-
 
     //Comment route
     Route::resource('/comment', 'CommentController',
