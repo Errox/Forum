@@ -39,10 +39,9 @@ class TopicController extends Controller
         $result[2] = Topic::with('subscriptions')->get()->sortBy(function($topic){
             return $topic->subscriptions->count();
         },$options = SORT_REGULAR, $descending = true );
-        $result[5] = Topic::with('getTags')->get();
         $result[3] = Subscription::all();
+        $result[5] = Topic::with('getTags')->get();
 
-        dd($result[5]);
         return view('topics')->with('result', $result);
     }
 

@@ -15,11 +15,6 @@
                         <th>Aanmeldingen</th>
                       </thead>
                       <tbody>
-                      @foreach($result[5] as $taggies)
-
-                    <?= $taggies->tag_id; ?>
-
-                      @endforeach
                         @foreach($result[0] as $topics)
                           <?php $subscribed = false; ?>
                             <tr>
