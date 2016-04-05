@@ -44,14 +44,16 @@ Route::group(['middleware' => 'web'], function () {
 	Route::post('/search', 'SearchController@index',
 		['only' => ['index']]);
 	
-//alles waar je alleen bij kan met speciale rechten	
-Route::group(['middleware' => 'role'], function(){
-	Route::resource('/beheer', 'RoleController');
-	    //Tag route
-    Route::resource('/tag', 'TagController');
+        //alles waar je alleen bij kan met speciale rechten	
+        Route::group(['middleware' => 'role'], function(){
+        	Route::resource('/beheer', 'RoleController');
+        	    //Tag route
+            Route::resource('/tag', 'TagController');
 
-    Route::resource('/user', 'UserController');
-});
+            Route::resource('/user', 'UserController');
+
+            Route::resource('/xml', 'XmlController');
+        });
 
 	//View profile
 	Route::resource('/profile', 'ProfileController',

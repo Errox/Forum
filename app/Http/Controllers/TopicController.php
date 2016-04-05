@@ -16,13 +16,18 @@ use App\Comment;
 
 use App\Subscription;
 
+use Carbon\Carbon;
+
 use App\User;
+
+
 
 class TopicController extends Controller
 {
     public function __construct()
     {
         //$this->middleware('auth');
+        Carbon::setLocale('nl');
     }
 
     /**
@@ -32,6 +37,7 @@ class TopicController extends Controller
      */
     public function index()
     {
+
 
         $result[0] = Topic::orderBy('created_at', 'desc')->get();
         $result[2] = Topic::with('subscriptions')->get()->sortBy(function($topic){
@@ -51,15 +57,11 @@ class TopicController extends Controller
     public function create()
     {
         if (Auth::check()){
-            
             $tags = Tag::all();
-        	
             return view('create_topic')->with('tags', $tags);
         }
         else{
-
             return redirect('/topic');
-        
         }
     }
 

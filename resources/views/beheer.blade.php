@@ -1,12 +1,35 @@
 @extends('layouts.app')
 @extends('layouts.menu')
 @section('content')
-<div class="container">
+<div class="container col-md-12">
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-body">
-                  <div class="container">
+                <div class="panel-heading">Recente leervragen</div>
+                  <div class="panel-body">
+                    <table class="table table-hover">
+                      <thead>
+                        <th>Gemaakt op</th>
+                        <th>Title</th>
+                        <th>Beschrijving</th>
+                        <th>tags</th>
+                        <th>Gemaakt door</th>
+                      </thead>
+                      <tbody>
+                      @foreach($result[0] as $topics)
+                      <tr>
+
+                      <td>{{$topics->created_at->diffForHumans()}} </td>
+                      <td>{{str_limit($topics->topic_title, 45)}}</td>
+                      <td>{{str_limit($topics->topic_description, 45)}}</td>
+                      <td>
+                      @foreach($topics->tag as $tag)
+                       <span class="label label-primary">{{$tag->tag_name}}</span>
+                      @endforeach
+                      </td>
+                      <td>{{$topics->user->name}}</td>
+                      </tr>
+                    @endforeach
                   </div>
                 </div>
             </div>
