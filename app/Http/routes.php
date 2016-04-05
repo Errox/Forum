@@ -52,7 +52,7 @@ Route::group(['middleware' => 'web'], function () {
 
             Route::resource('/user', 'UserController');
 
-            Route::resource('/xml', 'XmlController');
+            Route::resource('/csv', 'CsvController');
         });
 
 	//View profile
