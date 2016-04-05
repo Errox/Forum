@@ -19,7 +19,7 @@
                     if ($user->id == $id){
 
 
-          ?>    <a href="/profile/<?=$profiel->id?>/edit"> <button>Profiel aanpassen</button></a>
+          ?>    <a class="btn btn-primary" href="/profile/<?=$profiel->id?>/edit">Profiel aanpassen</a>
                                 
              <?php  } }     ?>                
                   @endforeach
@@ -47,7 +47,7 @@
                     {!! Form::text('username', $profiel->name, ['required']) !!}<br>
                     {!! Form::label('email', 'E-Mail: ') !!}
                     {!! Form::email('email', $profiel->email) !!} <br>
-                    {!!Form::submit('Opslaan')!!}
+                    {!!Form::submit('Opslaan', ['class' => 'btn btn-primary'])!!}
                     {!!Form::close()!!}
                   @endforeach
                  @endif   
