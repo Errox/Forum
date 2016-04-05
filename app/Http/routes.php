@@ -54,7 +54,8 @@ Route::group(['middleware' => 'role'], function(){
 });
 
 	//View profile
-	Route::resource('/profile', 'ProfileController');
+	Route::resource('/profile', 'ProfileController',
+		['only' => ['edit', 'show', 'update']]);
 
     //Topic route.
     Route::resource('/topic', 'TopicController');
