@@ -11,19 +11,31 @@ Use Request;
 
 class ProfileController extends Controller
 {
-    public function index($id){
-
+    public function index(){
+    	$profile = User::all();
+    	$index = true;
+    	return view('profile')->with(compact('profile', 'index'));
 
     }
 
     public function show($id){
    $profile = User::where('id', '=', $id)->get();
-   return view('profile')->with('profile', $profile);
+   $show = true;
+   return view('profile')->with(compact('profile', 'show', 'id'));
     }
 
     public function edit($id){
    $profile = User::where('id', '=', $id)->get();
-   $edit = 'edit';
+   if (\Auth::check()){
+   $user = \Auth::user();
+   if ($id != $user->id){
+   	return redirect('/profile/'.$id);
+   }
+}
+else{
+	return redirect('/profile/'.$id);
+}
+   $edit = true;
    return view('profile')->with(compact('profile', 'edit'));
     }
 

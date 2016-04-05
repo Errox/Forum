@@ -48,6 +48,7 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/topic') }}">Home</a></li>
+                    <li><a href="{{url('/profile')}}">Leerlingen</a></li>                 
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -79,6 +80,7 @@
                         <li><a href="{{ url('/beheer') }}">Beheer</a></li>
                         @endif
                         
+
                         <li><a href="{{ url('/topic/create')}}">Maak leervraag</a></li>
 
                         <li class="dropdown">
