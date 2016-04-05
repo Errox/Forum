@@ -14,7 +14,7 @@
                       @foreach($topics->tag as $tag)
                       <span class="label label-primary" style="background-color:#8B0000;">{{$tag->tag_name}}</span>
                       @endforeach
-                      <p style="text-transform:capitalize;">Gemaakt door {{$topics->user->name}}</p>
+                      <p style="text-transform:capitalize;">Gemaakt door <a href="/profile/<?=$topics->user->id?>">{{$topics->user->name}}</a></p>
                       @if(Auth::check())
                         @if (!$result[2]->count())
                           {{Form::open(array('route' => array('subscribe.store'), 'method' => 'store')) }}
