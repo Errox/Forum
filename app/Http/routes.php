@@ -36,7 +36,7 @@ Route::post('/search', 'SearchController@index',
 |
 */
 
-
+//alleen bij kunnen als je ingelogt bent
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
@@ -44,6 +44,7 @@ Route::group(['middleware' => 'web'], function () {
 	Route::post('/search', 'SearchController@index',
 		['only' => ['index']]);
 	
+//alles waar je alleen bij kan met speciale rechten	
 Route::group(['middleware' => 'role'], function(){
 	Route::resource('/beheer', 'RoleController');
 	    //Tag route
@@ -51,6 +52,9 @@ Route::group(['middleware' => 'role'], function(){
 
     Route::resource('/user', 'UserController');
 });
+
+	//View profile
+	Route::resource('/profile', 'ProfileController');
 
     //Topic route.
     Route::resource('/topic', 'TopicController');
