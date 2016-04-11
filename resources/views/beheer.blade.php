@@ -10,7 +10,7 @@
                     <table class="table table-hover">
                       <thead>
                         <th>Gemaakt op</th>
-                        <th>Title</th>
+                        <th>Titel</th>
                         <th>Beschrijving</th>
                         <th>tags</th>
                         <th>Gemaakt door</th>

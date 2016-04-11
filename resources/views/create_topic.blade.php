@@ -13,10 +13,10 @@
                         @if ((session()->has('error')))
                             <p style="color:red;">Er moet een checkbox aangevinkt zijn!</p>
                         @endif
-                            {!! Form::label('name', 'Name:') !!}
+                            {!! Form::label('name', 'Titel:') !!}
                             {!! Form::text('title', null, ['class' => 'form-control']) !!}
                              <br />
-                            {!! Form::label('description', 'Description:') !!}
+                            {!! Form::label('description', 'Beschrijving:') !!}
                             {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
                              <br />
                              {!! Form::label('tags', 'Tags:') !!}
@@ -26,7 +26,7 @@
                                 @endforeach
                             </div>
                               <br />
-                            {!! Form::submit('Create post', ['class' => 'btn btn-primary form-control']) !!}
+                            {!! Form::submit('Maak leervraag', ['class' => 'btn btn-primary form-control']) !!}
                         </div>
                     {!! Form::close() !!}
                 </div>
