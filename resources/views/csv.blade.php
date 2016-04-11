@@ -8,25 +8,15 @@
                 <div class="panel-heading">Recente leervragen</div>
                   <div class="panel-body centerd">
                     <h1 style="color: red">ALLEEN CSV BESTANDEN</h1>
-                      <?php
-                          function readCSV($csvFile){
-  $file_handle = fopen($csvFile, 'r');
-  while (!feof($file_handle) ) {
-    $line_of_text[] = fgetcsv($file_handle, 1024);
-  }
-  fclose($file_handle);
-  return $line_of_text;
-}
-
-
-// Set path to CSV file
-$csvFile = 'test.csv';
-
-$csv = readCSV($csvFile);
-echo '<pre>';
-print_r($csv);
-echo '</pre>';
-                      ?>
+                    @if(isset($good))
+                      <div class="alert alert-success">
+                        <strong>Success!</strong> Alle gebruikers zijn succesvol geupload.
+                      </div>
+                    @endif
+                      {{Form::open(array('url' => 'csv', 'files' => true, 'method' => 'post'))}}                      
+                      {{Form::token()}}
+                      {{Form::file('csv')}}
+                      {{Form::submit('Uploaden')}}
                   </div>
                 </div>
             </div>

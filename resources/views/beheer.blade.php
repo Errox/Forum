@@ -18,11 +18,10 @@
                       <tbody>
                       @foreach($result[0] as $topics)
                       <tr>
-
-                      <td>{{$topics->created_at->diffForHumans()}} </td>
-                      <td>{{str_limit($topics->topic_title, 45)}}</td>
-                      <td>{{str_limit($topics->topic_description, 45)}}</td>
-                      <td>
+                        <td>{{$topics->created_at->diffForHumans()}} </td>
+                        <td>{{str_limit($topics->topic_title, 45)}}</td>
+                        <td>{{str_limit($topics->topic_description, 45)}}</td>
+                        <td>
                       @foreach($topics->tag as $tag)
                        <span class="label label-primary">{{$tag->tag_name}}</span>
                       @endforeach
@@ -35,7 +34,7 @@
             </div>
             <div class="panel panel-default">
               <div class="panel-body">
-                <h2>Dit is het admin/beheer menu</h2>
+                <h2>Dit is een lijst met alle leervragen</h2>
               </div>
             </div>
         </div>

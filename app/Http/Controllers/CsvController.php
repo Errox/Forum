@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+
+use App\User;
+
+use Request;
 
 use App\Http\Requests;
 
@@ -13,16 +17,28 @@ class CsvController extends Controller
     	return view('csv');
     }
 
-    protected function store(array $data)
+    protected function store()
     {
 
-    	var_dump($data);
-        
-        // return User::create([
-        //     'name' => $data['name'],
-        //     'email' => $data['email'],
-        //     'password' => bcrypt($data['password']),
-        // ]);
-    	
+      	$input = request::all();
+      	$loop = 0;
+
+      
+		$input = fopen($_FILES['csv']['tmp_name'], 'r+');
+		$lines = array();
+		while( ($row = fgetcsv($input, 8192)) !== FALSE ) {
+			$lines[] = $row;
+			$loop += 1;
+		}
+		array_shift($lines);
+		for($i=0;$i <= count($loop); $i++) {
+			User::create([
+	            'name' => $lines[$i]['0'],
+	            'email' => $lines[$i]['1'],
+	            'password' => bcrypt($lines[$i]['2']),
+	        ]);
+      	}
+      	$good = true;
+      	return view('/csv')->with('good', $good);
     }
 }

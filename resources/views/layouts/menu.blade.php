@@ -5,8 +5,10 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
           <ul class="nav navbar-nav">
             <span><a href="{{ url('/tag')}}">Tags</a></span>
+            <span>|</span>
             <span><a href="{{ url('/user')}}">Users</a></span>
-            <span><a href="{{ url('/xml')}}">Test</a></span>
+            <span>|</span>
+            <span><a href="{{ url('/csv')}}">CSV</a></span>
           </ul>
         </div>
       </div>
