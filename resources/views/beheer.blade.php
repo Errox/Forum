@@ -10,7 +10,7 @@
                     <table class="table table-hover">
                       <thead>
                         <th>Gemaakt op</th>
-                        <th>Title</th>
+                        <th>Titel</th>
                         <th>Beschrijving</th>
                         <th>tags</th>
                         <th>Gemaakt door</th>
@@ -19,14 +19,14 @@
                       @foreach($result[0] as $topics)
                       <tr>
                         <td>{{$topics->created_at->diffForHumans()}} </td>
-                        <td>{{str_limit($topics->topic_title, 45)}}</td>
+                        <td><a href="topic/<?=$topics->id?>">{{str_limit($topics->topic_title, 45)}}</a></td>
                         <td>{{str_limit($topics->topic_description, 45)}}</td>
                         <td>
-                      @foreach($topics->tag as $tag)
-                       <span class="label label-primary">{{$tag->tag_name}}</span>
-                      @endforeach
-                      </td>
-                      <td>{{$topics->user->name}}</td>
+                          @foreach($topics->tag as $tag)
+                           <span class="label label-primary">{{$tag->tag_name}}</span>
+                          @endforeach
+                        </td>
+                        <td><a href="/profile/<?=$topics->user->id?>">{{$topics->user->name}}</a></td>
                       </tr>
                     @endforeach
                   </div>

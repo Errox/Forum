@@ -6,7 +6,7 @@
           <ul class="nav navbar-nav">
             <span><a href="{{ url('/tag')}}">Tags</a></span>
             <span>|</span>
-            <span><a href="{{ url('/user')}}">Users</a></span>
+            <span><a href="{{ url('/user')}}">Gebruikers</a></span>
             <span>|</span>
             <span><a href="{{ url('/csv')}}">CSV</a></span>
           </ul>
