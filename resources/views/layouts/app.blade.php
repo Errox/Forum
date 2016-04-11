@@ -53,7 +53,7 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
-                        <li style="margin-right: 200px;margin-top: 10px;">
+                        <li style="margin-right: 150px;margin-top: 10px;">
                         {!! Form::open(array('url' => 'search', 'required')) !!}
                             <div class="form-group" style="left: 100px;width:400px;">
                                 {!! Form::text('Search', null, ['class' => 'form-control', 'placeholder' => 'Zoeken', 'required'] ) !!}
