@@ -8,7 +8,7 @@
                 <div class="panel-body">
                   <ul>
                     @foreach($result[0] as $topics)
-                      <p>{{$topics->created_at}} </p>
+                      <p>Deze leervraag is {{$topics->created_at->diffForHumans()}} gecreeerd. </p>
                       <h1>{{$topics->topic_title}}</h1>
                       <p>{{$topics->topic_description}}</p>
                       @foreach($topics->tag as $tag)
@@ -38,7 +38,7 @@
                   <div class="panel">
                     <h3>{{$comments->user->name}} antwoorde: </h3>
                     <h4>{{$comments->comment_description}} </h4>
-                    <p>Tijd: {{$comments->created_at->diffForHumans()}}</p>
+                    <p>{{$comments->created_at->diffForHumans()}}</p>
                   </div>
                 @endforeach
               @else
