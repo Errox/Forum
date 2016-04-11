@@ -14,7 +14,7 @@
                       @foreach($topics->tag as $tag)
                       <span class="label label-primary" style="background-color:#8B0000;">{{$tag->tag_name}}</span>
                       @endforeach
-                      <p style="text-transform:capitalize;">Gemaakt door <a href="/profile/<?=$topics->user->id?>">{{$topics->user->name}}</a></p>
+                      <p>Gemaakt door <a  style="text-transform:capitalize;" href="/profile/<?=$topics->user->id?>">{{$topics->user->name}}</a></p>
                       @if(Auth::check())
                         @if (!$result[2]->count())
                           {{Form::open(array('route' => array('subscribe.store'), 'method' => 'store')) }}
@@ -38,7 +38,7 @@
                   <div class="panel">
                     <h3>{{$comments->user->name}} antwoorde: </h3>
                     <h4>{{$comments->comment_description}} </h4>
-                    <p>Tijd: {{$comments->created_at}}</p>
+                    <p>Tijd: {{$comments->created_at->diffForHumans()}}</p>
                   </div>
                 @endforeach
               @else

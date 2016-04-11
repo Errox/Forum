@@ -10,6 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+
 	//Topic via Home
     //Directing to homepage
 Route::get('/', function () {
