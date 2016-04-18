@@ -41,9 +41,11 @@ Route::post('/search', 'SearchController@index',
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
+	Route::post('/topic/close', 'TopicController@close');
 	Route::resource('/topic', 'TopicController');
 	Route::post('/search', 'SearchController@index',
 		['only' => ['index']]);
+
 	
         //alles waar je alleen bij kan met speciale rechten	
         Route::group(['middleware' => 'role'], function(){
