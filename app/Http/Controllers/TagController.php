@@ -36,9 +36,19 @@ class TagController extends Controller
     }
 
     public function destroy($id){
-        Tag::where('id', $id)
-          ->delete();
-          return redirect('tag');
+      $input = Request::all();
+
+      $result = Tag::find($id);
+        if($result->active == "1"){
+          $update = Tag::find($id);
+          $update->active = '0';
+          $update->save();
+        }else{
+          $update = Tag::find($id);
+          $update->active = '1';
+          $update->save();
+        }
+      return redirect('tag');
     }
 
 

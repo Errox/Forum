@@ -16,6 +16,7 @@ class CreateTagsTable extends Migration
             $table->increments('id');
             $table->string('tag_name');
             $table->timestamps();
+            $table->integer('active')->default('1');
         });
     }
 

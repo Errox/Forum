@@ -15,7 +15,6 @@
                         <th>Aanmeldingen</th>
                       </thead>
                       <tbody>
-
                         @foreach($result[0] as $topics)
                           <?php $subscribed = false; ?>
                             <tr>

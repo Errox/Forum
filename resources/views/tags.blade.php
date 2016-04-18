@@ -14,13 +14,16 @@
               </thead>
               <tbody>
                 @foreach($result as $tags)
-                  <tr>
-                    <td>{{ $tags->tag_name}}</td>
-                    <td> {{Form::open(array('route' => array('tag.destroy', $tags->id), 'method' => 'delete')) }}
-                            <button class="btn btn-primary" type="submit" >Verwijderen</button>
-                          {{Form::close()}}
-                    </td>
-                  </tr>
+                  @if($tags->active == "1")
+                    <tr>
+                      <td>{{ $tags->tag_name}}</td>
+                      <td> 
+                      {{Form::open(array('route' => array('tag.destroy', $tags->id), 'method' => 'delete')) }}
+                        <button class="btn btn-primary" style="text-align: center;" type="submit" >Archiveren</button>
+                      {{Form::close()}}
+                      </td>
+                    </tr>
+                  @endif
                 @endforeach
               </tbody>
             </table>
