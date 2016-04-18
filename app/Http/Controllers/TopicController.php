@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 
-use Request;
+use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
@@ -39,8 +39,12 @@ class TopicController extends Controller
     {
 
 
-        $result[0] = Topic::orderBy('created_at', 'desc')->get();
-        $result[2] = Topic::with('subscriptions')->get()->sortBy(function($topic){
+        $result[0] = Topic::orderBy('created_at', 'desc')
+        ->where('active', '<>', '0')
+        ->get();
+        $result[2] = Topic::with('subscriptions')
+        ->where('active', '<>', '0')
+        ->get()->sortBy(function($topic){
             return $topic->subscriptions->count();
         },$options = SORT_REGULAR, $descending = true );
         $result[3] = Subscription::all();
@@ -65,12 +69,12 @@ class TopicController extends Controller
         }
     }
 
-    public function store()
+    public function store(Request $request)
     {
         $user = \Auth::user();
         $userid = $user->id;
 
-        $input = Request::all();
+        $input = $request->all();
 
         $topic = new Topic;
 
@@ -106,5 +110,20 @@ class TopicController extends Controller
                                       ->get();         
         }
     	return view('topicShow')->with('result', $result);
+    }
+
+    public function close(Request $request){
+        $user = \Auth::user();
+        $userid = $user->id;
+
+        if($userid == $request->input('user_id')){
+            $update = Topic::find($request->input('id'));
+            $update->active = '0';
+            $update->save();
+         return redirect('/topics');   
+        }
+
+
+
     }
 }

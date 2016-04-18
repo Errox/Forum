@@ -16,6 +16,7 @@
                       @endforeach
                       <p>Gemaakt door <a  style="text-transform:capitalize;" href="/profile/<?=$topics->user->id?>">{{$topics->user->name}}</a></p>
                       @if(Auth::check())
+                      <?php   $user = \Auth::user(); ?>
                         @if (!$result[2]->count())
                           {{Form::open(array('route' => array('subscribe.store'), 'method' => 'store')) }}
                           {{Form::hidden('id', $topics->id)}}
@@ -26,11 +27,21 @@
                             <button class="btn btn-primary" type="submit" >Afmelden</button>
                           {{Form::close()}}
                           @endif
-                        @endif 
+                      @if($topics->user_id == $user->id)
+                        <br>
+                   {!!Form::open(array('action' => array('TopicController@close'), 'method' => 'POST')) !!}
+                   <input type="hidden" value="<?=$topics->user_id?>" name="user_id" />
+                   <input type="hidden" value="<?=$topics->id?>" name="id" />  
+                     <button class="btn btn-primary" type="submit">Vraag sluiten</button>
+                   
+                  {!!Form::close()!!}
+                    @endif 
+                    @endif                       
                     @endforeach
+                      
                   </ul>
               </div>
-          </div>
+          </div> 
           <div class="panel panel-default">
             <div class="panel-body">
               @if ($result[1]->count())

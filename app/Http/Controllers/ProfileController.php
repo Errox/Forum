@@ -9,12 +9,18 @@ Use App\User;
 
 Use Request;
 
+Use Auth;
+
 class ProfileController extends Controller
 {
     public function index(){
     	$profile = User::all();
     	$index = true;
-    	return view('profile')->with(compact('profile', 'index'));
+    	              if (Auth::check()){
+                $user = \Auth::user();
+              }
+                 
+    	return view('profile')->with(compact('profile', 'index', 'user'));
 
     }
 
