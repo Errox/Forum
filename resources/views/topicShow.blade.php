@@ -66,9 +66,6 @@
             </div>
           </div>
          @if (Auth::check()) 
-          @if ($topics->active == 0)
-            bleh
-            @endif
             <div class="panel panel-default">
               <div class="panel-body">
                 {!! Form::open(array('url' => 'comment')) !!}
