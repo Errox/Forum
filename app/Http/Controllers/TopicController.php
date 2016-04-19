@@ -95,6 +95,24 @@ class TopicController extends Controller
         return redirect('topic');
         }
     }
+
+        public function update(Request $request, $id){
+           $topic = Topic::find($id);
+           $topic->topic_description = $request->input('description');
+           $topic->save();
+
+           return redirect('/topic/'.$id);
+        }
+
+        public function edit($id){
+            $result = Topic::find($id);
+
+
+
+
+        return view('topicEdit')->with(compact('result'));
+    }
+
     public function show($id){
         $result[0] = Topic::with('user')->with('tag')->where('id', '=', $id)->get();
 
@@ -112,16 +130,17 @@ class TopicController extends Controller
     	return view('topicShow')->with('result', $result);
     }
 
+
     public function close(Request $request){
         $user = \Auth::user();
         $userid = $user->id;
        $found = Topic::with('user')
         ->where('id', '=', $request->input('id'))
         ->first();
-        if($userid == $found->user_id){          
+        if($userid == $found->user_id || $user->role == 1){          
            $found->active = '0';
             $found->save();
-         return redirect('/topics');   
+            return redirect('/topics');            
         }
 
 

@@ -27,7 +27,7 @@
                             <button class="btn btn-primary" type="submit" >Afmelden</button>
                           {{Form::close()}}
                           @endif
-                      @if($topics->user_id == $user->id)
+                      @if($topics->user_id == $user->id || $user->role == 1)
                         <br>
                    {!!Form::open(array('action' => array('TopicController@close'), 'method' => 'POST')) !!}
                    <input type="hidden" value="<?=$topics->user_id?>" name="user_id" />
@@ -36,7 +36,15 @@
                    
                   {!!Form::close()!!}
                     @endif 
-                    @endif                       
+                    @endif
+
+                    @if($user->role == 1)
+                        <br>
+                   <?php echo Form::open(array('url' => array('topic/'.$topics->id.'/edit'), 'method' => 'GET')); ?>
+                     <button class="btn btn-primary" type="submit">Vraag aanpassen</button>
+                   
+                  {!!Form::close()!!}                      
+                    @endif
                     @endforeach
                       
                   </ul>
@@ -58,15 +66,18 @@
             </div>
           </div>
          @if (Auth::check()) 
+          @if ($topics->active == 0)
+            bleh
+            @endif
             <div class="panel panel-default">
               <div class="panel-body">
                 {!! Form::open(array('url' => 'comment')) !!}
                   <div class="form-group">
                     {!! Form::label('description', 'Antwoord') !!}
                     {!! Form::hidden('id', $topics->id) !!}
-                    {!! Form::textarea('comment_description', null, ['class' => 'form-control']) !!}
+                    <?php echo Form::textarea('comment_description', null, ($topics->active == 0 ? ['class' => 'form-control', 'disabled' => 'disabled'] : ['class' => 'form-control'])) ?>
                       <br />
-                    {!! Form::submit('Plaats antwoord', ['class' => 'btn btn-primary form-control']) !!}
+                    {!! Form::submit('Plaats antwoord',($topics->active == 0 ? ['class' => 'btn btn-primary form-control', 'disabled' => 'disabled'] : ['class' => 'btn btn-primary form-control'])) !!}
                   </div>
                 {!! form::close(); !!}
               </div>

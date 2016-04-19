@@ -14,9 +14,18 @@
                         <th>Beschrijving</th>
                         <th>tags</th>
                         <th>Gemaakt door</th>
+                        <th>Status</th>
                       </thead>
                       <tbody>
                       @foreach($result[0] as $topics)
+                      <?php
+                      if ($topics->active == 1){
+                        $status = "Actief";
+                      }
+                      else{
+                        $status = "Gearchiveerd";
+                      }?>
+
                       <tr>
                         <td>{{$topics->created_at->diffForHumans()}} </td>
                         <td><a href="topic/<?=$topics->id?>">{{str_limit($topics->topic_title, 45)}}</a></td>
@@ -27,6 +36,7 @@
                           @endforeach
                         </td>
                         <td><a href="/profile/<?=$topics->user->id?>">{{$topics->user->name}}</a></td>
+                        <td>{{$status}}</td>
                       </tr>
                     @endforeach
                   </div>
