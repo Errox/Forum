@@ -50,6 +50,7 @@ class ProfileController extends Controller
     	$update = User::find($id);
     	$update->email = $input['email'];
     	$update->name = $input['username'];
+      $update->about = $input['about'];
     	$update->save();
 
     	return redirect('/profile/'.$id);

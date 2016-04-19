@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
   <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-6 col-xs-offset-0 col-sm-offset-0  toppad" >
+    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-6 col-xs-offset-0 col-sm-offset-0 " >
       <div class="panel panel-info">
         <div class="panel-heading">
           @foreach ($profile as $profiel)
@@ -11,7 +11,7 @@
         </div>
           <div class="panel-body">
             <div class="row">
-              <div class="col-md-12 col-lg-12 " align="center"> <img alt="User Pic" src="https://eliaslealblog.files.wordpress.com/2014/03/user-200.png" class="img-circle img-responsive"> </div>
+              <div class="col-md-6 col-lg-12 " align="center"> <img alt="User Pic" src="https://eliaslealblog.files.wordpress.com/2014/03/user-200.png" class="img-circle img-responsive"> </div>
                 <div class=" col-md-12 col-lg-12 "> 
                   <table class="table table-user-information">
                     <tbody>
@@ -45,13 +45,23 @@
                 <?php $user = \Auth::user();?>
                 @if ($user->id == $id)
                   <span class="pull-right">
-                    <a href="edit" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+                    <a href="<?=$user->id?>/edit" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
                   </span>
                 @endif
               @endif
             </div>
             @endforeach
             </div>
+            </div>
+            <div class="col-md-6  col-lg-6 panel-body" align="center">
+                  <div class="panel">
+                    <h3>About me</h3>
+                    <br>
+                  </div>
+                <p>{{$profiel->about}}</p>
+            </div>
+          </div>
+
           </div>
           </div>
         </div>

@@ -32,8 +32,7 @@
 				                    <tr>
 				                      <td>{!!Form::label('email', 'E-Mail: ') !!}</td>
 				                      <td>{!!Form::email('email', $profiel->email) !!} <br></td>
-				                    </tr>
-				                {!!Form::close()!!}    
+				                    </tr>    
 	                    		</tbody>
                   			</table>
                 		</div>
@@ -48,6 +47,14 @@
 	              @endif
 	            </div>
               </div>
+            </div>
+              <div class="col-md-6  col-lg-6 panel-body" align="center">
+                  <div class="panel">
+                    <h3>{!!Form::label('about', 'About me')!!}</h3>
+                    <br>
+                  </div>
+                <p>{!!Form::textarea('about', $profiel->about)!!}</p>
+                {!! Form::close() !!}
             </div>
           @endforeach
         </div>
