@@ -53,8 +53,6 @@ Route::group(['middleware' => 'web'], function () {
         	    //Tag route
             Route::resource('/tag', 'TagController');
 
-            Route::resource('/user', 'UserController');
-
             Route::resource('/csv', 'CsvController');
         });
 

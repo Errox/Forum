@@ -115,11 +115,12 @@ class TopicController extends Controller
     public function close(Request $request){
         $user = \Auth::user();
         $userid = $user->id;
-
-        if($userid == $request->input('user_id')){
-            $update = Topic::find($request->input('id'));
-            $update->active = '0';
-            $update->save();
+       $found = Topic::with('user')
+        ->where('id', '=', $request->input('id'))
+        ->first();
+        if($userid == $found->user_id){          
+           $found->active = '0';
+            $found->save();
          return redirect('/topics');   
         }
 

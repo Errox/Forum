@@ -37,4 +37,18 @@ class RoleController extends Controller
 
     	return view('beheer')->with('result', $result);
     }
+
+    public function show($id){
+            $result = User::find($id);
+    if($result->role == 1){
+        $result->role = 0;
+    }
+    else{
+        $result->role = 1;
+    }
+    $result->save();
+
+    return redirect('/profile');
+    }
+    
 }

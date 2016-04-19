@@ -7,6 +7,8 @@
             <span><a href="{{ url('/tag')}}">Tags</a></span>
             <span>|</span>
             <span><a href="{{ url('/csv')}}">CSV</a></span>
+            <span>|</span>
+            <span><a href="{{url('/profile')}}">Gebruikers</a></span>
           </ul>
         </div>
       </div>

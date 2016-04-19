@@ -20,8 +20,19 @@ class ProfileController extends Controller
     }
   public function index(){
    	$profile = User::all();
-  
-    return view('profile')->with('profile', $profile);
+  	if (\Auth::check()){
+  	  $user = \Auth::user();
+  	}
+
+  	if (isset($user)){
+  		if ($user->role == 1){
+  			return view('gebruikers')->with(compact('profile'));
+  		}
+  	}
+
+
+    return view('profile')->with(compact('profile', 'user'));
+
   }
 
   public function show($id){
