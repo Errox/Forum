@@ -10,7 +10,7 @@
                       <p>Deze leervraag is {{$result->created_at->diffForHumans()}} gecreeerd. </p>
                       <h1>{{$result->topic_title}}</h1>
                       {{Form::open(array('route' => array('topic.update', $result->id), 'method' => 'PATCH'))}}
-                      <input type="textarea" name="description" value="<?=$result->topic_description?>">
+                      <?php echo Form::textarea('description', $result->topic_description, ['class' => 'form-control']) ?>
                        {!! Form::submit('Aanpassen', ['class' => 'btn btn-primary form-control']) !!}
 
                       @foreach($result->tag as $tag)
