@@ -15,7 +15,7 @@
                     @endif
                       {{Form::open(array('url' => 'csv', 'files' => true, 'method' => 'post'))}}                      
                       {{Form::token()}}
-                      {{Form::file('csv')}}
+                      {{Form::file('csv', array('accept' => '.csv'))}}
                       {{Form::submit('Uploaden')}}
                   </div>
                 </div>
