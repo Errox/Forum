@@ -40,13 +40,13 @@ class TopicController extends Controller
 
 
         $result[0] = Topic::orderBy('created_at', 'desc')
-        ->where('active', '<>', '0')
-        ->get();
+            ->where('active', '<>', '0')
+            ->get();
         $result[2] = Topic::with('subscriptions')
-        ->where('active', '<>', '0')
-        ->get()->sortBy(function($topic){
-            return $topic->subscriptions->count();
-        },$options = SORT_REGULAR, $descending = true );
+            ->where('active', '<>', '0')
+            ->get()->sortBy(function($topic){
+                return $topic->subscriptions->count();
+            },$options = SORT_REGULAR, $descending = true );
         $result[3] = Subscription::all();
 
        // dd($result[5]);
@@ -134,11 +134,11 @@ class TopicController extends Controller
     public function close(Request $request){
         $user = \Auth::user();
         $userid = $user->id;
-       $found = Topic::with('user')
-        ->where('id', '=', $request->input('id'))
-        ->first();
+        $found = Topic::with('user')
+            ->where('id', '=', $request->input('id'))
+            ->first();
         if($userid == $found->user_id || $user->role == 1){          
-           $found->active = '0';
+            $found->active = '0';
             $found->save();
             return redirect('/topics');            
         }
