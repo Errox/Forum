@@ -36,7 +36,7 @@
                    
                   {!!Form::close()!!}
                     @endif 
-                    @endif
+
 
                     @if($user->role == 1)
                         <br>
@@ -45,6 +45,7 @@
                    
                   {!!Form::close()!!}                      
                     @endif
+                     @endif
                     @endforeach
                       
                   </ul>
