@@ -62,7 +62,7 @@
                   </div>
                 @endforeach
               @else
-                <p>Er zijn nog geen antwoorden gegeven.</p>
+                <p style="text-align: center;">Er zijn nog geen antwoorden gegeven.</p>
               @endif
             </div>
           </div>
