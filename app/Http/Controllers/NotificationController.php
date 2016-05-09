@@ -10,10 +10,12 @@ use Auth;
 
 use App\Notification;
 
+use Carbon\Carbon;
+
 class NotificationController extends Controller
 {
 
-	    public function __construct()
+	public function __construct()
     {
         $this->middleware('auth');
        // Carbon::setLocale('nl');
@@ -29,6 +31,18 @@ class NotificationController extends Controller
     public function show($id){
     $notification = Notification::find($id)->get();
     	dd($notification);
+    	echo 'hoi';
+    }
 
+    public function index(){
+    	if(Auth::check()){
+            $user = \Auth::user();
+            $userid = $user->id;
+            $notifications = Notification::where('reciever_id', '=', $userid)->get();
+
+    		return view('notifyboard')->with('notifications', $notifications);
+        }else{
+        	return redirect('/topic');
+        }
     }
 }
