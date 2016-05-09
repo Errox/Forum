@@ -10,6 +10,10 @@ use Auth;
 
 use App\Notification;
 
+use App\Subscription;
+
+use App\Topic;
+
 use Carbon\Carbon;
 
 class NotificationController extends Controller
@@ -46,5 +50,25 @@ class NotificationController extends Controller
         }else{
         	return redirect('/topic');
         }
+    }
+
+    public function subnotify($id, $user_id, $target){
+    $topic = Topic::find($id);
+    $subscriptions = Subscription::where('topic_id', '=', $id)->get();
+    foreach ($subscriptions as $loops){
+    $notifications = new Notification;
+    $notifications->topic_id = $id;
+    $notifications->user_id = $user_id;
+    $notifications->receiver_id = $loops->user_id;
+    $notifications->read = 0;
+    if ($target == 'comment'){
+    $notifications->notification_description = 'Er is een nieuwe reactie geplaatst op een leervraag';
+}
+else{
+	$notifications->notification_description = $topic->topic_description;
+}
+$notifications->save();
+}
+
     }
 }
