@@ -14,6 +14,7 @@
                         <th>user_id</th>
                         <th>Topic Title</th>
                         <th>read</th>
+                        <th></th>
                       </thead>
                       <tbody>
                       @foreach($notifications as $notification)
@@ -22,6 +23,7 @@
                           <td>{{$notification->user->name}} </td>
                           <td><a href="/topic/{{$notification->topic_id}}"> {{$notification->topic->topic_title}}</a></td>
                           <td>{{$notification->read}} </td>
+                          <td>{{$notification->created_at->diffforhumans()}}</td>
                         </tr>
                       @endforeach
                   </div>

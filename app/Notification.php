@@ -10,7 +10,7 @@ class Notification extends Model
 		return $this->belongsTo('App\User');
 	}
 
-	public function reciever(){
+	public function receiver(){
 		return $this->belongsTo('App\User');
 	}
 
