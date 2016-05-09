@@ -26,7 +26,9 @@ class NotificationController extends Controller
     	dd($test);
     }
 
-    public function detail($id){
+    public function show($id){
+    $notification = Notification::find($id)->get();
+    	dd($notification);
 
     }
 }
