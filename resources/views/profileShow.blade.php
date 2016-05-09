@@ -58,7 +58,7 @@
                     <h3>About me</h3>
                     <br>
                   </div>
-                <p>{{$profiel->about}}</p>
+                <p>{!!$profiel->about!!}</p>
             </div>
           </div>
 

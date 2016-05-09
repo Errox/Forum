@@ -80,7 +80,7 @@ class TopicController extends Controller
 
         $topic->user_id = $userid;
         $topic->topic_title = $input['title'];
-        $topic->topic_description = $input['description'];
+        $topic->topic_description =  nl2br($input['description']);
         
         if (isset($input['tags'])){
             $checked = $input['tags'];
@@ -101,7 +101,7 @@ class TopicController extends Controller
            $user = \Auth::user();
            $userid = $user->id; 
            $topic = Topic::find($id);  
-           $topic->topic_description = $request->input('description');
+           $topic->topic_description =  nl2br($request->input('description'));
            $topic->save();
        }
        return redirect('/topic/'.$id);

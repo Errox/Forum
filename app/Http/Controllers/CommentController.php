@@ -21,7 +21,7 @@ class CommentController extends Controller
 
         $comment->user_id = $userid;
         $comment->topic_id = $input['id'];
-        $comment->comment_description = $input['comment_description'];
+        $comment->comment_description =  nl2br($input['comment_description']);
         $comment->save();
 
     	return redirect('topic/'.$input['id']);
