@@ -124,7 +124,6 @@ class TopicController extends Controller
 
         $result[1] = Comment::where('topic_id', '=', $id)->get();
         $result[2] = Topic::with('user')->get();
-
         if (Auth::check()){
             $user = \Auth::user();
             $userid = $user->id;

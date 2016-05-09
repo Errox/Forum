@@ -6,7 +6,7 @@
     <div class="col-xs-12 col-sm-12 col-md-10 col-lg-6 col-xs-offset-0 col-sm-offset-0  toppad" >
       <div class="panel panel-info">
             @foreach ($profile as $profiel) 
-                <div class="panel-heading">Edit profiel van {{$profiel->name}}</div>
+                <div class="panel-heading">Bewerk profiel van {{$profiel->name}}</div>
            		  <div class="panel-body">
             		<div class="row">
               			<div class="col-md-12 col-lg-12 " align="center"> <img alt="User Pic" src="https://eliaslealblog.files.wordpress.com/2014/03/user-200.png" class="img-circle img-responsive"> </div>
