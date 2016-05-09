@@ -97,21 +97,27 @@ class TopicController extends Controller
     }
 
         public function update(Request $request, $id){
-           $topic = Topic::find($id);
+           if (Auth::check()){
+           $user = \Auth::user();
+           $userid = $user->id; 
+           $topic = Topic::find($id);  
            $topic->topic_description = $request->input('description');
            $topic->save();
-
+       }
            return redirect('/topic/'.$id);
         }
 
         public function edit($id){
+        if (Auth::check()){
+           $user = \Auth::user();
+           $userid = $user->id;   
             $result = Topic::find($id);
-
-
-
-
+           if ($userid == $result->user_id){  
         return view('topicEdit')->with(compact('result'));
     }
+    }
+ return redirect('topic/'.$id);
+}
 
     public function show($id){
         $result[0] = Topic::with('user')->with('tag')->where('id', '=', $id)->get();
