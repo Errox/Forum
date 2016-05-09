@@ -62,7 +62,7 @@ class NotificationController extends Controller
     $notifications->receiver_id = $loops->user_id;
     $notifications->read = 0;
     if ($target == 'comment'){
-    $notifications->notification_description = 'Er is een nieuwe reactie geplaatst op een leervraag';
+    $notifications->notification_description = 'heeft een nieuwe reactie geplaatst op een leervraag';
 }
 else{
 	$notifications->notification_description = $topic->topic_description;
