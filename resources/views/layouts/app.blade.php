@@ -23,6 +23,11 @@
         .fa-btn {
             margin-right: 6px;
         }
+        .quick-btn .label {
+          position: absolute;
+          top: -5px;
+          right: -5px;
+        }
     </style>
 </head>
 <body id="app-layout">
@@ -83,11 +88,23 @@
 
                         <li><a href="{{ url('/topic/create')}}">Maak leervraag</a></li>
 
+                    <?php         
+                        $user = \Auth::user();
+                            $count = DB::table('notifications')
+                            ->where('receiver_id','=', $user->id)
+                            ->where('read', '=', '0')
+                            ->count();
+                    ?>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                {{ Auth::user()->name }} 
+                                @if($count == '0')
+                                    <span class="label label-info" style="display:none;">{{$count}}</span> 
+                                @else
+                                    <span class="label label-info">{{$count}}</span>
+                                @endif
+                                    <span class="caret"></span>
                             </a>
-
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="/profile/<?=$result->id?>"><i class="fa fa-btn fa-user"></i>Profiel</a></li>
                                 <li><a href="{{ url('/notificaties') }}"><i class="fa fa-btn fa-bell"></i>notificaties</a></li>

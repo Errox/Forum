@@ -28,7 +28,7 @@ class NotificationController extends Controller
 	    if ($userid == $notification->receiver_id){
 	    	$notification->read = 1;
 	    	$notification->save();
-	    	return view('notificationShow')->with('notification', $notification);
+	    	return redirect('notificaties');
 	    }
 	    else{
 	    	return redirect('notificaties');
@@ -42,7 +42,7 @@ class NotificationController extends Controller
             $userid = $user->id;
             $notifications = Notification::where('receiver_id', '=', $userid)->get();
 
-    		return view('notifyboard')->with('notifications', $notifications);
+    		return view('notification')->with('notifications', $notifications);
         }else{
         	return redirect('/topic');
         }
