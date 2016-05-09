@@ -24,12 +24,11 @@ class NotificationController extends Controller
     public function show($id){
 	    $user = \Auth::user();
 	    $userid = $user->id;	
-	    $notification = Notification::where('id', '=', $id)->get();
-	    dd($notification);
+	    $notification = Notification::find($id);
 	    if ($userid == $notification->receiver_id){
 	    	$notification->read = 1;
 	    	$notification->save();
-	    	return redirect('notificaties/'.$id)->with('notifications', $notifications);
+	    	return view('notificationShow')->with('notification', $notification);
 	    }
 	    else{
 	    	return redirect('notificaties');
