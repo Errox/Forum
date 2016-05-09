@@ -7,24 +7,23 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Recente leervragen</div>
                   <div class="panel-body">
+                  <div class="">
                     <table class="table table-hover">
                       <thead>
-                        <th>id</th>
-                        <th>user_id</th>
-                        <th>topic_id</th>
                         <th>notification_description</th>
+                        <th>user_id</th>
+                        <th>Topic Title</th>
                         <th>read</th>
                       </thead>
                       <tbody>
                       @foreach($notifications as $notification)
-                      <tr>
-                        <td>{{$notification->id}} </td>
-                        <td>{{$notification->user_id}} </td>
-                        <td>{{$notification->topic_id}} </td>
-                        <td>{{$notification->notification_description}} </td>
-                        <td>{{$notification->read}} </td>
-                      </tr>
-                    @endforeach
+                        <tr>
+                          <td><a href="/notificaties/{{$notification->id}}">{{$notification->notification_description}}</a></td>
+                          <td>{{$notification->user->name}} </td>
+                          <td><a href="/topic/{{$notification->topic_id}}"> {{$notification->topic->topic_title}}</a></td>
+                          <td>{{$notification->read}} </td>
+                        </tr>
+                      @endforeach
                   </div>
                 </div>
             </div>

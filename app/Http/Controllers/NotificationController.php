@@ -36,7 +36,7 @@ class NotificationController extends Controller
     	if(Auth::check()){
             $user = \Auth::user();
             $userid = $user->id;
-            $notifications = Notification::where('reciever_id', '=', $userid)->get();
+            $notifications = Notification::all();
 
     		return view('notifyboard')->with('notifications', $notifications);
         }else{

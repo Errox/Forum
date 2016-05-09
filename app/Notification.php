@@ -11,6 +11,10 @@ class Notification extends Model
 	}
 
 	public function reciever(){
-		//hoi
+		return $this->belongsTo('App\User');
+	}
+
+	public function topic(){
+		return $this->belongsTo('App\Topic');
 	}
 }
