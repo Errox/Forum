@@ -20,25 +20,28 @@ class NotificationController extends Controller
         $this->middleware('auth');
        // Carbon::setLocale('nl');
     }
-    public function notification(){
-           $user = \Auth::user();
-           $userid = $user->id; 
-    	$test = Notification::where('receiver_id', '=', $userid)
-    						->get();
-    	dd($test);
-    }
 
     public function show($id){
-    $notification = Notification::find($id)->get();
-    	dd($notification);
-    	echo 'hoi';
+     $user = \Auth::user();
+    $userid = $user->id;	
+    $notification = Notification::where('id', '=', $id)->get();
+    dd($notification);
+    if ($userid == $notification->receiver_id){
+    	$notification->read = 1;
+    	$notification->save();
+    	return redirect('notificaties/'.$id)->with('notifications', $notifications);
+    }
+    else{
+    	return redirect('notificaties');
+    }
+
     }
 
     public function index(){
     	if(Auth::check()){
             $user = \Auth::user();
             $userid = $user->id;
-            $notifications = Notification::where('reciever_id', '=', $userid)->get();
+            $notifications = Notification::where('receiver_id', '=', $userid)->get();
 
     		return view('notifyboard')->with('notifications', $notifications);
         }else{
