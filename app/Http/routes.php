@@ -57,6 +57,7 @@ Route::group(['middleware' => 'web'], function () {
 
 	//View profile
 	Route::resource('/profile', 'ProfileController');
+	Route::resource('/notification', 'NotificationController@notification');
 
     //Notification route
     Route::resource('/notificaties', 'NotificationController');

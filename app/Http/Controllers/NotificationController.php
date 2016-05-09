@@ -13,16 +13,23 @@ use App\Notification;
 use Carbon\Carbon;
 
 class NotificationController extends Controller
-{  
+{
+
 	public function __construct()
     {
-        //$this->middleware('auth');
-        Carbon::setLocale('nl');
+        $this->middleware('auth');
+       // Carbon::setLocale('nl');
     }
-    
-    public function notification($id){
-    	Notification::where('receiver_id', '=', $id);
+    public function notification(){
+           $user = \Auth::user();
+           $userid = $user->id; 
+    	$test = Notification::where('receiver_id', '=', $userid)
+    						->get();
+    	dd($test);
+    }
 
+    public function show($id){
+    	echo 'hoi';
     }
 
     public function index(){
