@@ -96,20 +96,15 @@ class TopicController extends Controller
         }
     }
 
-        public function update(Request $request, $id){
-           $topic = Topic::find($id);
-           $topic->topic_description = $request->input('description');
-           $topic->save();
+    public function update(Request $request, $id){
+        $topic = Topic::find($id);
+        $topic->topic_description = $request->input('description');
+        $topic->save();
+        return redirect('/topic/'.$id);
+    }
 
-           return redirect('/topic/'.$id);
-        }
-
-        public function edit($id){
-            $result = Topic::find($id);
-
-
-
-
+    public function edit($id){
+        $result = Topic::find($id);
         return view('topicEdit')->with(compact('result'));
     }
 
@@ -118,7 +113,6 @@ class TopicController extends Controller
 
         $result[1] = Comment::where('topic_id', '=', $id)->get();
         $result[2] = Topic::with('user')->get();
-
         if (Auth::check()){
             $user = \Auth::user();
             $userid = $user->id;
