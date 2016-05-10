@@ -7,6 +7,7 @@
                 <div class="panel-heading">Notificaties</div>
                   <div class="panel-body">
                   <div class="">
+                  @if(count($notifications))
                     <table class="table table-hover">
                       <thead>
                         <th>Beschrijving</th>
@@ -28,6 +29,11 @@
                           @endif
                         </tr>
                       @endforeach
+                      </tbody>
+                    </table>
+                  @else
+                  <h2 style="text-align: center"> Er zijn nog geen notificaties.</h2>
+                  @endif
                   </div>
                 </div>
             </div>
