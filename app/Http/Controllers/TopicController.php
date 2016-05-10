@@ -103,6 +103,11 @@ class TopicController extends Controller
            $topic = Topic::find($id);  
            $topic->topic_description =  nl2br($request->input('description'));
            $topic->save();
+
+           if ($request->input('notify')){
+            $target = "";
+       app('App\Http\Controllers\NotificationController')->subnotify($id, $userid, $target);  
+           }
        }
        return redirect('/topic/'.$id);
     }
@@ -112,7 +117,8 @@ class TopicController extends Controller
             $user = \Auth::user();
             $userid = $user->id;   
             $result = Topic::find($id);
-            if ($userid == $result->user_id){  
+            $user =   User::find($userid);
+            if ($userid == $result->user_id || $user->role == 1){  
                 return view('topicEdit')->with(compact('result'));
             }
         }
