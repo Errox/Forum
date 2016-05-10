@@ -53,22 +53,25 @@ class NotificationController extends Controller
     }
 
     public function subnotify($id, $user_id, $target){
-    $topic = Topic::find($id);
-    $subscriptions = Subscription::where('topic_id', '=', $id)->get();
-    foreach ($subscriptions as $loops){
-    $notifications = new Notification;
-    $notifications->topic_id = $id;
-    $notifications->user_id = $user_id;
-    $notifications->receiver_id = $loops->user_id;
-    $notifications->read = 0;
-    if ($target == 'comment'){
-    $notifications->notification_description = 'heeft een nieuwe reactie geplaatst op een leervraag';
-}
-else{
-	$notifications->notification_description = $topic->topic_description;
-}
-$notifications->save();
-}
+   		$topic = Topic::find($id);
+   		$subscriptions = Subscription::where('topic_id', '=', $id)->get();
+	    foreach ($subscriptions as $loops){
+		    $notifications = new Notification;
+		    $notifications->topic_id = $id;
+		    $notifications->user_id = $user_id;
+		    $notifications->receiver_id = $loops->user_id;
+		    $notifications->read = 0;
+		    if ($user_id == $loops->user_id){
+		    	continue;
+		    }
+		    if ($target == 'comment'){
+		    	$notifications->notification_description = 'heeft een nieuwe reactie geplaatst op een leervraag';
+			}
+			else{
+				$notifications->notification_description = $topic->topic_description;
+			}
+			$notifications->save();
+		}
 
-    }
+	    }
 }

@@ -10,12 +10,14 @@
                     <table class="table table-hover">
                       <thead>
                         <th>Beschrijving</th>
+                        <th>Door</th>
                         <th>Topic Title</th>
                       </thead>
                       <tbody>
                       @foreach($notifications as $notification)
                         <tr>
-                          <td><a href="/profile/{{$notification->user->id}}">{{$notification->user->name}}</a> {{$notification->notification_description}}</td>
+                          <td> {{$notification->notification_description}}</td>
+                          <td><a href="/profile/{{$notification->user->id}}">{{$notification->user->name}}</a></td>
                           <td><a href="/topic/{{$notification->topic_id}}"> {{$notification->topic->topic_title}}</a></td>
                           <td>{{$notification->created_at->diffforhumans()}}</td>
                           <td>
