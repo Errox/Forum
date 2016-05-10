@@ -89,7 +89,7 @@ class TopicController extends Controller
             return redirect('/topic/create')->with('error', ['foutmelding']);
         }else{
           $topic->save();
-
+          app('App\Http\Controllers\SubscriptionController')->store();
         //Tags moeten nog opgeslagen worden via de tendant table
         $topic->tag()->sync($input['tags']);
         return redirect('topic');
@@ -119,7 +119,7 @@ class TopicController extends Controller
             $result = Topic::find($id);
             $user =   User::find($userid);
             if ($userid == $result->user_id || $user->role == 1){  
-                return view('topicEdit')->with(compact('result'));
+                return view('topicEdit')->with(compact('result', 'user'));
             }
         }
         return redirect('topic/'.$id);

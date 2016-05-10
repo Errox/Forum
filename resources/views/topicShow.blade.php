@@ -38,7 +38,7 @@
                     @endif 
 
 
-                    @if($user->role == 1)
+                    @if($user->role == 1 || $user->id == $topics->user_id)
                         <br>
                    <?php echo Form::open(array('url' => array('topic/'.$topics->id.'/edit'), 'method' => 'GET')); ?>
                      <button class="btn btn-primary" type="submit">Vraag aanpassen</button>

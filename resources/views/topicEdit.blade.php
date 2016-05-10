@@ -11,7 +11,9 @@
                       <h1>{{$result->topic_title}}</h1>
                         {{Form::open(array('route' => array('topic.update', $result->id), 'method' => 'PATCH'))}}
                           <?php echo Form::textarea('description', $result->topic_description, ['class' => 'form-control']) ?>
+                            @if($user->role == 1)
                            <input type="checkbox" name="notify"> Verstuur notificatie?<br>
+                           @endif
                       @foreach($result->tag as $tag)
                       <span class="label label-primary" style="background-color:#8B0000;">{{$tag->tag_name}}</span>
                       @endforeach

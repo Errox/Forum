@@ -10,6 +10,8 @@ use App\Subscription;
 
 use View;
 
+use App\Topic;
+
 class SubscriptionController extends Controller
 {
     public function __construct()
@@ -19,14 +21,21 @@ class SubscriptionController extends Controller
 
     public function store()
     {
-
     	$input = Request::all();
+        if (!isset($input['id'])){
+        $topic_id = Topic::all()->last();
+        $topic_id = $topic_id->id;
+        }
+        else{            
 		$topic_id = $input['id']; 
+    }
 		$user = \Auth::user();
     	$userid = $user->id;
 
-		$subscription = new Subscription;   
+    
+		$subscription = new Subscription; 
 		$subscription->topic_id = $topic_id;
+
 		$subscription->user_id = $userid;	
 		$subscription->save();
 
