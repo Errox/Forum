@@ -6,12 +6,13 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-use App\Event;
+//use App\EventModel;
 
 use Carbon\Carbon;
 
 use Auth;
 
+use App\Event;
 
 class EventController extends Controller
 {
@@ -28,15 +29,44 @@ class EventController extends Controller
      */
     public function index()
     {
+        $events = [];
+            
+        $found = Event::all();
+        foreach ($found as $found_events){
+            $found_events_title = $found_events->room->name .' '. $found_events->title;
+            $events[] = \Calendar::event(
+                $found_events_title,
+                false,
+                $found_events->start_time,
+                $found_events->end_time,
+                $found_events->id
+                );
 
-
-		$events = Event::all();
-
-        if(Auth::check()){
-            $user = \Auth::user();
-            $userid = $user->id;
         }
-        return view('event')->with(compact('events', 'userid'));
+/*/
+$events[] = \Calendar::event(
+    'Event One', //event title
+    false, //full day event?
+    '2016-05-15T0800', //start time (you can also use Carbon instead of DateTime)
+    '2016-05-15T0900', //end time (you can also use Carbon instead of DateTime)
+    0 //optionally, you can specify an event ID
+);
+
+$events[] = \Calendar::event(
+    "Valentine's Day", //event title
+    true, //full day event?
+    new \DateTime('2016-05-14'), //start time (you can also use Carbon instead of DateTime)
+    new \DateTime('2016-05-14'), //end time (you can also use Carbon instead of DateTime)
+    'stringEventId' //optionally, you can specify an event ID
+);/*/
+
+//$eloquentEvent = EventModel::first(); //EventModel implements MaddHatter\LaravelFullcalendar\Event
+
+$calendar = \Calendar::addEvents($events)
+    ->setOptions([ //set fullcalendar options
+        'weekends' => false
+    ]);
+        return view('event')->with(compact('calendar'));
     }
 
     public function create()
