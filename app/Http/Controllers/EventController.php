@@ -78,8 +78,8 @@ class EventController extends Controller
         $userid = $user->id;
         $input = $request->all();
 
-        $date = explode("/", $input['time_0']);
-        $date = $date['2'].'-'.$date['0'].'-'.$date['1'];
+        $date = explode("-", $input['time_0']);
+        $date = $date['2'].'-'.$date['1'].'-'.$date['0'];
 
         $timestart = $date.' '.$input['time_1'].':00';
         $timestop = $date.' '.$input['time_2'].':00';
