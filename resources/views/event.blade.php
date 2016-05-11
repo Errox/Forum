@@ -4,7 +4,10 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Recente leervragen<span style="float:right;"><a href="/event/create">Maak een nieuwe afspraak</a></span></div>
+                <div class="panel-heading">Recente leervragen<span style="float:right;">
+                @if($user->role == '1')
+                  <a href="/event/create">Maak een nieuwe afspraak</a></span></div>
+                @endif 
                   <div class="panel-body">
                     {!! $calendar->calendar() !!}
                     {!! $calendar->script() !!}

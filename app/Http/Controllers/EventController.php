@@ -38,6 +38,7 @@ class EventController extends Controller
             $user = \Auth::user();
             $userid = $user->id;
         }
+
         $events = [];
             
         $found = Event::all();
@@ -56,7 +57,7 @@ class EventController extends Controller
             ->setOptions([ //set fullcalendar options
                 'weekends' => false
         ]);
-        return view('event')->with(compact('calendar'));
+        return view('event')->with(compact('calendar','user'));
     }
 
 

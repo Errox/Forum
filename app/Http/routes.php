@@ -54,6 +54,8 @@ Route::group(['middleware' => 'web'], function () {
 
             Route::resource('/csv', 'CsvController');
 
+
+            Route::resource('/event', 'EventController');
         });
 
     //View profile
@@ -77,5 +79,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::resource('/subscribe', 'SubscriptionController');
 
     //Event route
-    Route::resource('/event', 'EventController');
+    Route::resource('/event', 'EventController',
+        ['only' => ['index']]);
 });
