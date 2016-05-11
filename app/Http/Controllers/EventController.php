@@ -8,9 +8,14 @@ use App\Http\Requests;
 
 use App\Event;
 
+use App\Room;
+
 use Carbon\Carbon;
 
 use Auth;
+
+use Session;
+
 
 
 class EventController extends Controller
@@ -28,10 +33,8 @@ class EventController extends Controller
      */
     public function index()
     {
-
-
 		$events = Event::all();
-
+        // Session::flash('flash_message_succes', 'Dit is een flash message');
         if(Auth::check()){
             $user = \Auth::user();
             $userid = $user->id;
@@ -39,11 +42,13 @@ class EventController extends Controller
         return view('event')->with(compact('events', 'userid'));
     }
 
+
+
     public function create()
     {
         if (Auth::check()){
-            $tags = Tag::all();
-            return view('create_topic')->with('tags', $tags);
+            $rooms = Room::all();
+            return view('eventCreate')->with('rooms', $rooms);
         }
         else{
             return redirect('/topic');
@@ -54,88 +59,24 @@ class EventController extends Controller
     {
         $user = \Auth::user();
         $userid = $user->id;
-
         $input = $request->all();
 
-        $topic = new Topic;
+        $date = explode("/", $input['time_0']);
+        $date = $date['2'].'-'.$date['0'].'-'.$date['1'];
 
-        $topic->user_id = $userid;
-        $topic->topic_title = $input['title'];
-        $topic->topic_description =  nl2br($input['description']);
-        
-        if (isset($input['tags'])){
-            $checked = $input['tags'];
-        }
-        if (empty($checked)){
-            return redirect('/topic/create')->with('error', ['foutmelding']);
-        }else{
-          $topic->save();
+        $timestart = $date.' '.$input['time_1'].':00';
+        $timestop = $date.' '.$input['time_2'].':00';
 
-        //Tags moeten nog opgeslagen worden via de tendant table
-        $topic->tag()->sync($input['tags']);
-        return redirect('topic');
-        }
-    }
-
-    public function update(Request $request, $id){
-       if (Auth::check()){
-           $user = \Auth::user();
-           $userid = $user->id; 
-           $topic = Topic::find($id);  
-           $topic->topic_description =  nl2br($request->input('description'));
-           $topic->save();
-
-           if ($request->input('notify')){
-            $target = "";
-       app('App\Http\Controllers\NotificationController')->subnotify($id, $userid, $target);  
-           }
-       }
-       return redirect('/topic/'.$id);
-    }
-
-    public function edit($id){
-        if (Auth::check()){
-            $user = \Auth::user();
-            $userid = $user->id;   
-            $result = Topic::find($id);
-            $user =   User::find($userid);
-            if ($userid == $result->user_id || $user->role == 1){  
-                return view('topicEdit')->with(compact('result'));
-            }
-        }
-        return redirect('topic/'.$id);
-    }
-
-    public function show($id){
-        $result[0] = Topic::with('user')->with('tag')->where('id', '=', $id)->get();
-
-        $result[1] = Comment::where('topic_id', '=', $id)->get();
-        $result[2] = Topic::with('user')->get();
-        if (Auth::check()){
-            $user = \Auth::user();
-            $userid = $user->id;
-
-            $result[2] = Subscription::where('user_id', '=', $userid)
-                                      ->where('topic_id', '=', $id)
-                                      ->get();         
-        }
-    	return view('topicShow')->with('result', $result);
-    }
+        $event = new Event;
 
 
-    public function close(Request $request){
-        $user = \Auth::user();
-        $userid = $user->id;
-        $found = Topic::with('user')
-            ->where('id', '=', $request->input('id'))
-            ->first();
-        if($userid == $found->user_id || $user->role == 1){          
-            $found->active = '0';
-            $found->save();
-            return redirect('/topics');            
-        }
+        $event->user_id = $userid;
+        $event->title = $input['description'];
+        $event->room_id = $input['room'];
+        $event->start_time = $timestart;
+        $event->end_time = $timestop;
+        $event->save();
 
-
-
+        return redirect('/event');
     }
 }

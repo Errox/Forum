@@ -10,6 +10,8 @@
     <!-- Fonts -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  
 
     <!-- Styles -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -116,11 +118,23 @@
             </div>
         </div>
     </nav>
+        @if (Session::has('flash_message_succes'))
+            <div class="container alert alert-success"> 
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{ Session::get('flash_message')}}</div>
+        @endif
 
+        @if (Session::has('flash_message_alert'))
+            <div class="container alert alert-danger"> 
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{ Session::get('flash_message_alert')}}</div>
+        @endif
+
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
     @yield('content')
 
     <!-- JavaScripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>

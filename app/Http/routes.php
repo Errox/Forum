@@ -44,21 +44,20 @@ Route::group(['middleware' => 'web'], function () {
 	Route::post('/topic/close', 'TopicController@close');
 	Route::resource('/topic', 'TopicController');
 	Route::post('/search', 'SearchController@index',
-		['only' => ['index']]);
-	
-        //alles waar je alleen bij kan met speciale rechten	
+        ['only' => ['index']]);
+    
+        //alles waar je alleen bij kan met speciale rechten 
         Route::group(['middleware' => 'role'], function(){
-        	Route::resource('/beheer', 'RoleController');
-        	    //Tag route
+            Route::resource('/beheer', 'RoleController');
+                //Tag route
             Route::resource('/tag', 'TagController');
 
             Route::resource('/csv', 'CsvController');
 
-            Route::resource('/event', 'EventController');
         });
 
-	//View profile
-	Route::resource('/profile', 'ProfileController');
+    //View profile
+    Route::resource('/profile', 'ProfileController');
 
     //Notification route
     Route::resource('/notificaties', 'NotificationController');
@@ -76,4 +75,7 @@ Route::group(['middleware' => 'web'], function () {
   
     //Subscribe resource
     Route::resource('/subscribe', 'SubscriptionController');
+
+    //Event route
+    Route::resource('/event', 'EventController');
 });
