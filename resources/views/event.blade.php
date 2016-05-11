@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@extends('layouts.menu')
 @section('content')
 <div class="container col-md-12">
     <div class="row">
