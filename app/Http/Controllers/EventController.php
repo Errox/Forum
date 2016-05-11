@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-use App\Event;
+//use App\EventModel;
 
 use App\Room;
 
@@ -16,7 +16,7 @@ use Auth;
 
 use Session;
 
-
+use App\Event;
 
 class EventController extends Controller
 {
@@ -33,13 +33,30 @@ class EventController extends Controller
      */
     public function index()
     {
-		$events = Event::all();
         // Session::flash('flash_message_succes', 'Dit is een flash message');
         if(Auth::check()){
             $user = \Auth::user();
             $userid = $user->id;
         }
-        return view('event')->with(compact('events', 'userid'));
+        $events = [];
+            
+        $found = Event::all();
+        foreach ($found as $found_events){
+            $found_events_title = $found_events->room->name .' '. $found_events->title;
+            $events[] = \Calendar::event(
+                $found_events_title,
+                false,
+                $found_events->start_time,
+                $found_events->end_time,
+                $found_events->id
+                );
+        }
+
+        $calendar = \Calendar::addEvents($events)
+            ->setOptions([ //set fullcalendar options
+                'weekends' => false
+        ]);
+        return view('event')->with(compact('calendar'));
     }
 
 
