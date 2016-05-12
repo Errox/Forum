@@ -105,8 +105,8 @@ class TopicController extends Controller
            $topic->save();
 
            if ($request->input('notify')){
-            $target = "";
-       app('App\Http\Controllers\NotificationController')->subnotify($id, $userid, $target);  
+                $target = "";
+                app('App\Http\Controllers\NotificationController')->subnotify($id, $userid, $target);  
            }
        }
        return redirect('/topic/'.$id);
