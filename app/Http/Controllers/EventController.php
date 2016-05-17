@@ -66,6 +66,7 @@ class EventController extends Controller
     {
         if (Auth::check()){
             $rooms = Room::all();
+            Session::flash('flash_message_alert', 'Let op! Een afspraak wordt niet laten zien in het weekend.');
             return view('eventCreate')->with('rooms', $rooms);
         }
         else{
