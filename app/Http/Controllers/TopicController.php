@@ -20,6 +20,8 @@ use Carbon\Carbon;
 
 use App\User;
 
+use App\tag_topic;
+
 
 
 class TopicController extends Controller
@@ -98,11 +100,26 @@ class TopicController extends Controller
 
     public function update(Request $request, $id){
        if (Auth::check()){
+            $input = $request->all();
            $user = \Auth::user();
            $userid = $user->id; 
            $topic = Topic::find($id);  
            $topic->topic_description =  nl2br($request->input('description'));
+           $topic->topic_title = $request->input('title');
            $topic->save();
+
+           $tags = tag_topic::where('topic_id','=',$id)->delete();
+           $next = 0;
+           foreach($input['new_tags'] as $loop){
+
+           $tags = new tag_topic;
+           $tags->topic_id = $id;
+          $tags->tag_id = $loop;
+          $tags->save();
+          
+       }
+
+
 
            if ($request->input('notify')){
                 $target = "";
@@ -117,11 +134,16 @@ class TopicController extends Controller
             $user = \Auth::user();
             $userid = $user->id;   
             $result = Topic::find($id);
+            $tags = Tag::all();
             $user =   User::find($userid);
-            if ($userid == $result->user_id || $user->role == 1){  
-                return view('topicEdit')->with(compact('result', 'user'));
+
             }
-        }
+
+            
+            if ($userid == $result->user_id || $user->role == 1){  
+                return view('topicEdit')->with(compact('result', 'user', 'tags', 'input', 'input_name'));
+            }
+        
         return redirect('topic/'.$id);
     }
 
