@@ -13,9 +13,7 @@
 
 	//Topic via Home
     //Directing to homepage
-Route::get('/', function () {
-    return redirect('/topic');
-});
+
     //Topic route
 Route::resource('/topic', 'TopicController',
         ['only' => ['index']]);

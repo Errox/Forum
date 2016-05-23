@@ -22,7 +22,7 @@
                             </select>
                               <br />
                             <p>Datum: <input type="text" name="time_0" id="datepicker"></p>
-                            <p>Van: <input type="time" name="time_1"> Tot: <input type="time" name="time_2"></p>
+                            <p>Van: <input id="basicExample" name="time_1"> Tot: <input id="basicExample1"  name="time_2"></p>
                             {!! Form::submit('Maak leervraag', ['class' => 'btn btn-primary form-control']) !!}
                           </div>
                       {!! Form::close() !!}
@@ -37,5 +37,7 @@
   $(function() {
     $( "#datepicker" ).datepicker();
   });
+  $('#basicExample').timepicker({ 'timeFormat': 'H:i', 'step': 15 });
+  $('#basicExample1').timepicker({ 'timeFormat': 'H:i', 'step': 15 });
 </script>
 @endsection
