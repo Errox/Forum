@@ -12,15 +12,15 @@
                             <p style="color:red;">Er moet een checkbox aangevinkt zijn!</p>
                         @endif
                             {!! Form::label('name', 'Titel:') !!}
-                            {!! Form::text('title', null, ['class' => 'form-control']) !!}
+                            {!! Form::text('title', null, ['class' => 'form-control', 'required']) !!}
                              <br />
                             {!! Form::label('description', 'Beschrijving:') !!}
-                            {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
+                            {!! Form::textarea('description', null, ['class' => 'form-control', 'required']) !!}
                              <br />
                              {!! Form::label('tags', 'Tags:') !!}
                             <div class="topic_tags" style="overflow-y:scroll;height:100px;">
                                 @foreach($tags as $tag)
-                                    <input type="checkbox" name="tags[]" value="<?= $tag>id?>"> <?=$tag->tag_name?> <br>
+                                    <input type="checkbox" name="tags[]" value="<?= $tag->id?>" required> <?=$tag->tag_name?> <br>
                                 @endforeach
                             </div>
                               <br />
