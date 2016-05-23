@@ -39,16 +39,18 @@ class RoleController extends Controller
     }
 
     public function show($id){
-            $result = User::find($id);
-    if($result->role == 1){
-        $result->role = 0;
-    }
-    else{
-        $result->role = 1;
-    }
-    $result->save();
+        $result = User::find($id);
 
-    return redirect('/profile');
+        if($result->role == 1){
+            $result->role = 0;
+        }
+        else{
+            $result->role = 1;
+        }
+        
+        $result->save();
+
+        return redirect('/profile');
     }
     
 }

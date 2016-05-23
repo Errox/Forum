@@ -79,8 +79,8 @@ class TopicController extends Controller
         $topic = new Topic;
 
         $topic->user_id = $userid;
-        $topic->topic_title = $input['title'];
-        $topic->topic_description =  nl2br($input['description']);
+        $topic->topic_title = $input['topic_title'];
+        $topic->topic_description =  nl2br($input['topic_description']);
         
         if (isset($input['tags'])){
             $checked = $input['tags'];

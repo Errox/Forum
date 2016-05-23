@@ -40,7 +40,7 @@ Route::post('/search', 'SearchController@index',
 //alleen bij kunnen als je ingelogt bent
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
-
+    Route::resource('/queue', 'QueueController');
 	Route::post('/topic/close', 'TopicController@close');
 	Route::resource('/topic', 'TopicController');
 	Route::post('/search', 'SearchController@index',

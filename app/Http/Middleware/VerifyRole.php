@@ -19,15 +19,15 @@ class VerifyRole
     {
         $user = \Auth::user();
 
-       $user = User::find($user->id);
+        $user = User::find($user->id);
 
         $role = $user->role;
 
         if($role == 0){
-        return redirect('/topic');
+            return redirect('/topic');
         }
-else{
-        return $next($request);
-    }
+        else{
+            return $next($request);
+        }
     }
 }

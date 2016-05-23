@@ -33,7 +33,7 @@ class Kernel extends HttpKernel
 
         'role'=>[
              \App\Http\Middleware\VerifyRole::class,  
-             ],
+        ],
 
         'api' => [
             'throttle:60,1',
