@@ -38,10 +38,15 @@ Route::post('/search', 'SearchController@index',
 //alleen bij kunnen als je ingelogt bent
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
+    
+    Route::get('/queue/ajax', 'Queuecontroller@ajax');
     Route::resource('/queue', 'QueueController');
-	Route::post('/topic/close', 'TopicController@close');
+
+
+
 	Route::resource('/topic', 'TopicController');
-	Route::post('/search', 'SearchController@index',
+    Route::post('/topic/close', 'TopicController@close');
+    Route::post('/search', 'SearchController@index',
         ['only' => ['index']]);
     
         //alles waar je alleen bij kan met speciale rechten 

@@ -90,5 +90,26 @@
         </div>
     </div>
 </div>
+
+<p class="voters"></p>
 </tbody></table></div></div></div></div></div>
+
+<script>
+ var refInterval = window.setInterval('update()', 1500); // 30 seconds
+
+var update = function() {
+    $.ajax({
+        type : 'GET',
+        url : '/queue/ajax',
+        success : function(data){
+            console.log(data);
+        },
+    });
+};
+update();
+
+
+
+
+</script>
 @endsection
