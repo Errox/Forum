@@ -16,7 +16,7 @@
                       </thead>
                       <tbody>
                       @foreach($queues as $queue)
-                      @if($queue->status == '0')
+                      @if($queue->active == '0')
                       <tr>
                         <td>{{$queue->created_at->diffForHumans()}} </td>
                           <td>
@@ -60,7 +60,7 @@
                       </thead>
                       <tbody>
                       @foreach($queues as $queue)
-                        @if($queue->status == '1')
+                        @if($queue->active == '1')
                           <tr>
                             <td>{{$queue->created_at->diffForHumans()}} </td>
                               <td>
