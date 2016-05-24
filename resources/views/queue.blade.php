@@ -44,8 +44,6 @@
             </div>
         </div>
     </div>
-</div>
-</tbody></table></div></div></div></div></div>
 <div class="container col-md-12">
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -84,11 +82,12 @@
                           </tr>
                       @endif
                     @endforeach
+                    </tbody></table>
                   </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</tbody></table></div></div></div></div></div>
+
 @endsection
