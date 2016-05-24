@@ -87,17 +87,28 @@ function InBehandeling(data){
   var loops = data.length;
    var behandelingen = document.getElementById("behandeling");
   behandelingen.innerHTML = "";
-    for (var i = 0; i <= loops; i++){
+  //console.log(data[0].tag[0].tag_name);
+    for (var i = 0; i < loops; i++){
+      var total = -1
+      var tags = "";
+      total += data[i].tag.length;
+
+      for (var t = 0; t <= total; t++){
+    tags = tags+"<span class='label label-primary' style='background-color:#337ab7;'>" + data[i].tag[t].tag_name + "</span>  ";
+}
+
+console.log(tags);
+  
     var   behandeling = '<tr><td>' + data[i].created_at+'</td>'
-        +'<td>' + data[i].tags  + '</td>'
+        +'<td>' + tags + '</td>'
         +'<td>' + data[i].title + '</td>'
-        +'<td>'+ data[i].name +  '</td>'
+        +'<td>'+ data[i].user.name +  '</td>'
         +'<td>' + data[i].status + '</td></tr>'; 
         
-       console.log(behandeling.length);
-       if (behandeling.length !== loops){
+      // console.log(behandeling.length);
+       
        behandelingen.innerHTML += behandeling;
-     }
+     
        }  
 
 }
