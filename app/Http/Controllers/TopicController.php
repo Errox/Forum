@@ -75,7 +75,7 @@ class TopicController extends Controller
     {
         $user = \Auth::user();
         $userid = $user->id;
-
+        $tags = Tag::all();
         $input = $request->all();
 
         $topic = new Topic;
@@ -84,11 +84,16 @@ class TopicController extends Controller
         $topic->topic_title = $input['topic_title'];
         $topic->topic_description =  nl2br($input['topic_description']);
         
+
+        $new_title = $input['topic_title'];
+        $new_description = $input['topic_description'];
+        $error = 'foutmelding';
+
         if (isset($input['tags'])){
             $checked = $input['tags'];
         }
         if (empty($checked)){
-            return redirect('/topic/create')->with('error', ['foutmelding']);
+            return view('create_topic')->with(compact( 'new_title','error', 'new_description', 'tags'));
         }else{
           $topic->save();
           app('App\Http\Controllers\SubscriptionController')->store();
@@ -100,12 +105,23 @@ class TopicController extends Controller
 
     public function update(Request $request, $id){
        if (Auth::check()){
+         $tags = Tag::all();
             $input = $request->all();
            $user = \Auth::user();
            $userid = $user->id; 
            $topic = Topic::find($id);  
            $topic->topic_description =  nl2br($request->input('description'));
            $topic->topic_title = $request->input('title');
+        if (isset($input['new_tags'])){
+            $checked = $input['new_tags'];
+        }
+        if (empty($checked)){
+            $result = $topic;
+            //dd($input['new_tags']);
+            $error = 'foutmelding';
+            return view('topicEdit')->with(compact( 'result','error', 'tags', 'user'));
+            }
+            else{
            $topic->save();
 
            $tags = tag_topic::where('topic_id','=',$id)->delete();
@@ -116,8 +132,8 @@ class TopicController extends Controller
            $tags->topic_id = $id;
           $tags->tag_id = $loop;
           $tags->save();
-          
-       }
+          }
+       
 
 
 
@@ -127,6 +143,7 @@ class TopicController extends Controller
            }
        }
        return redirect('/topic/'.$id);
+   }
     }
 
     public function edit($id){
