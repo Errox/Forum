@@ -18,7 +18,6 @@
                       @foreach($queues as $queue)
                       @if($queue->status == '0')
                       <tr>
-                        <td>{{$queue->created_at->diffForHumans()}} </td>
                           <td>
                           @foreach($queue->tag as $tag)
                            <span class="label label-primary">{{$tag->tag_name}}</span>

@@ -20,7 +20,8 @@ class Queue extends Model
 		return $this->belongsTo('App\User');
 	}
 
-	public function createdAtCarbon($value){
-		$this->attributes['created_at'] = diffForHumans($value);
+	public function getCreatedAtAttribute($value){
+		$isDate = new Carbon($value);
+		return $isDate->diffForHumans();
 	}
 }
