@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Carbon\Carbon;
+
 class Queue extends Model
 {
     public function user(){
@@ -16,5 +18,9 @@ class Queue extends Model
 
 	public function teacher(){
 		return $this->belongsTo('App\User');
+	}
+
+	public function createdAtCarbon($value){
+		$this->attributes['created_at'] = diffForHumans($value);
 	}
 }
