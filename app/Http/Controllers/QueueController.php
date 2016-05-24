@@ -23,4 +23,10 @@ class QueueController extends Controller
 
     	return view('queue')->with(compact('queues'));
     }
+
+    public function ajax(){
+		$queues = Queue::where('active', '1')->get();
+
+		return $queues;
+    }
 }
