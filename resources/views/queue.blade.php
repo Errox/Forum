@@ -44,7 +44,7 @@
             </div>
         </div>
     </div>
-<div class="container col-md-12">
+    <div class="container col-md-12">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">Wachtrij</div>
@@ -58,6 +58,7 @@
                         <th>Status</th>
                         <th>button hier</th>
                       </thead>
+
                       <tbody id="behandeling">
 
                     </tbody></table>
@@ -98,6 +99,7 @@ function InBehandeling(data){
        behandelingen.innerHTML += behandeling;
      }
        }  
+
 }
 
 

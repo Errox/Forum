@@ -25,8 +25,7 @@ class QueueController extends Controller
     }
 
     public function ajax(){
-		$queues = Queue::where('active', '1')->get();
-
-		return $queues;
-    }
+		$queues = Queue::with('user', 'tag', 'teacher')->where('active', '1')->get();
+    	return $queues;
+	}
 }
