@@ -26,8 +26,6 @@ class QueueController extends Controller
 
     public function ajax(){
 		$queues = Queue::with('user', 'tag', 'teacher')->where('active', '1')->get();
-
-		echo $queues['0']->createdAtCarbon;
     	return $queues;
 	}
 }
