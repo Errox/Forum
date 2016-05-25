@@ -31,7 +31,7 @@ class QueueController extends Controller
     	$tags = Tag::all();
     	return view('queue')->with(compact('queues','tags','user'));
     }
-
+	//Als dit niet meer werkt voor gods reden, verrander update naar show
     public function update($id){
         $queue = Queue::find($id);
         if ($queue->status != 1){
