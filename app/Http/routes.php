@@ -39,7 +39,7 @@ Route::post('/search', 'SearchController@index',
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
     
-    Route::get('/queue/ajax', 'Queuecontroller@ajax');
+    Route::get('/queue/ajax', 'QueueController@ajax');
     Route::resource('/queue', 'QueueController');
 
 
