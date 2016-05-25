@@ -51,10 +51,11 @@
       <div class="panel panel-default">
           <div class="panel-body">
               <tbody>
+                {!! Form::open(array('name' => 'Ticket', 'method' => 'POST'))!!}
+                <input type="hidden" id="token" name="_token" value="{!! csrf_token() !!}">
               <div class="col-md-6">
                 {!! Form::label('name', "tag 1")!!}
-                <form onsubmit="return makeSearch()" name="Ticket">
-                  <select id="tag1" name="tag1">
+                <select id="tag1" name="tag1">
                   @foreach($tags as $tag)
                       <option name="objectid" value="{{$tag->id}}">{{$tag->tag_name}}</option>
                   @endforeach
@@ -69,9 +70,9 @@
                     @endforeach
                   </select>
                 </div>
-                  Algemeen probleem <input type="text" name="title" class="form-control"><br>
-                <input type="submit" value="Submit">
-                </form>
+                  Algemeen probleem <input type="text" id="title" name="title" class="form-control"><br>
+                <button onclick="submitdata()" type="button">Submit ticket</button>
+                {!! Form::close()!!}
               </tbody>
             </table>
           </div>
@@ -84,7 +85,7 @@
 
 
 <script>
-  var refInterval = window.setInterval('update()', 1000); // 1 seconds
+  var refInterval = window.setInterval('update()', 1500); // 1 seconds
 
   var update = function() {
       $.ajax({
@@ -160,21 +161,23 @@ $(function() {
   
 function submitdata()
 {
-alert("poop function");
-var tag1=document.getElementById( "name_of_user" );
-var tag2=document.getElementById( "age_of_user" );
-var title=document.getElementById( "course_of_user" );
 
+var tag1=document.getElementById( "tag1" );
+var tag2=document.getElementById( "tag2" );
+var title=document.getElementById( "title" );
+
+var token=document.getElementById( "token" );
 $.ajax({
         type: 'post',
-        url: '',
+        url: '/queue',
         data: {
-        tag1:tag1,
-        tag2:tag2,
-        title:title
+        tag1:tag1.value,
+        tag2:tag2.value,
+        title:title.value,
+        _token:token.value
         },
         success: function (response) {
-          $('#success__para').html("You data will be saved");
+          $( "#dialog" ).dialog( "close" );
         }
     });
 return false;

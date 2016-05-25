@@ -38,6 +38,18 @@ class QueueController extends Controller
 	}
 
 	public function store(Request $request){
-		dd($request);
+		if (Auth::check()){
+            $user = \Auth::user();
+            $userid = $user->id; 
+        }
+        $input = $request->all();
+
+        $queue = New Queue;
+
+        $queue->user_id = $userid;
+        $queue->title = $request->title;
+		
+		$queue->save();        
+
 	}
 }
