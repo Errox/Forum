@@ -12,6 +12,8 @@ use App\Queue;
 
 use App\Tag;
 
+use Auth;
+
 class QueueController extends Controller
 {
 	public function __construct()
@@ -21,9 +23,13 @@ class QueueController extends Controller
     }
 
     public function index(){
+        if (Auth::check()){
+            $user = \Auth::user();
+            $userid = $user->id; 
+            }        
     	$queues = Queue::where('active', '1')->get();
     	$tags = Tag::all();
-    	return view('queue')->with(compact('queues','tags'));
+    	return view('queue')->with(compact('queues','tags','user'));
     }
 
     public function ajax(){
