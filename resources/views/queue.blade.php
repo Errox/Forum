@@ -12,31 +12,10 @@
                         <th>title</th>
                         <th>naam</th>
                         <th>Status</th>
-                        <th>button hier</th>
+                       @if($user->role == 1)  <th>button hier</th>@endif
                       </thead>
-                      <tbody>
-                      @foreach($queues as $queue)
-                      @if($queue->status == '0')
-                      <tr>
-                          <td>
-                          @foreach($queue->tag as $tag)
-                           <span class="label label-primary">{{$tag->tag_name}}</span>
-                          @endforeach
-                          </td>
-                        <td>{{str_limit($queue->title, 25 )}}</td>
-                        <td>{{$queue->user->name}}</td>
-                        <td>
-                        @if($queue->status == '1')Idle
-                        @elseif($queue->status == '0') In behandeling 
-                        @else Onbekent
-                        @endif 
-                        </td>
-                          <td>
-                            <a href="#" class="btn btn-primary"> Hallo </a>
-                          </td>
-                      </tr>
-                      @endif
-                    @endforeach
+                      <tbody id="behandeling">
+                     
                     </tbody>
                     </table>
                   </div>
@@ -55,10 +34,10 @@
                         <th>title</th>
                         <th>naam</th>
                         <th>Status</th>
-                        <th>button hier</th>
+                        @if($user->role == 1)<th>button hier</th>@endif
                       </thead>
 
-                      <tbody id="behandeling">
+                      <tbody id="open">
 
                     </tbody></table>
                   </div>
@@ -84,8 +63,10 @@ update();
 function InBehandeling(data){
 
   var loops = data.length;
+  var open = document.getElementById("open");
    var behandelingen = document.getElementById("behandeling");
   behandelingen.innerHTML = "";
+  open.innerHTML = "";
   //console.log(data[0].tag[0].tag_name);
     for (var i = 0; i < loops; i++){
       var total = -1
@@ -95,20 +76,33 @@ function InBehandeling(data){
       for (var t = 0; t <= total; t++){
     tags = tags+"<span class='label label-primary' style='background-color:#337ab7;'>" + data[i].tag[t].tag_name + "</span>  ";
 }
+    
+    if(data[i].status === 1){
 
-console.log(tags);
-  
     var   behandeling = '<tr><td>' + data[i].created_at+'</td>'
         +'<td>' + tags + '</td>'
         +'<td>' + data[i].title + '</td>'
-        +'<td>'+ data[i].user.name +  '</td>'
-        +'<td>' + data[i].status + '</td></tr>'; 
+        +'<td>' + data[i].user.name +  '</td>'
+        +'<td>' + data[i].status + '</td>'
+        +'<?php if($user->role == 1){ ?> <td>' + '<a class="btn btn-primary" href="/queue/'+data[i].id+'">Afsluiten</a>' +'</td><?php } ?></tr>'; 
         
       // console.log(behandeling.length);
        
        behandelingen.innerHTML += behandeling;
-     
+     }
+
+     if(data[i].status === 0){
+    var   openingen = '<tr><td>' + data[i].created_at+'</td>'
+        +'<td>' + tags + '</td>'
+        +'<td>' + data[i].title + '</td>'
+        +'<td>' + data[i].user.name +  '</td>'
+        +'<td>' + data[i].status + '</td>'
+        +'<?php if($user->role == 1){ ?> <td>' + '<a class="btn btn-primary" href="/queue/'+data[i].id+'">Behandelen</a>' +'</td><?php } ?></tr>'; 
+
+
+        open.innerHTML += openingen;
        }  
+     }
 
 }
 
