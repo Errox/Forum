@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Recente leervragen</div>
+                <div class="panel-heading">Beheer overzicht leervragen</div>
                   <div class="panel-body">
                     <table class="table table-hover">
                       <thead>
@@ -41,11 +41,6 @@
                     @endforeach
                   </div>
                 </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-body">
-                <h2>Dit is een lijst met alle leervragen</h2>
-              </div>
             </div>
         </div>
     </div>

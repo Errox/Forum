@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Recente leervragen</div>
+                <div class="panel-heading">Leerlingen toevoegen met een csv bestand</div>
                   <div class="panel-body centerd">
                     <h1 style="color: red">ALLEEN CSV BESTANDEN</h1>
                     @if(isset($good))

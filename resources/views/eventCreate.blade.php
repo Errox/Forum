@@ -23,7 +23,7 @@
                               <br />
                             <p>Datum: <input type="text" name="time_0" id="datepicker"></p>
                             <p>Van: <input id="basicExample" name="time_1"> Tot: <input id="basicExample1"  name="time_2"></p>
-                            {!! Form::submit('Maak leervraag', ['class' => 'btn btn-primary form-control']) !!}
+                            {!! Form::submit('Plan afspraak', ['class' => 'btn btn-primary form-control']) !!}
                           </div>
                       {!! Form::close() !!}
                   </div>
