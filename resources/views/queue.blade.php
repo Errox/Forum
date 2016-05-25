@@ -120,7 +120,7 @@
         +'<td>' + data[i].title + '</td>'
         +'<td>' + data[i].user.name +  '</td>'
         +'<td>' + data[i].status + '</td>'
-        +'<?php if($user->role == 1){ ?> <td>' + '<a class="btn btn-primary" href="/queue/'+data[i].id+'">Afsluiten</a>' +'</td><?php } ?></tr>'; 
+        +'<?php if($user->role == 1){ ?> <td>' + '<button class="btn btn-primary" onclick="statusupdate('+data[i].id+')">Afsluiten</button>' +'</td><?php } ?></tr>'; 
         
       // console.log(behandeling.length);
        
@@ -133,7 +133,7 @@
         +'<td>' + data[i].title + '</td>'
         +'<td>' + data[i].user.name +  '</td>'
         +'<td>' + data[i].status + '</td>'
-        +'<?php if($user->role == 1){ ?> <td>' + '<a class="btn btn-primary" href="/queue/'+data[i].id+'">Behandelen</a>' +'</td><?php } ?></tr>'; 
+        +'<?php if($user->role == 1){ ?> <td>' + '<button class="btn btn-primary" onclick="statusupdate('+data[i].id+')">Behandelen</button>' +'</td><?php } ?></tr>'; 
 
 
         open.innerHTML += openingen;
@@ -185,21 +185,16 @@ return false;
 
 function statusupdate(data)
 {
-alert("omg ik kom er gwn bij!");
-var tag1=document.getElementById( "name_of_user" );
-var tag2=document.getElementById( "age_of_user" );
-var title=document.getElementById( "course_of_user" );
-
+var token=document.getElementById( "token" );
 $.ajax({
         type: 'patch',
-        url: '/queue'+data.id,
+        url: '/queue/'+data,
         data: {
-        tag1:tag1,
-        tag2:tag2,
-        title:title
+        id:data,
+        _token:token.value
         },
         success: function (response) {
-         alert("het is gelukt!");
+       
         }
     });
 return false;

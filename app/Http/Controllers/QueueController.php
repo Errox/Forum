@@ -33,7 +33,14 @@ class QueueController extends Controller
     }
 
     public function update($id){
-        
+        $queue = Queue::find($id);
+        if ($queue->status != 1){
+        $queue->status = 1;
+    }
+        else{
+        $queue->active = 0;    
+        }
+        $queue->save();
     }
 
     public function ajax(){
