@@ -182,5 +182,27 @@ $.ajax({
     });
 return false;
 }
+
+function statusupdate(data)
+{
+alert("omg ik kom er gwn bij!");
+var tag1=document.getElementById( "name_of_user" );
+var tag2=document.getElementById( "age_of_user" );
+var title=document.getElementById( "course_of_user" );
+
+$.ajax({
+        type: 'patch',
+        url: '/queue'+data.id,
+        data: {
+        tag1:tag1,
+        tag2:tag2,
+        title:title
+        },
+        success: function (response) {
+         alert("het is gelukt!");
+        }
+    });
+return false;
+}
 </script>
 @endsection

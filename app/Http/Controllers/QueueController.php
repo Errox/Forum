@@ -32,6 +32,10 @@ class QueueController extends Controller
     	return view('queue')->with(compact('queues','tags','user'));
     }
 
+    public function update($id){
+        
+    }
+
     public function ajax(){
 		$queues = Queue::with('user', 'tag', 'teacher')->where('active', '1')->orderBy('created_at', 'asc')->get();
     	return $queues;
