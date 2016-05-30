@@ -43,6 +43,29 @@ class QueueController extends Controller
         $queue->save();
     }
 
+    public function edit($id){
+       $result = Queue::where('user_id', '=', $id)
+                        ->where('active', '=', 1)
+                        ->get();             
+        if ($result){
+            foreach($result as $found){
+            $found->active = 0;
+            $found->save();
+        }
+        }
+    }
+
+    public function actief(){
+        if (Auth::check()){
+            $user = \Auth::user();
+            $userid = $user->id; 
+            }          
+        $result = Queue::where('user_id', '=', $userid)
+                            ->where('active', '=', 1)
+                            ->get();
+       return $result;                     
+    }
+
     public function ajax(){
 		$queues = Queue::with('user', 'tag', 'teacher')->where('active', '1')->orderBy('created_at', 'asc')->get();
     	return $queues;
@@ -59,8 +82,12 @@ class QueueController extends Controller
 
         $queue->user_id = $userid;
         $queue->title = $request->title;
-		
-		$queue->save();        
+        $queue->save();   
+        $tags[] = $input['tag1'];
+        $tags[] = $input['tag2'];
+		$queue->tag()->sync($tags);
+
+      
 
 	}
 }

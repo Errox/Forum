@@ -38,7 +38,7 @@ Route::post('/search', 'SearchController@index',
 //alleen bij kunnen als je ingelogt bent
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
-    
+    route::get('/queue/actief', 'Queuecontroller@actief');
     Route::get('/queue/ajax', 'Queuecontroller@ajax');
     Route::resource('/queue', 'QueueController');
 

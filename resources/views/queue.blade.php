@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('content')
-<div class="container col-md-12">
+
+
+<div class="container col-md-12" <?php if($user->role != 1){ ?>style="display:none;"<?php } ?>>
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">In Behandeling</div>
@@ -11,8 +13,7 @@
                         <th>Tags</th>
                         <th>title</th>
                         <th>naam</th>
-                        <th>Status</th>
-                       @if($user->role == 1)  <th>button hier</th>@endif
+                        <th>Actie</th>
                       </thead>
                       <tbody id="behandeling">
                      
@@ -25,7 +26,7 @@
     <div class="container col-md-12">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Wachtrij<span style="float:right; text-align:right;"><button id="opener">Creeeer ticket </button></span></div>
+                <div class="panel-heading">Wachtrij<span style="float:right; text-align:right;" id="ticket"></span></div>
                   <div class="panel-body">
                     <table class="table table-hover">
                       <thead>
@@ -33,8 +34,7 @@
                         <th>Tags</th>
                         <th>title</th>
                         <th>naam</th>
-                        <th>Status</th>
-                        @if($user->role == 1)<th>button hier</th>@endif
+                        @if($user->role == 1)<th>Actie</th>@endif
                       </thead>
 
                       <tbody id="open">
@@ -85,8 +85,8 @@
 
 
 <script>
-  var refInterval = window.setInterval('update()', 1500); // 1 seconds
-
+  var refInterval = window.setInterval('update()', 1500);
+  var actiefInterval = window.setInterval('actief()', 1500);
   var update = function() {
       $.ajax({
           type : 'GET',
@@ -94,6 +94,25 @@
           success : InBehandeling});
   };
   update();
+
+    var actief = function() {
+      $.ajax({
+          type : 'GET',
+          url : '/queue/actief',
+          success : checker});
+  };
+  actief();
+
+  function checker(data){
+  var result = data[0];
+  var ticket = document.getElementById("ticket");
+  ticket.innerHTML = '<button id="opener2">Creeeer ticket </button>';
+      $( "#opener2" ).click(handleOpenerClick);
+  if (result.active === 1){
+        ticket.innerHTML = '<button id="cancel" onclick="cancelticket(<?=$user->id?>)">Cancel</button>';
+  }
+     
+  }
 
   function InBehandeling(data){
 
@@ -115,12 +134,11 @@
     
     if(data[i].status === 1){
 
-    var   behandeling = '<tr><td>' + data[i].created_at+'</td>'
+    var   behandeling = '<?php if ($user->role == 1){?><tr><td>' + data[i].created_at+'</td>'
         +'<td>' + tags + '</td>'
         +'<td>' + data[i].title + '</td>'
         +'<td>' + data[i].user.name +  '</td>'
-        +'<td>' + data[i].status + '</td>'
-        +'<?php if($user->role == 1){ ?> <td>' + '<button class="btn btn-primary" onclick="statusupdate('+data[i].id+')">Afsluiten</button>' +'</td><?php } ?></tr>'; 
+        +'<?php if($user->role == 1){ ?> <td>' + '<button class="btn btn-primary" onclick="statusupdate('+data[i].id+')">Afsluiten</button>' +'</td><?php } ?></tr><?php } ?>'; 
         
       // console.log(behandeling.length);
        
@@ -132,7 +150,6 @@
         +'<td>' + tags + '</td>'
         +'<td>' + data[i].title + '</td>'
         +'<td>' + data[i].user.name +  '</td>'
-        +'<td>' + data[i].status + '</td>'
         +'<?php if($user->role == 1){ ?> <td>' + '<button class="btn btn-primary" onclick="statusupdate('+data[i].id+')">Behandelen</button>' +'</td><?php } ?></tr>'; 
 
 
@@ -140,6 +157,11 @@
        }  
      }
    }
+
+var handleOpenerClick = function(e) {
+  $( "#dialog" ).dialog( "open" );
+
+}
 
 $(function() {
     $( "#dialog" ).dialog({
@@ -153,10 +175,11 @@ $(function() {
         duration: 500
       }
     });
- 
-    $( "#opener" ).click(function() {
-      $( "#dialog" ).dialog( "open" );
-    });
+
+    //$( "#opener" ).click(handleOpenerClick);
+
+
+
   });
   
 function submitdata()
@@ -178,9 +201,26 @@ $.ajax({
         },
         success: function (response) {
           $( "#dialog" ).dialog( "close" );
+         var ticket = document.getElementById("ticket");
+        ticket.innerHTML = '<button id="cancel" onclick="cancelticket(<?=$user->id?>)">Cancel</button>';
+
         }
     });
 return false;
+}
+
+function cancelticket(id){
+  $.ajax({
+        type: 'get',
+        url: '/queue/'+id+'/edit',
+        data: {
+        id:id,
+        _token:token.value
+        },
+        success: function (response) {
+
+        }
+});
 }
 
 function statusupdate(data)
