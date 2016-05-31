@@ -176,31 +176,30 @@ $(function() {
     //$( "#opener" ).click(handleOpenerClick);
 });
   
-function submitdata()
-{
+function submitdata(){
 
-var tag1=document.getElementById( "tag1" );
-var tag2=document.getElementById( "tag2" );
-var title=document.getElementById( "title" );
+  var tag1=document.getElementById( "tag1" );
+  var tag2=document.getElementById( "tag2" );
+  var title=document.getElementById( "title" );
 
-var token=document.getElementById( "token" );
-$.ajax({
-        type: 'post',
-        url: '/queue',
-        data: {
-        tag1:tag1.value,
-        tag2:tag2.value,
-        title:title.value,
-        _token:token.value
-        },
-        success: function (response) {
-          $( "#dialog" ).dialog( "close" );
-         var ticket = document.getElementById("ticket");
-        ticket.innerHTML = '<button id="cancel" onclick="cancelticket(<?=$user->id?>)">Cancel</button>';
+  var token=document.getElementById( "token" );
+  $.ajax({
+          type: 'post',
+          url: '/queue',
+          data: {
+          tag1:tag1.value,
+          tag2:tag2.value,
+          title:title.value,
+          _token:token.value
+          },
+          success: function (response) {
+            $( "#dialog" ).dialog( "close" );
+           var ticket = document.getElementById("ticket");
+          ticket.innerHTML = '<button id="cancel" onclick="cancelticket(<?=$user->id?>)">Cancel</button>';
 
-        }
-    });
-return false;
+          }
+      });
+  return false;
 }
 
 function cancelticket(id){
@@ -219,19 +218,23 @@ function cancelticket(id){
 
 function statusupdate(data)
 {
-var token=document.getElementById( "token" );
-$.ajax({
-        type: 'patch',
-        url: '/queue/'+data,
-        data: {
-        id:data,
-        _token:token.value
-        },
-        success: function (response) {
-       
-        }
-    });
-return false;
+  var token=document.getElementById( "token" );
+  $.ajax({
+          type: 'patch',
+          url: '/queue/'+data,
+          data: {
+          id:data,
+          _token:token.value
+          },
+          success: function (response) {
+         
+          }
+  });
+  return false;
 }
+$('form input').on('keypress', function(e) {
+    return e.which !== 13;
+});
+
 </script>
 @endsection
