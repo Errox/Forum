@@ -179,7 +179,7 @@ $(function() {
 
     //$( "#opener" ).click(handleOpenerClick);
 });
-  
+
 function submitdata()
 {
 var disabled=document.getElementById("sendButton")
@@ -205,6 +205,7 @@ $.ajax({
         }
     });
 return false;
+
 }
 
 function cancelticket(id){
@@ -223,25 +224,30 @@ function cancelticket(id){
 
 function statusupdate(data)
 {
-var token=document.getElementById( "token" );
-$.ajax({
-        type: 'patch',
-        url: '/queue/'+data,
-        data: {
-        id:data,
-        _token:token.value
-        },
-        success: function (response) {
-       
-        }
-    });
-return false;
+  var token=document.getElementById( "token" );
+  $.ajax({
+          type: 'patch',
+          url: '/queue/'+data,
+          data: {
+          id:data,
+          _token:token.value
+          },
+          success: function (response) {
+         
+          }
+  });
+  return false;
 }
+
 
 function checkForm()
   {
 var disable =  document.getElementById('sendButton');
    disable.disabled = true;
-  }
+}
+$('form input').on('keypress', function(e) {
+    return e.which !== 13;
+});
+
 </script>
 @endsection
