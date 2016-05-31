@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
 
-
 <div class="container col-md-12" <?php if($user->role != 1){ ?>style="display:none;"<?php } ?>>
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -16,7 +15,6 @@
                         <th>Actie</th>
                       </thead>
                       <tbody id="behandeling">
-                     
                     </tbody>
                     </table>
                   </div>
@@ -36,9 +34,7 @@
                         <th>naam</th>
                         @if($user->role == 1)<th>Actie</th>@endif
                       </thead>
-
                       <tbody id="open">
-
                     </tbody></table>
                   </div>
                 </div>
@@ -48,18 +44,19 @@
 </div>
 
 <div id="dialog" title="Support ticket">
-      <div class="panel panel-default">
-          <div class="panel-body">
-              <tbody>
-                {!! Form::open(array('name' => 'Ticket', 'method' => 'POST'))!!}
-                <input type="hidden" id="token" name="_token" value="{!! csrf_token() !!}">
-              <div class="col-md-6">
-                {!! Form::label('name', "tag 1")!!}
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <tbody>
+        {!! Form::open(array('name' => 'Ticket', 'method' => 'POST'))!!}
+          <input type="hidden" id="token" name="_token" value="{!! csrf_token() !!}">
+            <div class="col-md-6">
+              {!! Form::label('name', "tag 1")!!}
                 <select id="tag1" name="tag1">
                   @foreach($tags as $tag)
                       <option name="objectid" value="{{$tag->id}}">{{$tag->tag_name}}</option>
                   @endforeach
                 </select>
+
                 </div>
                 <div class="col-md-6">
                   {!! Form::label('name', "Tag 2")!!}
@@ -73,15 +70,17 @@
                 </div>
                   Algemeen probleem <input type="text" id="title" name="title" class="form-control"><br>
                 <button onclick="checkForm(); submitdata()" type="button" id="sendButton">Submit ticket</button>
+
+            </div>
                 {!! Form::close()!!}
               </tbody>
             </table>
           </div>
         </div>
-        </tbody>
-        </div>
-        </div>
-        </div>
+      </tbody>
+    </div>
+  </div>
+</div>
 
 
 
@@ -105,13 +104,14 @@
   actief();
 
   function checker(data){
-  var result = data[0];
-  var ticket = document.getElementById("ticket");
-  ticket.innerHTML = '<button id="opener2">Creeeer ticket </button>';
-      $( "#opener2" ).click(handleOpenerClick);
-  if (result.active === 1){
-        ticket.innerHTML = '<button id="cancel" onclick="cancelticket(<?=$user->id?>)">Cancel</button>';
-  }
+    var result = data[0];
+    var ticket = document.getElementById("ticket");
+    
+    ticket.innerHTML = '<button id="opener2">Creeeer ticket </button>';
+    $( "#opener2" ).click(handleOpenerClick);
+    if (result.active === 1){
+          ticket.innerHTML = '<button id="cancel" onclick="cancelticket(<?=$user->id?>)">Cancel</button>';
+    }
      
   }
 
@@ -127,11 +127,11 @@
     for (var i = 0; i < loops; i++){
       var total = -1
       var tags = "";
+
       total += data[i].tag.length;
       for (var t = 0; t <= total; t++){
-
-    tags = tags+"<span class='label label-primary' style='background-color:#337ab7;'>" + data[i].tag[t].tag_name + "</span>  ";
-}
+        tags = tags+"<span class='label label-primary' style='background-color:#337ab7;'>" + data[i].tag[t].tag_name + "</span>  ";
+      }
     
     if(data[i].status === 1){
 
@@ -178,10 +178,7 @@ $(function() {
     });
 
     //$( "#opener" ).click(handleOpenerClick);
-
-
-
-  });
+});
   
 function submitdata()
 {

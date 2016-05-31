@@ -116,34 +116,29 @@ class TopicController extends Controller
             $checked = $input['new_tags'];
         }
         if (empty($checked)){
-            $result = $topic;
-            //dd($input['new_tags']);
-            $error = 'foutmelding';
-            return view('topicEdit')->with(compact( 'result','error', 'tags', 'user'));
-            }
-            else{
-           $topic->save();
+          $result = $topic;
+          //dd($input['new_tags']);
+          $error = 'foutmelding';
+          return view('topicEdit')->with(compact( 'result','error', 'tags', 'user'));
+        
+        }else{
+          $topic->save();
 
-           $tags = tag_topic::where('topic_id','=',$id)->delete();
-           $next = 0;
-           foreach($input['new_tags'] as $loop){
-
-           $tags = new tag_topic;
-           $tags->topic_id = $id;
+          $tags = tag_topic::where('topic_id','=',$id)->delete();
+          $next = 0;
+          foreach($input['new_tags'] as $loop){
+          $tags = new tag_topic;
+          $tags->topic_id = $id;
           $tags->tag_id = $loop;
           $tags->save();
+        }
+          if ($request->input('notify')){
+            $target = "";
+            app('App\Http\Controllers\NotificationController')->subnotify($id, $userid, $target);  
           }
-       
-
-
-
-           if ($request->input('notify')){
-                $target = "";
-                app('App\Http\Controllers\NotificationController')->subnotify($id, $userid, $target);  
-           }
-       }
+        }
        return redirect('/topic/'.$id);
-   }
+      }
     }
 
     public function edit($id){
@@ -192,8 +187,5 @@ class TopicController extends Controller
             $found->save();
             return redirect('/topics');            
         }
-
-
-
     }
 }
