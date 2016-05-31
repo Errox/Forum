@@ -104,13 +104,14 @@
   actief();
 
   function checker(data){
-  var result = data[0];
-  var ticket = document.getElementById("ticket");
-  ticket.innerHTML = '<button id="opener2">Creeeer ticket </button>';
-      $( "#opener2" ).click(handleOpenerClick);
-  if (result.active === 1){
-        ticket.innerHTML = '<button id="cancel" onclick="cancelticket(<?=$user->id?>)">Cancel</button>';
-  }
+    var result = data[0];
+    var ticket = document.getElementById("ticket");
+    
+    ticket.innerHTML = '<button id="opener2">Creeeer ticket </button>';
+    $( "#opener2" ).click(handleOpenerClick);
+    if (result.active === 1){
+          ticket.innerHTML = '<button id="cancel" onclick="cancelticket(<?=$user->id?>)">Cancel</button>';
+    }
      
   }
 
@@ -126,11 +127,11 @@
     for (var i = 0; i < loops; i++){
       var total = -1
       var tags = "";
+
       total += data[i].tag.length;
       for (var t = 0; t <= total; t++){
-
-    tags = tags+"<span class='label label-primary' style='background-color:#337ab7;'>" + data[i].tag[t].tag_name + "</span>  ";
-}
+        tags = tags+"<span class='label label-primary' style='background-color:#337ab7;'>" + data[i].tag[t].tag_name + "</span>  ";
+      }
     
     if(data[i].status === 1){
 
@@ -177,10 +178,7 @@ $(function() {
     });
 
     //$( "#opener" ).click(handleOpenerClick);
-
-
-
-  });
+});
   
 function submitdata()
 {
