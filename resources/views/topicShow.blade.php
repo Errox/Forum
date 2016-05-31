@@ -9,8 +9,8 @@
                   <ul>
                     @foreach($result[0] as $topics)
                       <p>Deze leervraag is {{$topics->created_at->diffForHumans()}} gecreeerd.
-                      <div style="float:right;"> 
                       @if(Auth::check())
+                      <div style="float:right;"> 
                       <?php   $user = \Auth::user(); ?>
                         @if (!$result[2]->count())
                           {{Form::open(array('route' => array('subscribe.store'), 'method' => 'store')) }}
