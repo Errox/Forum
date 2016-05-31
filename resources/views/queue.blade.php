@@ -68,10 +68,11 @@
                     @foreach($tags as $tag)
                         <option name="objectid" value="{{$tag->id}}">{{$tag->tag_name}}</option>
                     @endforeach
+                        <option name="objectid" value="null">(geen)</option>
                   </select>
                 </div>
                   Algemeen probleem <input type="text" id="title" name="title" class="form-control"><br>
-                <button onclick="submitdata()" type="button">Submit ticket</button>
+                <button onclick="checkForm(); submitdata()" type="button" id="sendButton">Submit ticket</button>
                 {!! Form::close()!!}
               </tbody>
             </table>
@@ -184,7 +185,7 @@ $(function() {
   
 function submitdata()
 {
-
+var disabled=document.getElementById("sendButton")
 var tag1=document.getElementById( "tag1" );
 var tag2=document.getElementById( "tag2" );
 var title=document.getElementById( "title" );
@@ -203,7 +204,7 @@ $.ajax({
           $( "#dialog" ).dialog( "close" );
          var ticket = document.getElementById("ticket");
         ticket.innerHTML = '<button id="cancel" onclick="cancelticket(<?=$user->id?>)">Cancel</button>';
-
+        disabled.disabled = false;
         }
     });
 return false;
@@ -239,5 +240,11 @@ $.ajax({
     });
 return false;
 }
+
+function checkForm()
+  {
+var disable =  document.getElementById('sendButton');
+   disable.disabled = true;
+  }
 </script>
 @endsection
