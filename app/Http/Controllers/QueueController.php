@@ -84,10 +84,12 @@ class QueueController extends Controller
         $queue->title = $request->title;
         $queue->save();   
         $tags[] = $input['tag1'];
+        
         if($input['tag2'] != 'null'){
-        $tags[] = $input['tag2'];
-    }
-		$queue->tag()->sync($tags);
+            $tags[] = $input['tag2'];
+        }
+		
+        $queue->tag()->sync($tags);
 
       
 

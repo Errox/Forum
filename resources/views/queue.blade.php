@@ -53,19 +53,22 @@
               {!! Form::label('name', "tag 1")!!}
                 <select id="tag1" name="tag1">
                   @foreach($tags as $tag)
+                    @if($tag->active == 1)
                       <option name="objectid" value="{{$tag->id}}">{{$tag->tag_name}}</option>
+                    @endif
                   @endforeach
                 </select>
-
                 </div>
                 <div class="col-md-6">
                   {!! Form::label('name', "Tag 2")!!}
                   <br> 
                   <select id="tag2" name="tag2">
+                        <option name="objectid" value="null"></option>
                     @foreach($tags as $tag)
+                      @if($tag->active == 1)
                         <option name="objectid" value="{{$tag->id}}">{{$tag->tag_name}}</option>
+                      @endif
                     @endforeach
-                        <option name="objectid" value="null">(geen)</option>
                   </select>
                 </div>
                   Algemeen probleem <input type="text" id="title" name="title" class="form-control"><br>
@@ -88,18 +91,18 @@
   var refInterval = window.setInterval('update()', 1500);
   var actiefInterval = window.setInterval('actief()', 1500);
   var update = function() {
-      $.ajax({
-          type : 'GET',
-          url : '/queue/ajax',
-          success : InBehandeling});
+    $.ajax({
+      type : 'GET',
+      url : '/queue/ajax',
+      success : InBehandeling});
   };
   update();
 
-    var actief = function() {
-      $.ajax({
-          type : 'GET',
-          url : '/queue/actief',
-          success : checker});
+  var actief = function() {
+    $.ajax({
+      type : 'GET',
+      url : '/queue/actief',
+      success : checker});
   };
   actief();
 
