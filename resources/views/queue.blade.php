@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
 
-
 <div class="container col-md-12" <?php if($user->role != 1){ ?>style="display:none;"<?php } ?>>
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -16,7 +15,6 @@
                         <th>Actie</th>
                       </thead>
                       <tbody id="behandeling">
-                     
                     </tbody>
                     </table>
                   </div>
@@ -36,9 +34,7 @@
                         <th>naam</th>
                         @if($user->role == 1)<th>Actie</th>@endif
                       </thead>
-
                       <tbody id="open">
-
                     </tbody></table>
                   </div>
                 </div>
@@ -48,39 +44,39 @@
 </div>
 
 <div id="dialog" title="Support ticket">
-      <div class="panel panel-default">
-          <div class="panel-body">
-              <tbody>
-                {!! Form::open(array('name' => 'Ticket', 'method' => 'POST'))!!}
-                <input type="hidden" id="token" name="_token" value="{!! csrf_token() !!}">
-              <div class="col-md-6">
-                {!! Form::label('name', "tag 1")!!}
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <tbody>
+        {!! Form::open(array('name' => 'Ticket', 'method' => 'POST'))!!}
+          <input type="hidden" id="token" name="_token" value="{!! csrf_token() !!}">
+            <div class="col-md-6">
+              {!! Form::label('name', "tag 1")!!}
                 <select id="tag1" name="tag1">
                   @foreach($tags as $tag)
                       <option name="objectid" value="{{$tag->id}}">{{$tag->tag_name}}</option>
                   @endforeach
                 </select>
-                </div>
-                <div class="col-md-6">
-                  {!! Form::label('name', "Tag 2")!!}
-                  <br> 
-                  <select id="tag2" name="tag2">
-                    @foreach($tags as $tag)
-                        <option name="objectid" value="{{$tag->id}}">{{$tag->tag_name}}</option>
-                    @endforeach
-                  </select>
-                </div>
-                  Algemeen probleem <input type="text" id="title" name="title" class="form-control"><br>
-                <button onclick="submitdata()" type="button">Submit ticket</button>
+            </div>
+            <div class="col-md-6">
+              {!! Form::label('name', "Tag 2")!!}
+              <br> 
+              <select id="tag2" name="tag2">
+                @foreach($tags as $tag)
+                  <option name="objectid" value="{{$tag->id}}">{{$tag->tag_name}}</option>
+                @endforeach
+              </select>
+            </div>
+              Algemeen probleem <input type="text" id="title" name="title" class="form-control"><br>
+              <button onclick="submitdata()" type="button">Submit ticket</button>
                 {!! Form::close()!!}
               </tbody>
             </table>
           </div>
         </div>
-        </tbody>
-        </div>
-        </div>
-        </div>
+      </tbody>
+    </div>
+  </div>
+</div>
 
 
 
