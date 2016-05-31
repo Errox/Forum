@@ -18,7 +18,7 @@
                              {!! Form::label('tags', 'Tags:') !!}
                             <div class="topic_tags" style="overflow-y:scroll;height:100px;">
                                 @foreach($tags as $tag)
-                                    <input type="checkbox" name="tags" id="<?=$tag->id?>" value="<?= $tag->id?>" onclick="validateForm(this)"> <?=$tag->tag_name?> <br>
+                                    <input type="checkbox" name="tags[]" id="<?=$tag->id?>" value="<?= $tag->id?>" onclick="validateForm(this)"> <?=$tag->tag_name?> <br>
                                 @endforeach
                             </div>
                               <br />
@@ -42,7 +42,7 @@
                              {!! Form::label('tags', 'Tags:') !!}
                             <div class="topic_tags" style="overflow-y:scroll;height:100px;">
                                 @foreach($tags as $tag)
-                                    <input type="checkbox" name="tags" id="<?=$tag->id?>" value="<?= $tag->id?>" onclick="validateForm(this)"> <?=$tag->tag_name?> <br>
+                                    <input type="checkbox" name="tags[]" id="<?=$tag->id?>" value="<?= $tag->id?>" onclick="validateForm(this)"> <?=$tag->tag_name?> <br>
                                 @endforeach
                             </div>
                               <br />
