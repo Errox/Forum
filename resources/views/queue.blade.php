@@ -88,8 +88,8 @@
 
 
 <script>
-  var refInterval = window.setInterval('update()', 1500);
-  var actiefInterval = window.setInterval('actief()', 1500);
+  var refInterval = window.setInterval('update()', 500);
+  var actiefInterval = window.setInterval('actief()', 500);
   var update = function() {
     $.ajax({
       type : 'GET',
@@ -110,7 +110,7 @@
     var result = data[0];
     var ticket = document.getElementById("ticket");
     
-    ticket.innerHTML = '<button id="opener2">Creeeer ticket </button>';
+    ticket.innerHTML = '<button id="opener2">Nieuw probleem</button>';
     $( "#opener2" ).click(handleOpenerClick);
     if (result.active === 1){
           ticket.innerHTML = '<button id="cancel" onclick="cancelticket(<?=$user->id?>)">Cancel</button>';
