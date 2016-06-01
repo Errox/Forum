@@ -21,9 +21,11 @@
      <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
      <script src="http://fullcalendar.io/js/fullcalendar-2.7.1/lang/nl.js"></script>
      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
+     <script type="text/javascript" src="http://jonthornton.github.io/Datepair.js/dist/jquery.datepair.js"></script>
      <script type="text/javascript" src="http://jonthornton.github.io/jquery-timepicker/jquery.timepicker.js"></script>
+     <script type="text/javascript" src="http://jonthornton.github.io/Datepair.js/dist/datepair.js"></script>
      <link rel="stylesheet" href="http://jonthornton.github.io/jquery-timepicker/jquery.timepicker.css"/>
- 
+    
      <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

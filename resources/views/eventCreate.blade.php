@@ -15,14 +15,16 @@
                             {!! Form::text('description', null, ['class' => 'form-control']) !!}
                               <br />
                             {!! Form::label('room', 'Lokaal:') !!}
-                            <select name="room">
+                            <select name="room" required>
                               @foreach($rooms as $room)
                                 <option value="{{$room->id}}">{{$room->name}}</option>
                               @endforeach
                             </select>
                               <br />
                             <p>Datum: <input type="text" name="time_0" id="datepicker"></p>
-                            <p>Van: <input id="basicExample" name="time_1"> Tot: <input id="basicExample1"  name="time_2"></p>
+                            <p id="timeOnlyExample">Van: 
+                              <input class="time start  ui-timepicker-input" id="basicExample" name="time_1" required> Tot: <input class="time end  ui-timepicker-input" id="basicExample1"  name="time_2" required>
+                            </p>
                             {!! Form::submit('Plan afspraak', ['class' => 'btn btn-primary form-control']) !!}
                           </div>
                       {!! Form::close() !!}
@@ -37,15 +39,17 @@
   $(function() {
     $( "#datepicker" ).datepicker({minDate: 0});
   });
-  $('#basicExample').timepicker({ 
+
+$('#timeOnlyExample .time').timepicker({
+    'showDuration': true,
     'timeFormat': 'H:i', 
     'step': 15,
     'minTime': '8:00',
-    'maxTime': '18:00', });
-  $('#basicExample1').timepicker({ 
-    'timeFormat': 'H:i', 
-    'step': 15,
-    'minTime': '8:00',
-    'maxTime': '18:00',});
+    'maxTime': '18:00'
+});
+
+var timeOnlyExampleEl = document.getElementById('timeOnlyExample');
+var timeOnlyDatepair = new Datepair(timeOnlyExampleEl);
+
 </script>
 @endsection
