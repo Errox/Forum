@@ -119,47 +119,46 @@
   }
 
   function InBehandeling(data){
-
-
-  var loops = data.length;
-  var open = document.getElementById("open");
-  var behandelingen = document.getElementById("behandeling");
-  behandelingen.innerHTML = "";
-  open.innerHTML = "";
-  //console.log(data[0].tag[0].tag_name);
-    for (var i = 0; i < loops; i++){
-      var total = -1
-      var tags = "";
-
-      total += data[i].tag.length;
-      for (var t = 0; t <= total; t++){
-        tags = tags+"<span class='label label-primary' style='background-color:#337ab7;'>" + data[i].tag[t].tag_name + "</span>  ";
-      }
+    var loops = data.length;
+    var open = document.getElementById("open");
+    var behandelingen = document.getElementById("behandeling");
     
-    if(data[i].status === 1){
+    behandelingen.innerHTML = "";
+    open.innerHTML = "";
+    //console.log(data[0].tag[0].tag_name);
+      for (var i = 0; i < loops; i++){
+        var total = -1
+        var tags = "";
 
-    var   behandeling = '<?php if ($user->role == 1){?><tr><td>' + data[i].created_at+'</td>'
-        +'<td>' + tags + '</td>'
-        +'<td>' + data[i].title + '</td>'
-        +'<td>' + data[i].user.name +  '</td>'
-        +'<?php if($user->role == 1){ ?> <td>' + '<button class="btn btn-primary" onclick="statusupdate('+data[i].id+')">Afsluiten</button>' +'</td><?php } ?></tr><?php } ?>'; 
-        
-      // console.log(behandeling.length);
-       
-       behandelingen.innerHTML += behandeling;
-     }
+        total += data[i].tag.length;
+        for (var t = 0; t <= total; t++){
+          tags = tags+"<span class='label label-primary' style='background-color:#337ab7;'>" + data[i].tag[t].tag_name + "</span>  ";
+        }
+      
+      if(data[i].status === 1){
 
-     if(data[i].status === 0){
-    var   openingen = '<tr><td>' + data[i].created_at+'</td>'
-        +'<td>' + tags + '</td>'
-        +'<td>' + data[i].title + '</td>'
-        +'<td>' + data[i].user.name +  '</td>'
-        +'<?php if($user->role == 1){ ?> <td>' + '<button class="btn btn-primary" onclick="statusupdate('+data[i].id+')">Behandelen</button>' +'</td><?php } ?></tr>'; 
+      var   behandeling = '<?php if ($user->role == 1){?><tr><td>' + data[i].created_at+'</td>'
+          +'<td>' + tags + '</td>'
+          +'<td>' + data[i].title + '</td>'
+          +'<td>' + data[i].user.name +  '</td>'
+          +'<?php if($user->role == 1){ ?> <td>' + '<button class="btn btn-primary" onclick="statusupdate('+data[i].id+')">Afsluiten</button>' +'</td><?php } ?></tr><?php } ?>'; 
+          
+        // console.log(behandeling.length);
+         
+         behandelingen.innerHTML += behandeling;
+       }
+
+       if(data[i].status === 0){
+      var   openingen = '<tr><td>' + data[i].created_at+'</td>'
+          +'<td>' + tags + '</td>'
+          +'<td>' + data[i].title + '</td>'
+          +'<td>' + data[i].user.name +  '</td>'
+          +'<?php if($user->role == 1){ ?> <td>' + '<button class="btn btn-primary" onclick="statusupdate('+data[i].id+')">Behandelen</button>' +'</td><?php } ?></tr>'; 
 
 
-        open.innerHTML += openingen;
-       }  
-     }
+          open.innerHTML += openingen;
+         }  
+       }
    }
 
 var handleOpenerClick = function(e) {
