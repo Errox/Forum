@@ -35,9 +35,17 @@
 
 <script>
   $(function() {
-    $( "#datepicker" ).datepicker();
+    $( "#datepicker" ).datepicker({minDate: 0});
   });
-  $('#basicExample').timepicker({ 'timeFormat': 'H:i', 'step': 15 });
-  $('#basicExample1').timepicker({ 'timeFormat': 'H:i', 'step': 15 });
+  $('#basicExample').timepicker({ 
+    'timeFormat': 'H:i', 
+    'step': 15,
+    'minTime': '8:00',
+    'maxTime': '18:00', });
+  $('#basicExample1').timepicker({ 
+    'timeFormat': 'H:i', 
+    'step': 15,
+    'minTime': '8:00',
+    'maxTime': '18:00',});
 </script>
 @endsection
