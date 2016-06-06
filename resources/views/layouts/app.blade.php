@@ -81,19 +81,19 @@
             @if(Auth::guest())
 
             @else
-                <div class="dropdown nav navbar-nav">
-                 <li class="dropdown">
-                    <a href="#" class="btn dropdown-toggle" type="button" data-toggle="dropdown">Menu
-                    <span class="caret"></span></a>
-                    <br>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{url('/topic') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-                        <li><a href="{{url('/profile')}}"><i class="fa fa-users" aria-hidden="true"></i> Leerlingen</a></li>
-                        <li><a href="{{url('/event')}}"><i class="fa fa-calendar" aria-hidden="true"></i> Agenda</a></li>     
-                    </ul>
-                 </li>
-                        <li><a href="{{url('/queue')}}"> Direct hulp nodig?</a></li>      
-                </div>
+
+            <div class="dropdown nav navbar-nav">
+             <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{url('/topic') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+                    <li><a href="{{url('/profile')}}"><i class="fa fa-users" aria-hidden="true"></i> Leerlingen</a></li>
+                    <li><a href="{{url('/event')}}"><i class="fa fa-calendar" aria-hidden="true"></i> Agenda</a></li>     
+                </ul>
+              </li>
+                 
+            <li><a href="{{url('/queue')}}"> Direct hulp nodig?</a></li>      
+            </div>
             @endif
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
