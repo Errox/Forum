@@ -12,7 +12,7 @@
                       {!! Form::open(array('url' => 'event')) !!}
                           <div class="form-group">
                             {!! Form::label('description', 'Beschrijving:') !!}
-                            {!! Form::text('description', null, ['class' => 'form-control']) !!}
+                            {!! Form::text('description', null, ['class' => 'form-control', 'required']) !!}
                               <br />
                             {!! Form::label('room', 'Lokaal:') !!}
                             <select name="room" required>
@@ -21,7 +21,7 @@
                               @endforeach
                             </select>
                               <br />
-                            <p>Datum: <input type="text" name="time_0" id="datepicker"></p>
+                            <p>Datum: <input required type="text" name="time_0" id="datepicker"></p>
                             <p id="timeOnlyExample">Van: 
                               <input class="time start  ui-timepicker-input" id="basicExample" name="time_1" required> Tot: <input class="time end  ui-timepicker-input" id="basicExample1"  name="time_2" required>
                             </p>
