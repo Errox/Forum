@@ -90,21 +90,23 @@
 <script>
   var refInterval = window.setInterval('update()', 500);
   var actiefInterval = window.setInterval('actief()', 500);
-  var update = function() {
+  var update = function(token) {
     $.ajax({
       type : 'GET',
       url : '/queue/ajax',
+      _token: token
       success : InBehandeling});
   };
-  update();
+  update("{{{csrf_token()}}}");
 
-  var actief = function() {
+  var actief = function(token) {
     $.ajax({
       type : 'GET',
       url : '/queue/actief',
+       _token: token
       success : checker});
   };
-  actief();
+  actief("{{{csrf_token()}}}");
 
   function checker(data){
     var result = data[0];
