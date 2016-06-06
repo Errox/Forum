@@ -6,6 +6,8 @@ use App\Http\Requests;
 
 Use App\User;
 
+Use App\User_privacy;
+
 Use Request;
 
 use Carbon\Carbon;
@@ -36,8 +38,7 @@ class ProfileController extends Controller
   }
 
   public function show($id){
-    $profile = User::where('id', '=', $id)->get();
-    
+    $profile = User::find($id);
     return view('profileShow')->with(compact('profile', 'id'));
   }
 
@@ -57,13 +58,21 @@ class ProfileController extends Controller
 
     public function update($id){
     	$input = Request::all();
-
     	$update = User::find($id);
+      $privacy = User_privacy::where('user_id', '=', $id)->get();
     	$update->email = $input['email'];
     	$update->name = $input['username'];
       $update->about =  nl2br($input['about']);
-    	$update->save();
-
+      if(empty($input['email_privacy'])){
+        $input['email_privacy'] = 0;
+      }
+      else{
+        $input['email_privacy'] = 1;
+      }
+        $privacy[0]->email_active = $input['email_privacy'];
+        $privacy[0]->save();
+      
+      $update->save();
     	return redirect('/profile/'.$id);
     }
 

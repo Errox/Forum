@@ -22,10 +22,6 @@
 				                        <td>Laatste geupdate:</td>
 				                        <td>{{$profiel->created_at->diffForHumans()}}</td>
 				                    </tr>
-				                    <tr>
-				                      <td>Date of Birth</td>
-				                      <td>01/24/1988</td>
-				                    </tr>
 				                      <td>Ov-nummer:</td>
 				                      <td>{{$profiel->ov_number}}</td>
 				                    </tr>
@@ -33,6 +29,9 @@
 				                      <td>{!!Form::label('email', 'E-Mail: ') !!}</td>
 				                      <td>{!!Form::email('email', $profiel->email) !!} <br></td>
 				                    </tr>    
+				                    <tr>
+				                    	<td>Toon email?</td>
+				                    	<td><input type="checkbox" name="email_privacy"></td>
 	                    		</tbody>
                   			</table>
                 		</div>
