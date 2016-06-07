@@ -156,7 +156,7 @@
             +'<td>' + tags + '</td>'
             +'<td>' + data[i].title + '</td>'
             +'<td>' + data[i].user.name +  '</td>';
-            if(data[i].user_id === id){
+            if(data[i].user_id === id || role === 1){
               openingen = openingen + '<td> <button class="btn btn-primary" onclick="statusupdate('+data[i].id+')">Behandelen</button></td>';
             }
 
