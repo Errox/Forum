@@ -11,15 +11,15 @@ use Request;
 class TagController extends Controller
 {
 
-	public function __construct(){
+  public function __construct(){
         $this->middleware('auth');
     }
 
     public function index(){
 
-		$result = Tag::all();
+	   	$result = Tag::all();
 
-        return view('tags')->with('result', $result);
+      return view('tags')->with('result', $result);
 
     }
 

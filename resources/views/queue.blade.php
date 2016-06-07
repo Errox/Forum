@@ -90,23 +90,23 @@
 <script>
   var refInterval = window.setInterval('update()', 500);
   var actiefInterval = window.setInterval('actief()', 500);
-  var update = function(token) {
+  var update = function() {
     $.ajax({
       type : 'GET',
       url : '/queue/ajax',
-      _token: token
+      headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') },
       success : InBehandeling});
   };
-  update("{{{csrf_token()}}}");
+  update();
 
-  var actief = function(token) {
+  var actief = function() {
     $.ajax({
       type : 'GET',
       url : '/queue/actief',
-       _token: token
+      headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') },
       success : checker});
   };
-  actief("{{{csrf_token()}}}");
+  actief();
 
   function checker(data){
     var result = data[0];
