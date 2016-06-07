@@ -38,7 +38,7 @@ class QueueController extends Controller
     	return view('queue')->with(compact('queues','tags','user', 'behandelen'));
     }
 	//Als dit niet meer werkt voor gods reden, verrander update naar show
-    public function update($id){
+    public function show($id){
         $queue = Queue::find($id);
         if ($queue->status != 1){
         $queue->status = 1;
