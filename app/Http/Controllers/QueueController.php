@@ -28,8 +28,14 @@ class QueueController extends Controller
             $userid = $user->id; 
             }        
     	$queues = Queue::where('active', '1')->get();
+        $behandelen = Queue::where('user_id', '=', $userid)
+                            ->where('active', '=', 1)->get();
+        if (!empty($behandelen[0])){
+        $behandelen = $behandelen[0];
+    }
+
     	$tags = Tag::all();
-    	return view('queue')->with(compact('queues','tags','user'));
+    	return view('queue')->with(compact('queues','tags','user', 'behandelen'));
     }
 	//Als dit niet meer werkt voor gods reden, verrander update naar show
     public function update($id){
