@@ -50,7 +50,7 @@
         {!! Form::open(array('name' => 'Ticket', 'method' => 'POST'))!!}
           <input type="hidden" id="token" name="_token" value="{!! csrf_token() !!}">
             <div class="col-md-6">
-              {!! Form::label('name', "tag 1")!!}
+              {!! Form::label('name', "Tag 1")!!}
                 <select id="tag1" name="tag1">
                   @foreach($tags as $tag)
                     @if($tag->active == 1)
