@@ -74,7 +74,12 @@ class QueueController extends Controller
 
     public function ajax(){
 		$queues = Queue::with('user', 'tag', 'teacher')->where('active', '1')->orderBy('created_at', 'asc')->get();
-    	return $queues;
+        if (Auth::check()){
+            $user = \Auth::user();
+            $userid = $user->id; 
+            $role = $user->role;
+            }    
+    	return compact('queues', 'userid','role');
 	}
 
 	public function store(Request $request){

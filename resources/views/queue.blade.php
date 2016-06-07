@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="container col-md-12" <?php if($user->role != 1){ ?>style="display:none;"<?php } ?>>
+<div class="container col-md-12">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">In Behandeling</div>
@@ -85,8 +85,6 @@
   </div>
 </div>
 
-
-
 <script>
   var refInterval = window.setInterval('update()', 500);
   var actiefInterval = window.setInterval('actief()', 500);
@@ -119,6 +117,10 @@
   }
 
   function InBehandeling(data){
+    var id = data.userid;
+    var role = data.role;
+    data = data.queues;
+    <?php $check = false; ?>
     var loops = data.length;
     var open = document.getElementById("open");
     var behandelingen = document.getElementById("behandeling");
@@ -134,31 +136,34 @@
         for (var t = 0; t <= total; t++){
           tags = tags+"<span class='label label-primary' style='background-color:#337ab7;'>" + data[i].tag[t].tag_name + "</span>  ";
         }
-      
+     if(role === 1 || id === data[i].user_id){ 
       if(data[i].status === 1){
-
-      var   behandeling = '<?php if ($user->role == 1){?><tr><td>' + data[i].created_at+'</td>'
+        
+      var   behandeling = '<td>'+ data[i].created_at+'</td>'
           +'<td>' + tags + '</td>'
           +'<td>' + data[i].title + '</td>'
           +'<td>' + data[i].user.name +  '</td>'
-          +'<?php if($user->role == 1){ ?> <td>' + '<button class="btn btn-primary" onclick="statusupdate('+data[i].id+')">Afsluiten</button>' +'</td><?php } ?></tr><?php } ?>'; 
-          
-        // console.log(behandeling.length);
+          +'<td>' + '<button class="btn btn-primary" onclick="statusupdate('+data[i].id+')">Afsluiten</button> </tr>'; 
+          behandelingen.innerHTML += behandeling;
+          }
+
          
-         behandelingen.innerHTML += behandeling;
+         
        }
 
-       if(data[i].status === 0){
-      var   openingen = '<tr><td>' + data[i].created_at+'</td>'
-          +'<td>' + tags + '</td>'
-          +'<td>' + data[i].title + '</td>'
-          +'<td>' + data[i].user.name +  '</td>'
-          +'<?php if($user->role == 1){ ?> <td>' + '<button class="btn btn-primary" onclick="statusupdate('+data[i].id+')">Behandelen</button>' +'</td><?php } ?></tr>'; 
+        if(data[i].status === 0){
+          var   openingen = '<tr><td>' + data[i].created_at+'</td>'
+            +'<td>' + tags + '</td>'
+            +'<td>' + data[i].title + '</td>'
+            +'<td>' + data[i].user.name +  '</td>';
+            if(data[i].user_id === id){
+              openingen = openingen + '<td> <button class="btn btn-primary" onclick="statusupdate('+data[i].id+')">Behandelen</button></td>';
+            }
 
-
-          open.innerHTML += openingen;
-         }  
-       }
+          openingen = openingen + '</tr>';
+            open.innerHTML += openingen;
+        }  
+      }
    }
 
 var handleOpenerClick = function(e) {
