@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'driver' => env('SESSION_DRIVER', 'file'),
+    'driver' => 'database',
 
     /*
     |--------------------------------------------------------------------------
@@ -149,5 +149,7 @@ return [
     */
 
     'secure' => false,
+
+    'payload' => 'laravel_payload',
 
 ];

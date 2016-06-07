@@ -32,7 +32,7 @@
                         <th>Tags</th>
                         <th>title</th>
                         <th>naam</th>
-                        <th>Actie</th>
+                        @if($user->role == 1)<th>Actie</th>@endif
                       </thead>
                       <tbody id="open">
                     </tbody></table>
@@ -94,7 +94,6 @@
     $.ajax({
       type : 'GET',
       url : '/queue/ajax',
-      headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') },
       success : InBehandeling});
   };
   update();
@@ -103,7 +102,6 @@
     $.ajax({
       type : 'GET',
       url : '/queue/actief',
-      headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') },
       success : checker});
   };
   actief();
@@ -121,7 +119,6 @@
   }
 
   function InBehandeling(data){
-    <?php $check = false; ?>
     var loops = data.length;
     var open = document.getElementById("open");
     var behandelingen = document.getElementById("behandeling");
@@ -156,15 +153,9 @@
           +'<td>' + tags + '</td>'
           +'<td>' + data[i].title + '</td>'
           +'<td>' + data[i].user.name +  '</td>'
-          <?php
-           foreach ($queues as $found){
-            if($found->user_id == $user->id){ 
-            if ($check != true){
-            $check = true;   
-          ?>
-          +'<td> <button class="btn btn-primary" onclick="statusupdate('+data[i].id+')">Behandelen</button></td>'
-        <?php } }}?>
-          +'</tr>';
+          +'<?php if($user->role == 1){ ?> <td>' + '<button class="btn btn-primary" onclick="statusupdate('+data[i].id+')">Behandelen</button>' +'</td><?php } ?></tr>'; 
+
+
           open.innerHTML += openingen;
          }  
        }
