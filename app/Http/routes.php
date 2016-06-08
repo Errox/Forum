@@ -11,8 +11,6 @@
 |
 */
 
-	//Topic via Home
-    //Directing to homepage
 
     //Topic route
 Route::resource('/topic', 'TopicController',
@@ -37,31 +35,20 @@ Route::post('/search', 'SearchController@index',
 
 //alleen bij kunnen als je ingelogt bent
 Route::group(['middleware' => 'web'], function () {
+    //De route wordt gecheckd of de gebruiker is ingelogd
     Route::auth();
 
-    route::get('/queue/actief', 'QueueController@actief');
+    //Hier wordt de route actief en ajax naar toe gestuurd. Actief en ajax returnd een json format en reageerd als een api.
+    Route::get('/queue/actief', 'QueueController@actief');
     Route::get('/queue/ajax', 'QueueController@ajax');
 
-    Route::resource('/queue', 'QueueController');
-
-
-
-	Route::resource('/topic', 'TopicController');
+    //Topic close post
     Route::post('/topic/close', 'TopicController@close');
+    
+    //Search Post
     Route::post('/search', 'SearchController@index',
         ['only' => ['index']]);
-    
-        //alles waar je alleen bij kan met speciale rechten 
-        Route::group(['middleware' => 'role'], function(){
-            Route::resource('/beheer', 'RoleController');
-                //Tag route
-            Route::resource('/tag', 'TagController');
 
-            Route::resource('/csv', 'CsvController');
-
-
-            Route::resource('/event', 'EventController');
-        });
 
     //View profile
     Route::resource('/profile', 'ProfileController');
@@ -72,9 +59,6 @@ Route::group(['middleware' => 'web'], function () {
     //Topic route.
     Route::resource('/topic', 'TopicController');
     
-    //Search route
-    Route::post('/search', 'SearchController@index',
-        ['only' => ['index']]);
 
     //Comment route
     Route::resource('/comment', 'CommentController',
@@ -86,4 +70,26 @@ Route::group(['middleware' => 'web'], function () {
     //Event route
     Route::resource('/event', 'EventController',
         ['only' => ['index']]);
+    
+    //Queue route    
+    Route::resource('/queue', 'QueueController');
+    
+    //Topic route
+    Route::resource('/topic', 'TopicController');
+
+        //alles waar je alleen bij kan met speciale rechten 
+        Route::group(['middleware' => 'role'], function(){
+            
+            //Beheer Route
+            Route::resource('/beheer', 'RoleController');
+            
+            //Tag route
+            Route::resource('/tag', 'TagController');
+
+            //Csv Route
+            Route::resource('/csv', 'CsvController');
+
+            //Event route
+            Route::resource('/event', 'EventController');
+        });
 });

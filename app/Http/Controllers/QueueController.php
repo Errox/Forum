@@ -23,13 +23,13 @@ class QueueController extends Controller
         $this->middleware('auth');
         Carbon::setLocale('nl');
     }
-// In de Index staat alles wat gebruikt word op de pagina en stuurt je door naar de pagina.
+    // In de Index staat alles wat gebruikt word op de pagina en stuurt je door naar de pagina.
     public function index(){
         // Hier word gekeken of er iemand ingelogd is en worden de gegevens van de gebruiker opgehaald
         if (Auth::check()){
             $user = \Auth::user();
             $userid = $user->id; 
-            } 
+        } 
         // $queues haalt alle openstaande queues op          
     	$queues = Queue::where('active', '1')->get();
         // $behandelen haalt alle queues op die door de ingelogde gebruiker gemaakt zijn & openstaand zijn.
@@ -40,19 +40,22 @@ class QueueController extends Controller
     }
         // Hier worden alle tags opgehaald die in de database staan.
     	$tags = Tag::all();
-    	return view('queue')->with(compact('queues','tags','user', 'behandelen'));
+    	
+        return view('queue')->with(compact('queues','tags','user', 'behandelen'));
     }
 
 	// Als dit niet meer werkt voor gods reden, verrander update naar show
     // Bij update word een queue gepakt die geüpdatet worden en zet ze in behandeling of sluit ze af.
     public function update($id){
         $queue = Queue::find($id);
+        
         if ($queue->status != 1){
             $queue->status = 1;
         }
         else{
             $queue->active = 0;    
         }
+        
         $queue->save();
     }
     // Hier word gekeken of de ingelogde user nog andere tickets had die open staan, en sluit de bestaande af.
@@ -72,7 +75,7 @@ class QueueController extends Controller
         if (Auth::check()){
             $user = \Auth::user();
             $userid = $user->id; 
-            }          
+        }          
         $result = Queue::where('user_id', '=', $userid)
                             ->where('active', '=', 1)
                             ->get();
@@ -86,7 +89,7 @@ class QueueController extends Controller
             $user = \Auth::user();
             $userid = $user->id; 
             $role = $user->role;
-            }    
+        }    
     	return compact('queues', 'userid','role');
 	}
     // Als er een nieuwe ticket word gemaakt dan word deze functie aangeroepen
@@ -110,8 +113,5 @@ class QueueController extends Controller
         }
 		// Nadat er een nieuwe queue is aangemaakt, dan worden automatisch de gelinkte tags gepakt via hun id & relaties in de models.
         $queue->tag()->sync($tags);
-
-      
-
 	}
 }

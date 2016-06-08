@@ -22,15 +22,14 @@
                         <td>Laatste geupdate:</td>
                         <td>{{$profile->created_at->diffForHumans()}}</td>
                       </tr>
-
                         <td>Ov-nummer:</td>
                         <td>{{$profile->ov_number}}</td>
                       </tr>
                       @if($profile->privacies->email_active == 1)
-                      <tr>
-                        <td>Email</td>
-                        <td><a href="mailto:{{$profile->email}}">{{$profile->email}}</a></td>
-                      </tr>
+                        <tr>
+                          <td>Email</td>
+                          <td><a href="mailto:{{$profile->email}}">{{$profile->email}}</a></td>
+                        </tr>
                       @endif
                     </tbody>
                   </table>
@@ -48,23 +47,15 @@
                 @endif
               @endif
             </div>
-
-            </div>
-            </div>
-            <div class="col-md-6  col-lg-6 panel-body" align="center">
-                  <div class="panel">
-                    <h3>About me</h3>
-                    <br>
-                  </div>
-                <p>{!!$profile->about!!}</p>
-            </div>
           </div>
-
+        </div>
+        <div class="col-md-6  col-lg-6 panel-body" align="center">
+          <div class="panel">
+            <h3>About me</h3>
+            <br>
           </div>
-          </div>
+          <p>{!!$profile->about!!}</p>
         </div>
       </div>
     </div>
-  </div>
-</div>
 @endsection

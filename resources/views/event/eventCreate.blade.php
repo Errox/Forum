@@ -40,16 +40,16 @@
     $( "#datepicker" ).datepicker({minDate: 0});
   });
 
-$('#timeOnlyExample .time').timepicker({
-    'showDuration': true,
-    'timeFormat': 'H:i', 
-    'step': 15,
-    'minTime': '8:00',
-    'maxTime': '18:00'
-});
+  $('#timeOnlyExample .time').timepicker({
+      'showDuration': true,
+      'timeFormat': 'H:i', 
+      'step': 15,
+      'minTime': '8:00',
+      'maxTime': '18:00'
+  });
 
-var timeOnlyExampleEl = document.getElementById('timeOnlyExample');
-var timeOnlyDatepair = new Datepair(timeOnlyExampleEl);
+  var timeOnlyExampleEl = document.getElementById('timeOnlyExample');
+  var timeOnlyDatepair = new Datepair(timeOnlyExampleEl);
 
 </script>
 @endsection

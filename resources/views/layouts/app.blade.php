@@ -11,7 +11,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
 
-         <!-- JS voor Calendar -->
+    <!-- Alle js bestanden die nodig zijn om de website succesvol te laten draaien wordt hier opgehaald. -->
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
      <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
@@ -25,7 +25,8 @@
      <script type="text/javascript" src="http://jonthornton.github.io/jquery-timepicker/jquery.timepicker.js"></script>
      <script type="text/javascript" src="http://jonthornton.github.io/Datepair.js/dist/datepair.js"></script>
      <link rel="stylesheet" href="http://jonthornton.github.io/jquery-timepicker/jquery.timepicker.css"/>
-    
+     
+     <!-- een google analystic script wordt hier uitgevoerd -->
      <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -72,17 +73,17 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <span style="font-size: 65%;margin-right: 5px;">Alpha</span>
                     Localghost
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
+            <!-- check of de gebruiker is ingelogd of een guest is -->
             @if(Auth::guest())
 
             @else
-
+            <!-- Drop down menu als de gebruiker is ingelogd.  -->
             <div class="dropdown nav navbar-nav">
              <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
@@ -98,12 +99,12 @@
             @endif
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
-                        <li style="margin-top: 10px;">
-                        {!! Form::open(array('url' => 'search', 'required')) !!}
-                            <div class="form-group" style="left: 100px;width:400px;">
-                                {!! Form::text('Search', null, ['class' => 'form-control', 'placeholder' => 'Zoeken', 'required'] ) !!}
-                            </div>
-                        {!! Form::close() !!}
+                    <li style="margin-top: 10px;">
+                    {!! Form::open(array('url' => 'search', 'required')) !!}
+                        <div class="form-group" style="left: 100px;width:400px;">
+                            {!! Form::text('Search', null, ['class' => 'form-control', 'placeholder' => 'Zoeken', 'required'] ) !!}
+                        </div>
+                    {!! Form::close() !!}
                     </li> 
                     <!-- Authentication Links -->
                     @if (Auth::guest())
@@ -112,21 +113,20 @@
                         <li><a href="{{ url('/register') }}">Register</a></li>
 
                     @else
-                    <?php         
-                         $user = \Auth::user();
-                        $info =  DB::table('users')
-                        ->where('id', '=', $user->id)
-                        ->get(); 
-                        foreach ($info as $result){
-                            $role = $result->role;
-                        } 
-                    ?>
-                @if($role != 0)
+                        <?php         
+                             $user = \Auth::user();
+                            $info =  DB::table('users')
+                            ->where('id', '=', $user->id)
+                            ->get(); 
+                            foreach ($info as $result){
+                                $role = $result->role;
+                            } 
+                        ?>
+                    @if($role != 0)
                         <li><a href="{{ url('/beheer') }}">Beheer</a></li>
-                        @endif
-                        
-
-                        <li><a href="{{ url('/topic/create')}}">Maak leervraag</a></li>
+                    @endif
+                    
+                    <li><a href="{{ url('/topic/create')}}">Maak leervraag</a></li>
 
                     <?php         
                         $user = \Auth::user();
@@ -156,12 +156,13 @@
             </div>
         </div>
     </nav>
+        <!-- dit is een succes message die globaal aangeroepen kunnen worden met bepaalde text -->
         @if (Session::has('flash_message_succes'))
             <div class="container alert alert-success"> 
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             {{ Session::get('flash_message')}}</div>
         @endif
-
+        <!-- dit is een alert message die globaal aangeroepen kunnen worden met bepaalde text -->
         @if (Session::has('flash_message_alert'))
             <div class="container alert alert-danger"> 
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

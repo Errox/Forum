@@ -24,6 +24,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    //een gebruiker heeft voorkeuren van zijn profiel aanpassen. Dit wordt gemakkelijker met deze functie 
     public function privacies(){
         return $this->hasOne('App\User_privacy');
     }
