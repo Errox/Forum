@@ -19,8 +19,10 @@ class SubscriptionController extends Controller
         $this->middleware('auth');
     }
 
+    //Opslaan van de aanmelding
     public function store(){
     	$input = Request::all();
+      //checken of id wel bestaad
       if (!isset($input['id'])){
         $topic_id = Topic::all()->last();
         $topic_id = $topic_id->id;
@@ -28,9 +30,11 @@ class SubscriptionController extends Controller
       else{            
     		$topic_id = $input['id']; 
       }
+
     	$user = \Auth::user();
       $userid = $user->id;
 
+      //aanmelding opslaan.
     	$subscription = new Subscription; 
     	$subscription->topic_id = $topic_id;
       $subscription->user_id = $userid;	
@@ -43,11 +47,12 @@ class SubscriptionController extends Controller
     		
     }
 
+    //aanmelding verwijderen.
     public function destroy($id){
       $user = \Auth::user();
       $userid = $user->id;
 
-
+      //destory aanmelding
      	Subscription::where('user_id', $userid)
      	  ->where('topic_id', $id)
      	  ->delete();

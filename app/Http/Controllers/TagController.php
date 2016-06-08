@@ -15,6 +15,7 @@ class TagController extends Controller
         $this->middleware('auth');
     }
 
+    //Index voor all tags
     public function index(){
 
 	   	$result = Tag::all();
@@ -23,9 +24,11 @@ class TagController extends Controller
 
     }
 
+    //opslaan van alle tags
     public function store(){
   	  $input = Request::all();
 
+      //nieuwe tag wordt aangevraagd en velden worden gevuld.
       $tag = new Tag;
 
       $tag->tag_name = $input['title'];
@@ -35,9 +38,11 @@ class TagController extends Controller
      	return redirect('tag');
     }
 
+    //het verwijderen/Archiveren van een tag
     public function destroy($id){
       $input = Request::all();
 
+      //als de tag active is wordt het inactief gemaakt en als het inactief is wordt het actief gemaakt.
       $result = Tag::find($id);
         if($result->active == "1"){
           $update = Tag::find($id);
