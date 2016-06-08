@@ -22,6 +22,7 @@
                             <button class="btn btn-primary" type="submit" >Afmelden</button>
                             {{Form::close()}}
                           @endif
+
                         @if($topics->user_id == $user->id || $user->role == 1)
                           {!!Form::open(array('action' => array('TopicController@close'), 'method' => 'POST','style' => 'margin-bottom : 5px;')) !!}
                           <input type="hidden" value="<?=$topics->user_id?>" name="user_id" />
