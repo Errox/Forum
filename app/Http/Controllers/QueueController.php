@@ -42,6 +42,7 @@ class QueueController extends Controller
     	$tags = Tag::all();
     	return view('queue')->with(compact('queues','tags','user', 'behandelen'));
     }
+
 	// Als dit niet meer werkt voor gods reden, verrander update naar show
     // Bij update word een queue gepakt die geüpdatet worden en zet ze in behandeling of sluit ze af.
     public function update($id){

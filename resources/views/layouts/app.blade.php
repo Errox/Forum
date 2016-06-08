@@ -72,6 +72,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
+                    <span style="font-size: 65%;margin-right: 5px;">Alpha</span>
                     Localghost
                 </a>
             </div>

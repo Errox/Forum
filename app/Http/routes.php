@@ -39,8 +39,8 @@ Route::post('/search', 'SearchController@index',
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
-    route::get('/queue/actief', 'Queuecontroller@actief');
-    Route::get('/queue/ajax', 'Queuecontroller@ajax');
+    route::get('/queue/actief', 'QueueController@actief');
+    Route::get('/queue/ajax', 'QueueController@ajax');
 
     Route::resource('/queue', 'QueueController');
 
