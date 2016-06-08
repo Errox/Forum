@@ -47,14 +47,14 @@
 	            </div>
               </div>
             </div>
-              <div class="col-md-6  col-lg-6 panel-body" align="center">
-                  <div class="panel">
-                    <h3>{!!Form::label('about', 'About me')!!}</h3>
-                    <br>
-                  </div>
-                <p>{!!Form::textarea('about', $profiel->about)!!}</p>
-                {!! Form::close() !!}
-            </div>
+              	<div class="col-md-6  col-lg-6 panel-body" align="center">
+                  	<div class="panel">
+                    	<h3>{!!Form::label('about', 'About me')!!}</h3>
+                    	<br>
+                  	</div>
+                	<p>{!!Form::textarea('about', $profiel->about)!!}</p>
+                	{!! Form::close() !!}
+            	</div>
           @endforeach
         </div>
     </div>

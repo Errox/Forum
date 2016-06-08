@@ -55,6 +55,7 @@ class NotificationController extends Controller
     public function subnotify($id, $user_id, $target){
    		$topic = Topic::find($id);
    		$subscriptions = Subscription::where('topic_id', '=', $id)->get();
+	    
 	    foreach ($subscriptions as $loops){
 		    $notifications = new Notification;
 		    $notifications->topic_id = $id;
@@ -73,5 +74,5 @@ class NotificationController extends Controller
 			$notifications->save();
 		}
 
-	    }
+	}
 }

@@ -19,20 +19,20 @@ class TagController extends Controller
 
 	   	$result = Tag::all();
 
-      return view('tags')->with('result', $result);
+      return view('beheer/tags')->with('result', $result);
 
     }
 
     public function store(){
-    	$input = Request::all();
+  	  $input = Request::all();
 
-        $tag = new Tag;
+      $tag = new Tag;
 
-        $tag->tag_name = $input['title'];
-        
-       	$tag->save();
+      $tag->tag_name = $input['title'];
+      
+     	$tag->save();
 
-       	return redirect('tag');
+     	return redirect('tag');
     }
 
     public function destroy($id){

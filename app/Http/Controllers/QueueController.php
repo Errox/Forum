@@ -26,26 +26,29 @@ class QueueController extends Controller
         if (Auth::check()){
             $user = \Auth::user();
             $userid = $user->id; 
-            }        
-    	$queues = Queue::where('active', '1')->get();
+        }        
+    	
+        $queues = Queue::where('active', '1')->get();
         $behandelen = Queue::where('user_id', '=', $userid)
                             ->where('active', '=', 1)->get();
         if (!empty($behandelen[0])){
-        $behandelen = $behandelen[0];
-    }
+            $behandelen = $behandelen[0];
+        }
 
     	$tags = Tag::all();
-    	return view('queue')->with(compact('queues','tags','user', 'behandelen'));
+    	
+        return view('queue')->with(compact('queues','tags','user', 'behandelen'));
     }
 	//Als dit niet meer werkt voor gods reden, verrander update naar show
     public function show($id){
         $queue = Queue::find($id);
+        
         if ($queue->status != 1){
-        $queue->status = 1;
-    }
-        else{
-        $queue->active = 0;    
+            $queue->status = 1;
+        }else{
+            $queue->active = 0;    
         }
+        
         $queue->save();
     }
 
@@ -55,9 +58,9 @@ class QueueController extends Controller
                         ->get();             
         if ($result){
             foreach($result as $found){
-            $found->active = 0;
-            $found->save();
-        }
+                $found->active = 0;
+                $found->save();
+            }
         }
     }
 
@@ -65,7 +68,7 @@ class QueueController extends Controller
         if (Auth::check()){
             $user = \Auth::user();
             $userid = $user->id; 
-            }          
+        }          
         $result = Queue::where('user_id', '=', $userid)
                             ->where('active', '=', 1)
                             ->get();
@@ -78,7 +81,7 @@ class QueueController extends Controller
             $user = \Auth::user();
             $userid = $user->id; 
             $role = $user->role;
-            }    
+        }    
     	return compact('queues', 'userid','role');
 	}
 
@@ -101,8 +104,5 @@ class QueueController extends Controller
         }
 		
         $queue->tag()->sync($tags);
-
-      
-
 	}
 }

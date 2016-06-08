@@ -34,6 +34,7 @@ class EventController extends Controller
     public function index()
     {
         // Session::flash('flash_message_succes', 'Dit is een flash message');
+        // Checken of gebruiker wel is ingelogd
         if(Auth::check()){
             $user = \Auth::user();
             $userid = $user->id;
@@ -57,7 +58,7 @@ class EventController extends Controller
             ->setOptions([ //set fullcalendar options
                 'weekends' => false
         ]);
-        return view('event')->with(compact('calendar','user'));
+        return view('event/event')->with(compact('calendar','user'));
     }
 
 
@@ -67,10 +68,10 @@ class EventController extends Controller
         if (Auth::check()){
             $rooms = Room::all();
             Session::flash('flash_message_alert', 'Let op! Een afspraak wordt niet laten zien in het weekend.');
-            return view('eventCreate')->with('rooms', $rooms);
+            return view('event/eventCreate')->with('rooms', $rooms);
         }
         else{
-            return redirect('/topic');
+            return redirect('/event');
         }
     }
 

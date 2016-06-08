@@ -86,15 +86,17 @@
 </div>
 
 <script>
-  var refInterval = window.setInterval('update()', 500);
-  var actiefInterval = window.setInterval('actief()', 500);
+ // var refInterval = window.setInterval('update()', 500);
+ // var actiefInterval = window.setInterval('actief()', 500);
+
+
   var update = function() {
     $.ajax({
       type : 'GET',
       url : '/queue/ajax',
       success : InBehandeling});
   };
-  update();
+//  update();
 
   var actief = function() {
     $.ajax({
@@ -102,6 +104,8 @@
       url : '/queue/actief',
       success : checker});
   };
+  
+  update();
   actief();
 
   function checker(data){
@@ -113,7 +117,12 @@
     if (result.active === 1){
           ticket.innerHTML = '<button id="cancel" onclick="cancelticket(<?=$user->id?>)">Cancel</button>';
     }
-     
+  
+
+    setTimeout(function(){
+        actief();
+    },1500)
+
   }
 
   function InBehandeling(data){
@@ -164,6 +173,10 @@
             open.innerHTML += openingen;
         }  
       }
+   
+   setTimeout(function(){
+        update();
+   },1500);
    }
 
 var handleOpenerClick = function(e) {

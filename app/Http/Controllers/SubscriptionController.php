@@ -19,37 +19,33 @@ class SubscriptionController extends Controller
         $this->middleware('auth');
     }
 
-    public function store()
-    {
+    public function store(){
     	$input = Request::all();
-        if (!isset($input['id'])){
+      if (!isset($input['id'])){
         $topic_id = Topic::all()->last();
         $topic_id = $topic_id->id;
-        }
-        else{            
-		$topic_id = $input['id']; 
-    }
-		$user = \Auth::user();
-    	$userid = $user->id;
+      }
+      else{            
+    		$topic_id = $input['id']; 
+      }
+    	$user = \Auth::user();
+      $userid = $user->id;
 
-    
-		$subscription = new Subscription; 
-		$subscription->topic_id = $topic_id;
+    	$subscription = new Subscription; 
+    	$subscription->topic_id = $topic_id;
+      $subscription->user_id = $userid;	
+    	$subscription->save();
 
-		$subscription->user_id = $userid;	
-		$subscription->save();
-
-		/*/ DB::table('subscription')->insert([
+		  /*/ DB::table('subscription')->insert([
         ['user_id' => $userid, 'topic_id' => $topic_id]]);/*/
     	
       return redirect('/topic/'.$topic_id);
     		
     }
 
-     public function destroy($id)
-     {
-        $user = \Auth::user();
-        $userid = $user->id;
+    public function destroy($id){
+      $user = \Auth::user();
+      $userid = $user->id;
 
 
      	Subscription::where('user_id', $userid)
@@ -60,6 +56,6 @@ class SubscriptionController extends Controller
     //     ->where('topic_id', '=', $id)
     //  		->where('user_id', '=', $userid)
     //  		->delete();
-      	return redirect('/topic/'.$id);
-     }
+      return redirect('/topic/'.$id);
+    }
 }
