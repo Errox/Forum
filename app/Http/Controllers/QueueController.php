@@ -24,24 +24,24 @@ class QueueController extends Controller
         Carbon::setLocale('nl');
     }
     // In de Index staat alles wat gebruikt word op de pagina en stuurt je door naar de pagina.
-    public function index(){
+public function index(){
         // Hier word gekeken of er iemand ingelogd is en worden de gegevens van de gebruiker opgehaald
         if (Auth::check()){
             $user = \Auth::user();
             $userid = $user->id; 
-        } 
-        // $queues haalt alle openstaande queues op          
-    	$queues = Queue::where('active', '1')->get();
+        }
+$teachers = user::where('role', '=', '1')->get();
+// $queues haalt alle openstaande queues op          
+        $queues = Queue::where('active', '1')->get();
         // $behandelen haalt alle queues op die door de ingelogde gebruiker gemaakt zijn & openstaand zijn.
         $behandelen = Queue::where('user_id', '=', $userid)
-                            ->where('active', '=', 1)->get();
+                            >where('active', '=', 1)>get();
         if (!empty($behandelen[0])){
-        $behandelen = $behandelen[0];
-    }
+            $behandelen = $behandelen[0];
+        }
         // Hier worden alle tags opgehaald die in de database staan.
-    	$tags = Tag::all();
-    	
-        return view('queue')->with(compact('queues','tags','user', 'behandelen'));
+        $tags = Tag::all();
+return view('queue')->with(compact('queues','tags','teachers','user', 'behandelen'));
     }
 
 	// Als dit niet meer werkt voor gods reden, verrander update naar show
@@ -51,12 +51,18 @@ class QueueController extends Controller
         
         if ($queue->status != 1){
             $queue->status = 1;
+            $queue->save();
+
+
         }
         else{
-            $queue->active = 0;    
+            $queue->active = 0;
+            $queue->save(); 
+            $check = 'true';
+            return $check;               
         }
         
-        $queue->save();
+        
     }
     // Hier word gekeken of de ingelogde user nog andere tickets had die open staan, en sluit de bestaande af.
     public function edit($id){
@@ -81,6 +87,11 @@ class QueueController extends Controller
                             ->get();
        return $result;                     
     }
+
+    public function postcomment(Request $request){
+        dd($request->comment);
+    }
+
     // Hier worden alle queues gepakt die bestaan en op actief staan en stuurt ze door.
     // Deze functie word elke 1.5 seconden aangeroepen door ajax om alles te refreshen. 
     public function ajax(){

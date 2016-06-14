@@ -50,6 +50,7 @@ class ProfileController extends Controller
   public function edit($id){
     // Hier word eerst gekeken of de ingelogde gebruiker ook de gebruiker is die aangepast gaat worden.
     $profile = User::where('id', '=', $id)->get();
+    $privacy = User_privacy::where('user_id', '=', $id)->get();
     if (\Auth::check()){
       $user = \Auth::user();
       if ($id != $user->id){
@@ -59,7 +60,7 @@ class ProfileController extends Controller
     else{
       return redirect('/profile/'.$id);
     }
-    return view('profile/profileEdit')->with('profile', $profile);
+    return view('profile/profileEdit')->with(compact('profile', 'privacy'));
   }
   // Hier word alles van het profiel geüpdatet met de nieuwe informatie.
     public function update($id){
