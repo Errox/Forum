@@ -12,6 +12,8 @@ Use Request;
 
 use Carbon\Carbon;
 
+use App\Queue_teacher;
+
 
 class ProfileController extends Controller
 {
@@ -50,7 +52,6 @@ class ProfileController extends Controller
   public function edit($id){
     // Hier word eerst gekeken of de ingelogde gebruiker ook de gebruiker is die aangepast gaat worden.
     $profile = User::where('id', '=', $id)->get();
-    $privacy = User_privacy::where('user_id', '=', $id)->get();
     if (\Auth::check()){
       $user = \Auth::user();
       if ($id != $user->id){
@@ -60,7 +61,7 @@ class ProfileController extends Controller
     else{
       return redirect('/profile/'.$id);
     }
-    return view('profile/profileEdit')->with(compact('profile', 'privacy'));
+    return view('profile/profileEdit')->with('profile', $profile);
   }
 
   // Hier word alles van het profiel geüpdatet met de nieuwe informatie.
@@ -89,18 +90,6 @@ class ProfileController extends Controller
     return redirect('/profile/'.$id);
   }
 
-  public function result(){
-    // Hier worden alle users opgehaald
-    $profile = User::all();
-    if (\Auth::check()){
-      $user = \Auth::user();
-    }
-    
-
-        return view('profile/gebruikers')->with(compact('profile'));
-     
-    // Hier worden users heen gestuurd die geen leeraar zijn met beperkte informatie.
-    return view('profile')->with(compact('profile', 'user'));
-  }
+  
 
 }
