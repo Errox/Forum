@@ -43,6 +43,37 @@
     </div>
 </div>
 
+<div id="dialog_comment" title="Comment">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <tbody>
+        {!! Form::open(array('name' => 'Comments', 'method' => 'STORE'))!!}
+          <input type="hidden" id="token" name="_token" value="{!! csrf_token() !!}">
+                <div class="col-md-12">
+                  {!! Form::label('Comment')!!}
+                  <br> 
+
+                </div>
+                {{Form::textarea('comment', null,['class' => 'form-control', 'id' => 'comment'])}}
+              <span id="commentbutton"></span>
+              
+{!! Form::label('name', "teacher")!!}
+                <select id="teacher" name="teacher">
+                  @foreach($teachers as $teacher)
+                      <option name="objectid" value="{{$teacher->id}}">{{$teacher->name}}</option>
+                  @endforeach
+                </select>
+            </div>
+                {!! Form::close()!!}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </tbody>
+    </div>
+  </div>
+</div>
+
 <div id="dialog" title="Support ticket">
   <div class="panel panel-default">
     <div class="panel-body">
@@ -152,7 +183,7 @@
           +'<td>' + tags + '</td>'
           +'<td>' + data[i].title + '</td>'
           +'<td>' + data[i].user.name +  '</td>'
-          +'<td>' + '<button class="btn btn-primary" onclick="statusupdate('+data[i].id+')">Afsluiten</button> </tr>'; 
+          +'<td>' + '<button class="btn btn-primary" onclick="commentbox('+data[i].id+')">Afsluiten</button> </tr>'; 
           behandelingen.innerHTML += behandeling;
           }
 
@@ -199,8 +230,49 @@ $(function() {
 
     //$( "#opener" ).click(handleOpenerClick);
 });
+var handleOpenerClick2 = function(e) {
+  $( "#dialog_comment" ).dialog( "open" );
 
-function submitdata()
+}
+
+$(function() {
+    $( "#dialog_comment" ).dialog({
+      autoOpen: false,
+      show: {
+        effect: "blind",
+        duration: 500
+      },
+      hide: {
+        effect: "explode",
+        duration: 500
+      }
+    });
+
+   return true;
+});
+
+function submitcomment(data){
+var disabled=document.getElementById("sendButton")
+var comment=document.getElementById( "comment" );
+var token=document.getElementById( "token" );
+$.ajax({
+        type: 'POST',
+        url: '/queue/postcomment',
+        data: {
+        comment:comment.value,
+        id:data,
+        _token:token.value
+        },
+        success: function (response) {
+          $( "#dialog_comment" ).dialog( "close" );
+        disabled.disabled = false;
+        }
+    });
+return false;
+
+}
+
+function submitdata(data)
 {
 var disabled=document.getElementById("sendButton")
 var tag1=document.getElementById( "tag1" );
@@ -242,9 +314,19 @@ function cancelticket(id){
 });
 }
 
+function commentbox(data){
+  $( "#dialog_comment" ).dialog( "open" );
+  var response = document.getElementById( "comment" );
+  var button = document.getElementById("commentbutton");
+  button.innerHTML = ' <button onclick="checkForm(); submitcomment('+data+')" type="button" id="sendButton">Submit comment</button>';
+  console.log(response);
+}
+
 function statusupdate(data)
 {
   var token=document.getElementById( "token" );
+
+
   $.ajax({
           type: 'patch',
           url: '/queue/'+data,
@@ -253,9 +335,9 @@ function statusupdate(data)
           _token:token.value
           },
           success: function (response) {
-         
           }
   });
+
   return false;
 }
 

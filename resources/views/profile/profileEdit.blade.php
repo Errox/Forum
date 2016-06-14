@@ -31,7 +31,7 @@
 				                    </tr>    
 				                    <tr>
 				                    	<td>Toon email?</td>
-				                    	<td><input type="checkbox" name="email_privacy"></td>
+				                    	<td><input type="checkbox" name="email_privacy" <?= ($privacy[0]->email_active == 1) ? 'checked' : ''; ?>></td>
 	                    		</tbody>
                   			</table>
                 		</div>

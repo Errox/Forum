@@ -41,6 +41,7 @@ Route::group(['middleware' => 'web'], function () {
     //Hier wordt de route actief en ajax naar toe gestuurd. Actief en ajax returnd een json format en reageerd als een api.
     Route::get('/queue/actief', 'QueueController@actief');
     Route::get('/queue/ajax', 'QueueController@ajax');
+    Route::post('/queue/postcomment', 'QueueController@postcomment');
 
     //Topic close post
     Route::post('/topic/close', 'TopicController@close');
