@@ -79,6 +79,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::resource('/queue', 'QueueController');
     
 
+    Route::post('/queue/afhandeling', 'QueueController@afhandeling');
+
 
     //Topic route
     Route::resource('/topic', 'TopicController');

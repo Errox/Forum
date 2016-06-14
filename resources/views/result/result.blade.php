@@ -18,9 +18,7 @@
                         @foreach($users as $user)
                           <tr>
                             <td style="text-transform:capitalize;"><a href="/profile/<?=$user->id?>"><?=$user->name?></a></td>
-                            @foreach($results as $result) 
-                              <h2> poop </h2>
-                            @endforeach
+                            <td> {{$user->result_tickets_count}}</td>
                           </tr>
                         @endforeach
                         </tbody>

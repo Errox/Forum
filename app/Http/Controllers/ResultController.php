@@ -20,15 +20,8 @@ class ResultController extends Controller
     $users = User::all();
 
 
-
-
-    $results = DB::table('queue_teachers')
-             ->select('student_id', DB::raw('count(*) as total'))
-             ->groupBy('student_id')
-             ->lists('total','student_id');
-    dd($results);
-    
-    return view('result/result')->with(compact('users', 'result'));
+    dd($users->Queue_teachers);
+    return view('result/result')->with(compact('users'));
 
 
   }
