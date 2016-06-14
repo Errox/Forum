@@ -140,7 +140,6 @@
 
 
   function checker(data){
-    console.log(data);
     var result = data[0];
     var ticket = document.getElementById("ticket");
     
