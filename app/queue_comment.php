@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Queue_teacher extends Model
+class queue_comment extends Model
 {
     public function teacher(){
     	return $this->belongsTo('App\User');
     }
 
-    public function student(){
+    public function user(){
     	return $this->belongsTo('App\User');
     }
 }

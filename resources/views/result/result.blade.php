@@ -18,7 +18,15 @@
                         @foreach($users as $user)
                           <tr>
                             <td style="text-transform:capitalize;"><a href="/profile/<?=$user->id?>"><?=$user->name?></a></td>
-                            <td> {{$user->result_tickets_count}}</td>
+                            <?php 
+                                  $subs = $user->queueCommentCount->first() ?>
+                              <td class="text-center">
+                                @if($subs == null)
+                                  {{'0'}}
+                                @else
+                                  {{$subs['aggregate']}}
+                                @endif
+                            <td> 
                           </tr>
                         @endforeach
                         </tbody>
