@@ -14,6 +14,8 @@ use App\Queue;
 
 use App\Tag;
 
+use App\User;
+
 use Auth;
 
 class QueueController extends Controller
@@ -30,18 +32,22 @@ class QueueController extends Controller
             $user = \Auth::user();
             $userid = $user->id; 
         } 
+
+        $teachers = user::where('role', '=', '1')->get();
+
+
         // $queues haalt alle openstaande queues op          
     	$queues = Queue::where('active', '1')->get();
         // $behandelen haalt alle queues op die door de ingelogde gebruiker gemaakt zijn & openstaand zijn.
         $behandelen = Queue::where('user_id', '=', $userid)
                             ->where('active', '=', 1)->get();
         if (!empty($behandelen[0])){
-        $behandelen = $behandelen[0];
-    }
+            $behandelen = $behandelen[0];
+        }
         // Hier worden alle tags opgehaald die in de database staan.
     	$tags = Tag::all();
     	
-        return view('queue')->with(compact('queues','tags','user', 'behandelen'));
+        return view('queue')->with(compact('queues','tags','teachers','user', 'behandelen'));
     }
 
 	// Als dit niet meer werkt voor gods reden, verrander update naar show
@@ -81,6 +87,8 @@ class QueueController extends Controller
                             ->get();
        return $result;                     
     }
+
+
     // Hier worden alle queues gepakt die bestaan en op actief staan en stuurt ze door.
     // Deze functie word elke 1.5 seconden aangeroepen door ajax om alles te refreshen. 
     public function ajax(){

@@ -9,6 +9,8 @@
             <span><a href="{{ url('/csv')}}">CSV</a></span>
             <span>|</span>
             <span><a href="{{url('/profile')}}">Gebruikers</a></span>
+            <span>|</span>
+            <span><a href="{{url('/profile/results')}}">Overzicht Vragen</a></span>
           </ul>
         </div>
       </div>

@@ -61,30 +61,45 @@ class ProfileController extends Controller
     }
     return view('profile/profileEdit')->with('profile', $profile);
   }
+
   // Hier word alles van het profiel geüpdatet met de nieuwe informatie.
-    public function update($id){
-      // Hier word eerst alle data van de ingevoerde velden opgehaald
-    	$input = Request::all();
-    	$update = User::find($id);
-      // Hier word opgehaald welke keuzes de gebruiker heeft gemaakt met betrekking tot zijn privacy.
-      $privacy = User_privacy::where('user_id', '=', $id)->get();
-    	$update->email = $input['email'];
-    	$update->name = $input['username'];
-      $update->about =  nl2br($input['about']);
+  public function update($id){
+    // Hier word eerst alle data van de ingevoerde velden opgehaald
+    $input = Request::all();
+    $update = User::find($id);
+    // Hier word opgehaald welke keuzes de gebruiker heeft gemaakt met betrekking tot zijn privacy.
+    $privacy = User_privacy::where('user_id', '=', $id)->get();
+    $update->email = $input['email'];
+    $update->name = $input['username'];
+    $update->about =  nl2br($input['about']);
 
-      // Hier word de nieuwe settings voor zijn email geüpdatet, of het wel of niet getoont mag worden.
+    // Hier word de nieuwe settings voor zijn email geüpdatet, of het wel of niet getoont mag worden.
 
-      if(empty($input['email_privacy'])){
-        $input['email_privacy'] = 0;
-      }else{
-        $input['email_privacy'] = 1;
-      }
-
-      $privacy[0]->email_active = $input['email_privacy'];
-      $privacy[0]->save();
-      
-      $update->save();
-    	return redirect('/profile/'.$id);
+    if(empty($input['email_privacy'])){
+      $input['email_privacy'] = 0;
+    }else{
+      $input['email_privacy'] = 1;
     }
+
+    $privacy[0]->email_active = $input['email_privacy'];
+    $privacy[0]->save();
+    
+    $update->save();
+    return redirect('/profile/'.$id);
+  }
+
+  public function result(){
+    // Hier worden alle users opgehaald
+    $profile = User::all();
+    if (\Auth::check()){
+      $user = \Auth::user();
+    }
+    
+
+        return view('profile/gebruikers')->with(compact('profile'));
+     
+    // Hier worden users heen gestuurd die geen leeraar zijn met beperkte informatie.
+    return view('profile')->with(compact('profile', 'user'));
+  }
 
 }

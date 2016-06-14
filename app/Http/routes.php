@@ -53,6 +53,9 @@ Route::group(['middleware' => 'web'], function () {
     //View profile
     Route::resource('/profile', 'ProfileController');
 
+    //View results of every profile
+    Route::get('/profile/result', 'ProfileController@result');
+
     //Notification route
     Route::resource('/notificaties', 'NotificationController');
 
@@ -74,6 +77,9 @@ Route::group(['middleware' => 'web'], function () {
     //Queue route    
     Route::resource('/queue', 'QueueController');
     
+    Route::post('/queue/afhandeling', 'QueueController@afhandeling')
+
+
     //Topic route
     Route::resource('/topic', 'TopicController');
 
