@@ -96,7 +96,19 @@ public function index(){
     }
 
     public function postcomment(Request $request){
-        dd($request->comment);
+        if (Auth::check()){
+            $user = \Auth::user();
+            $userid = $user->id; 
+        }
+
+        $comment = New Queue_teacher;
+        $comment->student_id = $userid;
+        $comment->teacher_id = $request->$teacher;
+        $comment->queue_id = $request->id;
+        $comment->comment = $request->comment;
+
+        $comment->save();
+
     }
 
     // Hier worden alle queues gepakt die bestaan en op actief staan en stuurt ze door.

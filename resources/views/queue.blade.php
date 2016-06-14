@@ -56,7 +56,7 @@
                 </div>
                 {{Form::textarea('comment', null,['class' => 'form-control', 'id' => 'comment'])}}
               <span id="commentbutton"></span>
-              
+
 {!! Form::label('name', "teacher")!!}
                 <select id="teacher" name="teacher">
                   @foreach($teachers as $teacher)
@@ -255,11 +255,13 @@ function submitcomment(data){
 var disabled=document.getElementById("sendButton")
 var comment=document.getElementById( "comment" );
 var token=document.getElementById( "token" );
+var teacher = document.getElementById("teacher");
 $.ajax({
         type: 'POST',
         url: '/queue/postcomment',
         data: {
         comment:comment.value,
+        teacher:teacher.value,
         id:data,
         _token:token.value
         },
