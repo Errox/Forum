@@ -16,6 +16,8 @@ use App\Tag;
 
 use App\User;
 
+use App\Queue_teacher;
+
 use Auth;
 
 class QueueController extends Controller
@@ -41,7 +43,7 @@ public function index(){
 
         // $behandelen haalt alle queues op die door de ingelogde gebruiker gemaakt zijn & openstaand zijn.
         $behandelen = Queue::where('user_id', '=', $userid)
-                            >where('active', '=', 1)>get();
+                            ->where('active', '=', 1)->get();
         if (!empty($behandelen[0])){
             $behandelen = $behandelen[0];
         }
@@ -100,14 +102,14 @@ public function index(){
             $user = \Auth::user();
             $userid = $user->id; 
         }
-
         $comment = New Queue_teacher;
         $comment->student_id = $userid;
-        $comment->teacher_id = $request->$teacher;
+        $comment->teacher_id = $request->teacher;
         $comment->queue_id = $request->id;
         $comment->comment = $request->comment;
 
         $comment->save();
+
 
     }
 

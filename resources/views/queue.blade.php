@@ -55,14 +55,14 @@
 
                 </div>
                 {{Form::textarea('comment', null,['class' => 'form-control', 'id' => 'comment'])}}
-              <span id="commentbutton"></span>
-
-{!! Form::label('name', "teacher")!!}
+                {!! Form::label('name', "teacher")!!}
                 <select id="teacher" name="teacher">
                   @foreach($teachers as $teacher)
                       <option name="objectid" value="{{$teacher->id}}">{{$teacher->name}}</option>
                   @endforeach
                 </select>
+              <span id="commentbutton"></span>
+
             </div>
                 {!! Form::close()!!}
               </tbody>
@@ -266,6 +266,7 @@ $.ajax({
         _token:token.value
         },
         success: function (response) {
+          statusupdate(data);
           $( "#dialog_comment" ).dialog( "close" );
         disabled.disabled = false;
         }
