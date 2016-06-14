@@ -16,7 +16,7 @@ use App\Tag;
 
 use App\User;
 
-use App\Queue_teacher;
+use App\queue_comment;
 
 use Auth;
 
