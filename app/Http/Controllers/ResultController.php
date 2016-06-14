@@ -24,7 +24,6 @@ class ResultController extends Controller
 
     $results = DB::table('queue_teachers')
              ->select('student_id', DB::raw('count(*) as total'))
-             ->all()
              ->groupBy('student_id')
              ->lists('total','student_id');
     dd($results);
