@@ -118,7 +118,7 @@
 
 <script>
  // var refInterval = window.setInterval('update()', 500);
- // var actiefInterval = window.setInterval('actief()', 500);
+  var actiefInterval = window.setInterval('actief()', 500);
 
 
   var update = function() {
@@ -137,9 +137,10 @@
   };
   
   update();
-  actief();
+
 
   function checker(data){
+    console.log(data);
     var result = data[0];
     var ticket = document.getElementById("ticket");
     
@@ -150,9 +151,7 @@
     }
   
 
-    setTimeout(function(){
-        actief();
-    },1500)
+
 
   }
 
@@ -207,7 +206,7 @@
    
    setTimeout(function(){
         update();
-   },1500);
+   },500);
    }
 
 var handleOpenerClick = function(e) {
@@ -322,7 +321,6 @@ function commentbox(data){
   var response = document.getElementById( "comment" );
   var button = document.getElementById("commentbutton");
   button.innerHTML = ' <button onclick="checkForm(); submitcomment('+data+')" type="button" id="sendButton">Submit comment</button>';
-  console.log(response);
 }
 
 function statusupdate(data)
@@ -338,6 +336,7 @@ function statusupdate(data)
           _token:token.value
           },
           success: function (response) {
+
           }
   });
 
