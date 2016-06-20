@@ -16,7 +16,7 @@
 	                    		{!!Form::open(['route' => ['profile.update', $profiel->id],'method' => 'put'])!!}
 	                      			<tr>
 	                        			<td>{!!Form::label('username', 'Naam: ') !!}</td>
-	                        			<td>{!!Form::text('username', $profiel->name, ['required']) !!}</td>
+	                        			<td>{!!Form::text('username', str_limit($profiel->name,'20'), ['required']) !!}</td>
 	                      			</tr>
 	                      			<tr>
 				                        <td>Laatste geupdate:</td>

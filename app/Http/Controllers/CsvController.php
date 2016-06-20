@@ -10,6 +10,8 @@ use Request;
 
 use App\Http\Requests;
 
+use App\User_privacy;
+
 class CsvController extends Controller
 {
 	//Hier wordt de view van csv gereturnd 
@@ -39,11 +41,19 @@ class CsvController extends Controller
 
 		//Hier wordt er geloopt door de array om het in de database op te slaan.
 		for($i=0;$i <= count($lines)-1; $i++) {
-			User::create([
+			$user = User::create([
 	            'name' => $lines[$i]['0'],
-	            'email' => $lines[$i]['1'],
+	            'ov_number' => $lines[$i]['1'],
+	            'email' => $lines[$i]['1'].'@mydavinci.nl',
 	            'password' => bcrypt($lines[$i]['2']),
 	        ]);
+	        $priv = new User_privacy;
+			
+			$user->save();
+
+
+			$priv->user_id = $user->id;
+        	$priv->save();
 
       	}
       	

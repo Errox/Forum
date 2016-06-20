@@ -42,7 +42,7 @@
                       @foreach($topics->tag as $tag)
                       <span class="label label-primary" style="background-color:#8B0000;">{{$tag->tag_name}}</span>
                       @endforeach
-                      <p>Gemaakt door <a  style="text-transform:capitalize;" href="/profile/<?=$topics->user->id?>">{{$topics->user->name}}</a></p>
+                      <p>Gemaakt door <a  style="text-transform:capitalize;" href="/profile/<?=$topics->user->id?>">{{str_limit($topics->user->name, '20')}}</a></p>
                     @endforeach 
                   </ul>
               </div>
@@ -52,7 +52,7 @@
               @if ($result[1]->count())
                 @foreach($result[1] as $comments)
                   <div class="panel">
-                    <h3>{{$comments->user->name}} antwoorde: </h3>
+                    <h3>{{str_limit($comments->user->name,'20')}} antwoorde: </h3>
                     <h4>{!!$comments->comment_description!!} </h4>
                     <p>{{$comments->created_at->diffForHumans()}}</p>
                   </div>

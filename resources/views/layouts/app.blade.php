@@ -137,7 +137,7 @@
                     ?>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} 
+                                {{ str_limit(Auth::user()->name, '20') }} 
                                 @if($count == '0')
                                     <span class="label label-info" style="display:none;">{{$count}}</span> 
                                 @else
