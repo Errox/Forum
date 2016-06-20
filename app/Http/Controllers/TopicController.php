@@ -88,7 +88,7 @@ class TopicController extends Controller
         // Hier word alles verdeeld in de juiste velden en wat de gebruiker ingevuld heeft.
         $topic->user_id = $userid;
         $topic->topic_title = $input['topic_title'];
-        $topic->topic_description =  nl2br($input['topic_description']);
+        $topic->topic_description =  $input['topic_description'];
         
         $new_title = $input['topic_title'];
         $new_description = $input['topic_description'];
@@ -116,7 +116,7 @@ class TopicController extends Controller
         $user = \Auth::user();
         $userid = $user->id; 
         $topic = Topic::find($id);  
-        $topic->topic_description =  nl2br($request->input('description'));
+        $topic->topic_description =  $request->input('description');
         $topic->topic_title = $request->input('title');
         
         if(isset($input['new_tags'])){
@@ -138,7 +138,7 @@ class TopicController extends Controller
             $user = \Auth::user();
             $userid = $user->id; 
             $topic = Topic::find($id);  
-            $topic->topic_description =  nl2br($request->input('description'));
+            $topic->topic_description =  $request->input('description');
             $topic->topic_title = $request->input('title');
             $result = $topic;
 
@@ -177,7 +177,7 @@ class TopicController extends Controller
 
       // Er word nog voor de zekerheid gekeken of je een leeraar bent / de maker van de topic.    
       if ($userid == $result->user_id || $user->role == 1){  
-        return view('topicEdit')->with(compact('result', 'user', 'tags', 'input', 'input_name'));
+        return view('topic/topicEdit')->with(compact('result', 'user', 'tags', 'input', 'input_name'));
       }  
       return redirect('topic/'.$id);
     }
@@ -196,7 +196,7 @@ class TopicController extends Controller
               ->where('topic_id', '=', $id)
               ->get();         
       }
-      return view('topicShow')->with('result', $result);
+      return view('topic/topicShow')->with('result', $result);
     }
 
     // Deze functie word aangeroepen als een leervraag gesloten word.

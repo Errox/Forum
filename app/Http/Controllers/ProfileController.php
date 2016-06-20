@@ -38,14 +38,17 @@ class ProfileController extends Controller
   		}
   	}
     // Hier worden users heen gestuurd die geen leeraar zijn met beperkte informatie.
-    return view('profile')->with(compact('profile', 'user'));
+    return view('profile/profile')->with(compact('profile', 'user'));
 }
 
   // Deze functie pakt de informatie voor een specifiek profiel en stuurt je door naar de juiste blade.php
   public function show($id){
     $profile = User::find($id);
-    
-    return view('profile/profileShow')->with(compact('profile', 'id'));
+    $privacy = User_privacy::where('user_id', '=', $id)->get();
+    if (\Auth::check()){
+      $user = \Auth::user();
+    }
+     return view('profile/profileShow')->with(compact('profile', 'privacy', 'id'));
   }
 
   // Deze functie pakt de informatie om de gebruiker zijn eigen profiel aan te laten passen en stuurt je door naar de juiste blade.php
@@ -56,11 +59,12 @@ class ProfileController extends Controller
       $user = \Auth::user();
       $userid = $user->id;
       if ($id != $user->id){
-        return redirect('/profile/'.$id);
+       	return redirect('profile/profile/'.$id);
+
       }
     }
     else{
-      return redirect('/profile/'.$id);
+      return redirect('profile/profile/'.$id);
     }
     $privacy = User_privacy::where('user_id', '=', $userid)->get();
     return view('profile/profileEdit')->with(compact('profile', 'privacy'));
@@ -75,7 +79,7 @@ class ProfileController extends Controller
     $privacy = User_privacy::where('user_id', '=', $id)->get();
     $update->email = $input['email'];
     $update->name = $input['username'];
-    $update->about =  nl2br($input['about']);
+    $update->about =  $input['about'];
 
     // Hier word de nieuwe settings voor zijn email geüpdatet, of het wel of niet getoont mag worden.
 
@@ -89,6 +93,6 @@ class ProfileController extends Controller
     $privacy[0]->save();
     
     $update->save();
-    return redirect('/profile/'.$id);
+    return redirect('profile/profile/'.$id);
   }
 }

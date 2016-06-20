@@ -38,7 +38,7 @@
                         @endif
                       @endif </p>
                         <h1>{{$topics->topic_title}}</h1>
-                        <p>{!!$topics->topic_description!!}</p>
+                        <p>{{$topics->topic_description}}</p>
                       @foreach($topics->tag as $tag)
                       <span class="label label-primary" style="background-color:#8B0000;">{{$tag->tag_name}}</span>
                       @endforeach
@@ -53,7 +53,7 @@
                 @foreach($result[1] as $comments)
                   <div class="panel">
                     <h3>{{str_limit($comments->user->name,'20')}} antwoorde: </h3>
-                    <h4>{!!$comments->comment_description!!} </h4>
+                    <h4>{{$comments->comment_description}} </h4>
                     <p>{{$comments->created_at->diffForHumans()}}</p>
                   </div>
                 @endforeach

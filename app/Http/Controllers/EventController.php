@@ -73,7 +73,7 @@ class EventController extends Controller
             return view('event/eventCreate')->with('rooms', $rooms);
         }
         else{
-            return redirect('/event');
+            return redirect('event/event');
         }
     }
 
@@ -102,6 +102,6 @@ class EventController extends Controller
         $event->end_time = $timestop;
         $event->save();
 
-        return redirect('/event');
+        return redirect('event/event');
     }
 }
