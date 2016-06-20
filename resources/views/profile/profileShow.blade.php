@@ -25,7 +25,7 @@
                         <td>Ov-nummer:</td>
                         <td>{{$profile->ov_number}}</td>
                       </tr>
-                      @if($profile->privacies->email_active == 1)
+                      @if($privacy[0]->email_active == 1)
                         <tr>
                           <td>Email</td>
                           <td><a href="mailto:{{$profile->email}}">{{$profile->email}}</a></td>

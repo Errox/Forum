@@ -55,7 +55,7 @@ class NotificationController extends Controller
 
     }
 
-    //hier wordt een text mee gegeven zodat de gebruiker weet waar de notificatie over gaat.
+    //hier wordt een text mee gegeven zodat de gebruiker weet waar de notificatie over gaat
     public function subnotify($id, $user_id, $target){
    		$topic = Topic::find($id);
    		$subscriptions = Subscription::where('topic_id', '=', $id)->get();

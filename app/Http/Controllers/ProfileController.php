@@ -44,8 +44,11 @@ class ProfileController extends Controller
   // Deze functie pakt de informatie voor een specifiek profiel en stuurt je door naar de juiste blade.php
   public function show($id){
     $profile = User::find($id);
-    
-    return view('profile/profileShow')->with(compact('profile', 'id'));
+    $privacy = User_privacy::where('user_id', '=', $id)->get();
+    if (\Auth::check()){
+      $user = \Auth::user();
+    }
+     return view('profile/profileShow')->with(compact('profile', 'privacy', 'id'));
   }
 
   // Deze functie pakt de informatie om de gebruiker zijn eigen profiel aan te laten passen en stuurt je door naar de juiste blade.php
@@ -54,14 +57,17 @@ class ProfileController extends Controller
     $profile = User::where('id', '=', $id)->get();
     if (\Auth::check()){
       $user = \Auth::user();
+      $userid = $user->id;
       if ($id != $user->id){
        	return redirect('profile/profile/'.$id);
+
       }
     }
     else{
-      return redirect('/profile/'.$id);
+      return redirect('profile/profile/'.$id);
     }
-    return view('profile/profileEdit')->with('profile', $profile);
+    $privacy = User_privacy::where('user_id', '=', $userid)->get();
+    return view('profile/profileEdit')->with(compact('profile', 'privacy'));
   }
 
   // Hier word alles van het profiel geüpdatet met de nieuwe informatie.
@@ -87,9 +93,6 @@ class ProfileController extends Controller
     $privacy[0]->save();
     
     $update->save();
-    return redirect('profile//profile/'.$id);
+    return redirect('profile/profile/'.$id);
   }
-
-  
-
 }
