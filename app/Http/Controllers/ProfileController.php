@@ -54,14 +54,16 @@ class ProfileController extends Controller
     $profile = User::where('id', '=', $id)->get();
     if (\Auth::check()){
       $user = \Auth::user();
+      $userid = $user->id;
       if ($id != $user->id){
-       	return redirect('/profile/'.$id);
+        return redirect('/profile/'.$id);
       }
     }
     else{
       return redirect('/profile/'.$id);
     }
-    return view('profile/profileEdit')->with('profile', $profile);
+    $privacy = User_privacy::where('user_id', '=', $userid)->get();
+    return view('profile/profileEdit')->with(compact('profile', 'privacy'));
   }
 
   // Hier word alles van het profiel geüpdatet met de nieuwe informatie.
@@ -89,7 +91,4 @@ class ProfileController extends Controller
     $update->save();
     return redirect('/profile/'.$id);
   }
-
-  
-
 }
