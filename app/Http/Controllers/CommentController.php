@@ -10,6 +10,8 @@ use App\Comment;
 
 use App\Topic;
 
+use Carbon\Carbon;
+
 class CommentController extends Controller
 {
     public function __construct()
@@ -34,7 +36,7 @@ class CommentController extends Controller
         //De nieuwe comment wordt hier ingevuld met data op elk specefiek veld.
         $comment->user_id = $userid;
         $comment->topic_id = $input['id'];
-        $comment->comment_description =  nl2br($input['comment_description']);
+        $comment->comment_description =  $input['comment_description'];
         $comment->save();
         $target = 'comment';
 

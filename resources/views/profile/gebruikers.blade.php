@@ -23,10 +23,10 @@
                             $role = 'Leerling';
                           } ?>
                           <tr>
-                            <td style="text-transform:capitalize;"><a href="/profile/<?=$profiel->id?>"><?=$profiel->name?></a></td>
-                            <td><?=$profiel->email?></td> 
-                            <td><?=$profiel->ov_number?></td>
-                            <td><a href="/beheer/<?=$profiel->id?>"><?=$role?></a></td>
+                            <td style="text-transform:capitalize;"><a href="/profile/<?=$profiel->id?>"><{{$profiel->name}}</a></td>
+                            <td>{{$profiel->email}}</td> 
+                            <td>{{$profiel->ov_number}}</td>
+                            <td><a href="/beheer/<?=$profiel->id?>">{{$role}}</a></td>
                           </tr>
                         @endforeach
                         </tbody>

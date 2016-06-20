@@ -38,7 +38,7 @@ class ProfileController extends Controller
   		}
   	}
     // Hier worden users heen gestuurd die geen leeraar zijn met beperkte informatie.
-    return view('profile')->with(compact('profile', 'user'));
+    return view('profile/profile')->with(compact('profile', 'user'));
 }
 
   // Deze functie pakt de informatie voor een specifiek profiel en stuurt je door naar de juiste blade.php
@@ -55,7 +55,7 @@ class ProfileController extends Controller
     if (\Auth::check()){
       $user = \Auth::user();
       if ($id != $user->id){
-       	return redirect('/profile/'.$id);
+       	return redirect('profile/profile/'.$id);
       }
     }
     else{
@@ -73,7 +73,7 @@ class ProfileController extends Controller
     $privacy = User_privacy::where('user_id', '=', $id)->get();
     $update->email = $input['email'];
     $update->name = $input['username'];
-    $update->about =  nl2br($input['about']);
+    $update->about =  $input['about'];
 
     // Hier word de nieuwe settings voor zijn email geüpdatet, of het wel of niet getoont mag worden.
 
@@ -87,7 +87,7 @@ class ProfileController extends Controller
     $privacy[0]->save();
     
     $update->save();
-    return redirect('/profile/'.$id);
+    return redirect('profile//profile/'.$id);
   }
 
   

@@ -15,8 +15,8 @@
                         <tbody>
                         @foreach($profile as $profiel)
                           <tr>
-                            <td style="text-transform:capitalize;"><a href="/profile/<?=$profiel->id?>"><?=$profiel->name?></a></td>
-                            <td><?=$profiel->ov_number?></td>
+                            <td style="text-transform:capitalize;"><a href="/profile/<?=$profiel->id?>">{{$profiel->name}}</a></td>
+                            <td>{{$profiel->ov_number}}</td>
                           </tr>
                         @endforeach
                         </tbody>

@@ -11,10 +11,10 @@
                     <table class="table table-hover">
                       {!! Form::open(array('url' => 'event')) !!}
                           <div class="form-group">
-                            {!! Form::label('description', 'Beschrijving:') !!}
-                            {!! Form::text('description', null, ['class' => 'form-control', 'required']) !!}
+                            {{ Form::label('description', 'Beschrijving:') }}
+                            {{ Form::text('description', null, ['class' => 'form-control', 'required']) }}
                               <br />
-                            {!! Form::label('room', 'Lokaal:') !!}
+                            {{ Form::label('room', 'Lokaal:') }}
                             <select name="room" required>
                               @foreach($rooms as $room)
                                 <option value="{{$room->id}}">{{$room->name}}</option>
