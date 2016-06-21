@@ -20,14 +20,14 @@ class RoleServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer('app', function($view){
-          $user = \Auth::user();
-       $info =  DB::table('users')
-        ->where('id', '=', $user->id)
-        ->get(); 
-        foreach ($info as $result){
-        $role = $result->role;
-        }     
-         $view->with('role', $role);
+            $user = \Auth::user();
+            $info =  DB::table('users')
+                ->where('id', '=', $user->id)
+                ->get(); 
+            foreach ($info as $result){
+                $role = $result->role;
+            }     
+            $view->with('role', $role);
         });
     }
 

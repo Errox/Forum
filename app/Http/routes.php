@@ -54,6 +54,8 @@ Route::group(['middleware' => 'web'], function () {
     //View profile
     Route::resource('/profile', 'ProfileController');
 
+    
+
     //View results of every profile
     Route::resource('/result', 'ResultController');
 

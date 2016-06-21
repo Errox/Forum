@@ -102,8 +102,8 @@ public function index(){
             $user = \Auth::user();
             $userid = $user->id; 
         }
-        $comment = New Queue_teacher;
-        $comment->student_id = $userid;
+        $comment = New queue_comment;
+        $comment->user_id = $userid;
         $comment->teacher_id = $request->teacher;
         $comment->queue_id = $request->id;
         $comment->comment = $request->comment;

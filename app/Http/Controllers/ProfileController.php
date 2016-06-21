@@ -95,4 +95,21 @@ class ProfileController extends Controller
     $update->save();
     return redirect('profile/profile/'.$id);
   }
+
+  public function passwordChange(request $request){
+    if (\Auth::check()){
+      $user = \Auth::user();
+      $userid = $user->id;
+    }
+
+    $user = user::where('user_id', '=', $userid);
+
+    $oldPassword = $request->oldPassword;
+
+    $oldPassword = bcrypt($oldPassword),
+
+    if($oldPassword == $user->password)
+    dd($user);
+
+  }
 }
