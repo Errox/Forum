@@ -29,10 +29,11 @@
 				                      <td>{!!Form::label('email', 'E-Mail: ') !!}</td>
 				                      <td>{!!Form::email('email', $profiel->email) !!} <br></td>
 				                    </tr>
-				                    {!!Form::open(['route' => ['profile.passwordChange', $profiel->id]]) !!}    
+
 				                    <tr>
 				                    	<td>Toon email?</td>
 				                    	<td><input type="checkbox" name="email_privacy" <?= ($privacy[0]->email_active == 1) ? 'checked' : ''; ?>></td>
+				                    </tr>
 	                    		</tbody>
                   			</table>
                 		</div>
@@ -55,7 +56,12 @@
                   	</div>
                 	<p>{!!Form::textarea('about', $profiel->about)!!}</p>
                 	{!! Form::close() !!}
+			  {!!Form::open(['route' => ['profile.passwordChange', $profiel->id]]) !!}
+				 {!!Form::label('Nieuw Wachtwoord: ')!!}
+				  {!!Form::password('password', null)!!}    
+				  {!!Form::close()!!}
             	</div>
+
           @endforeach
         </div>
     </div>
