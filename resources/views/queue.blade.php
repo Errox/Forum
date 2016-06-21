@@ -32,7 +32,7 @@
                         <th>Tags</th>
                         <th>title</th>
                         <th>naam</th>
-                        @if($user->role == 1)<th>Actie</th>@endif
+                        @if($user->role != 0)<th>Actie</th>@endif
                       </thead>
                       <tbody id="open">
                     </tbody></table>
@@ -174,7 +174,7 @@
         for (var t = 0; t <= total; t++){
           tags = tags+"<span class='label label-primary' style='background-color:#337ab7;'>" + data[i].tag[t].tag_name + "</span>  ";
         }
-     if(role === 1 || id === data[i].user_id){ 
+     if(role !== 1 || id === data[i].user_id){ 
       if(data[i].status === 1){
         
       var   behandeling = '<td>'+ data[i].created_at+'</td>'

@@ -33,7 +33,7 @@ class ProfileController extends Controller
   	}
     // Hier word gekeken of er iemand is ingelogd. Als de user een leeraar is word de user doorgestuurd naar een andere view met meer informatie.
   	if (isset($user)){
-  		if ($user->role == 1){
+  		if ($user->role != 0){
   			return view('profile/gebruikers')->with(compact('profile'));
   		}
   	}
@@ -78,7 +78,7 @@ class ProfileController extends Controller
     // Hier word opgehaald welke keuzes de gebruiker heeft gemaakt met betrekking tot zijn privacy.
     $privacy = User_privacy::where('user_id', '=', $id)->get();
     $update->email = $input['email'];
-    $update->name = $input['username'];
+    //$update->name = $input['username'];
     $update->about =  $input['about'];
 
     // Hier word de nieuwe settings voor zijn email geüpdatet, of het wel of niet getoont mag worden.
