@@ -56,10 +56,21 @@
                   	</div>
                 	<p>{!!Form::textarea('about', $profiel->about)!!}</p>
                 	{!! Form::close() !!}
-			  {!!Form::open(['route' => ['profile.passwordChange', $profiel->id]]) !!}
-				 {!!Form::label('Nieuw Wachtwoord: ')!!}
-				  {!!Form::password('password', null)!!}    
-				  {!!Form::close()!!}
+                <table>
+                <tr>
+			  	{!!Form::open(array('url' => 'profileChange')) !!}
+
+				 	<td>{!!Form::label('Oud Wachtwoord: ')!!}
+					{!!Form::password('passwordOld', null)!!}</td>    
+
+				 	<td>{!!Form::label('Nieuw Wachtwoord: ')!!}
+					{!!Form::password('passwordNew', null)!!}</td>    
+
+					<td>{!!Form::submit('Wachtwoord opslaan', ['class' => 'btn btn-primary'])!!}</td>
+
+				{!! Form::close()!!}
+				</tr>
+				</table>
             	</div>
 
           @endforeach

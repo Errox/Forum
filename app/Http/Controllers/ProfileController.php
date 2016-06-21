@@ -96,20 +96,31 @@ class ProfileController extends Controller
     return redirect('profile/profile/'.$id);
   }
 
-  public function passwordChange(request $request){
+  public function passwordChange(){
+    $input = \Request::all();
     if (\Auth::check()){
       $user = \Auth::user();
       $userid = $user->id;
     }
 
-    $user = user::where('user_id', '=', $userid);
+    $user = user::find($userid);
+    $profile = User::where('id', '=', $userid)->get();
+    $privacy = User_privacy::where('user_id', '=', $userid)->get();
 
-    $oldPassword = $request->oldPassword;
+    $oldPassword = $input['passwordOld'];
 
-    $oldPassword = bcrypt($oldPassword),
 
-    if($oldPassword == $user->password)
-    dd($user);
-
+    if(\Hash::check($oldPassword, $user->password)){
+      
+      $hashed = \Hash::make($oldPassword);
+        
+      $user->password = bcrypt($input['passwordNew']);
+      $user->save();
+      \Session::flash('flash_message_succes', 'Je wachtwoord is succesvol verranderd');
+      return view('profile/profileEdit')->with(compact('profile', 'privacy'));
+    }else{
+      \Session::flash('flash_message_alert', 'Je oude wachtwoord klopt niet met het orginele wachtwoord');
+      return view('profile/profileEdit')->with(compact('profile', 'privacy'));
+    }
   }
 }

@@ -55,6 +55,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::resource('/profile', 'ProfileController');
 
     
+    Route::post('/profileChange', 'ProfileController@passwordChange');
 
     //View results of every profile
     Route::resource('/result', 'ResultController');
