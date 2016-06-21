@@ -28,7 +28,8 @@
 				                    <tr>
 				                      <td>{!!Form::label('email', 'E-Mail: ') !!}</td>
 				                      <td>{!!Form::email('email', $profiel->email) !!} <br></td>
-				                    </tr>    
+				                    </tr>
+				                    {!!Form::open(['route' => ['profile.passwordChange', $profiel->id]]) !!}    
 				                    <tr>
 				                    	<td>Toon email?</td>
 				                    	<td><input type="checkbox" name="email_privacy" <?= ($privacy[0]->email_active == 1) ? 'checked' : ''; ?>></td>
