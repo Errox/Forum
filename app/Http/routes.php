@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('/register', function(
+        return redirect('/login');
+    ));
+
 
     //Topic route
 Route::resource('/topic', 'TopicController',
