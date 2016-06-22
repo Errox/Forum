@@ -75,8 +75,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::resource('/subscribe', 'SubscriptionController');
 
     //Event route
-    Route::resource('/event', 'EventController',
-        ['only' => ['index']]);
+    Route::resource('/event', 'EventController');
     
     //Queue route    
     Route::resource('/queue', 'QueueController');

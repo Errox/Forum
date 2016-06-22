@@ -68,6 +68,10 @@ class EventController extends Controller
     {
         //checken of gebruiker is ingelogd.
         if (Auth::check()){
+            $user = \Auth::user();
+            if($user->role == 0){
+                return redirect('/topic');
+            }
             $rooms = Room::all();
             Session::flash('flash_message_alert', 'Let op! Een afspraak wordt niet laten zien in het weekend.');
             return view('event/eventCreate')->with('rooms', $rooms);
