@@ -11,10 +11,10 @@
 |
 */
 
-Route::get('/register', function(
-        return redirect('/login');
-    ));
 
+Route::get('/register', function () {
+    return redirect('/login');
+});
 
     //Topic route
 Route::resource('/topic', 'TopicController',
@@ -41,6 +41,9 @@ Route::post('/search', 'SearchController@index',
 Route::group(['middleware' => 'web'], function () {
     //De route wordt gecheckd of de gebruiker is ingelogd
     Route::auth();
+    Route::get('/register', function () {
+    return redirect('/login');
+});
 
     //Hier wordt de route actief en ajax naar toe gestuurd. Actief en ajax returnd een json format en reageerd als een api.
     Route::get('/queue/actief', 'QueueController@actief');
