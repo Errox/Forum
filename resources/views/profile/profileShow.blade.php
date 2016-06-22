@@ -37,13 +37,10 @@
               </div>
             </div>
             <div class="panel-footer">
-              <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
               @if(Auth::check())
                 <?php $user = \Auth::user();?>
                 @if ($user->id == $id)
-                  <span class="pull-right">
                     <a href="<?=$user->id?>/edit" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                  </span>
                 @endif
               @endif
             </div>
