@@ -13,6 +13,7 @@ Laravel is accessible, yet powerful, providing powerful tools needed for large, 
 ## Usage
 
 We use this laravel framework for a school project. The project contains a ask and awnser method to help students out when ever they have a question. With this a student can help other students or get help when a teacher isnt around. 
+Feel free to contact me in anyway if you have any questions related to this project.
 
 ## Official Documentation
 
